@@ -18,6 +18,10 @@ The paper is in an **ARR-ready pre-submission stage**.
   `EMNLP_ORAL_BEST_PAPER_GAP_LEDGER_20260506.md`.
 - A deadline-aware execution checklist for the ARR window was created in
   `EMNLP_ARR19DAY_TODO_20260506.md` (T-19 to T-0 plan toward 2026-05-25 AoE).
+- A new technical freeze candidate was created and verified:
+  `ARR20260506T073630Z` with tarball
+  `paper/emnlp2026/frozen/insight_emnlp_arr_freeze_ARR20260506T073630Z.tar.gz`.
+- Latest sanity rerun reports `OK fatal_count=0` at `2026-05-06T07:27:49Z`.
 
 ## Upload Candidate Checklist (Human-Gated)
 
@@ -191,9 +195,9 @@ freeze, sanity, manual read-through, and upload logistics.
 ## Latest recommended freeze
 
 - Remote freeze directory:
-  `/data/sony/LFCRASH/LFCRASH-CBM/paper/emnlp2026/frozen/ARR20260427T032620Z`
+  `/data/sony/LFCRASH/LFCRASH-CBM/paper/emnlp2026/frozen/ARR20260506T073630Z`
 - Remote tarball:
-  `/data/sony/LFCRASH/LFCRASH-CBM/paper/emnlp2026/frozen/insight_emnlp_arr_freeze_ARR20260427T032620Z.tar.gz`
+  `/data/sony/LFCRASH/LFCRASH-CBM/paper/emnlp2026/frozen/insight_emnlp_arr_freeze_ARR20260506T073630Z.tar.gz`
 
 ## Residual technical notes
 
