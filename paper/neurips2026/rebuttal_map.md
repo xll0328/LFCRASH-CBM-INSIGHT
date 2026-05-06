@@ -79,3 +79,18 @@ We provide a multi-seed DAD stability diagnostic, protocol separation, and a rev
 
 ### Honest scope note
 Current multi-seed support is strongest for one DAD line; broader seed coverage remains future strengthening.
+
+---
+
+## Reviewer attack 7 — "Did you prove hard-case symmetry on DAD?"
+### Short answer
+Not yet. We now provide an explicit hard-case symmetry audit path and keep stronger symmetry claims blocked until manual pair-level outcomes are completed.
+
+### Evidence to cite
+- hard-case scope language in `sec_experiments.tex` / `sec_conclusion.tex`
+- `dad_hard_case_symmetry_audit.md` (family buckets + auto-suggested mixed pairs)
+- `build_dad_hard_case_symmetry_audit.py` (reproducible audit scaffold)
+- `reviewer_proof_experiment_manifest.md` hard-case gating checklist
+
+### Honest scope note
+Current snapshot is an audit checkpoint, not a solved-symmetry result. Pair IDs and outcomes still require human confirmation before promotion to stronger claims.
