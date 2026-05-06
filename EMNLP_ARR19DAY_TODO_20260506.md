@@ -36,7 +36,7 @@ Completion rule:
 ### Phase C (T-8 to T-3, 2026-05-17 to 2026-05-22): Final Freeze Candidate
 
 - [ ] Freeze candidate tarball cut (`freeze_arr_submission.sh`) only if human read-through passes.
-- [ ] Verify package (`verify_arr_freeze.sh`) and record freeze path.
+- [x] Verify current recommended package (`verify_arr_freeze.sh`) and keep freeze path recorded.
 - [ ] Confirm author/reviewer-registration logistics ownership.
 - [ ] Run one last sanity and first-25 PDF freshness check.
 
