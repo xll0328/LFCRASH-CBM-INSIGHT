@@ -88,8 +88,10 @@ remain bounded.
   auto-suggest mixed early-vs-late pairs (currently 4 heuristic pair suggestions
   from `strong_top` assets), while keeping all pair labels explicitly marked as
   needing manual reviewer confirmation before any symmetry promotion.
+- Added an explicit sentence in `paper/neurips2026/sec_experiments.tex` tying
+  hard-case symmetry claims to that scaffold as a blocking audit gate.
 - Rebuilt `paper/neurips2026/insight_main.pdf` and reran the NeurIPS sanity
-  gate. Latest status at 05:39 UTC is `OK fatal_count=0 warn_count=1`
+  gate. Latest status at 05:56 UTC is `OK fatal_count=0 warn_count=1`
   (only expected legacy-draft warning remains).
 
 ## Immediate Safe Next Actions
