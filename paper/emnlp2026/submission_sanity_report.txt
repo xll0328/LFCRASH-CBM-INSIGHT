@@ -1,5 +1,5 @@
 INSIGHT submission sanity report
-generated_at=2026-05-06T07:20:44Z
+generated_at=2026-05-06T07:27:49Z
 
 [1] Core files
 OK insight_emnlp.tex
@@ -70,7 +70,7 @@ OK PDF metadata /Keywords empty
 
 [5] Claim/evidence text audit
 [claim-audit] wrote /data/sony/LFCRASH/LFCRASH-CBM/paper/emnlp2026/claim_evidence_audit_report.md
-[claim-audit] critical_blockers=0 advisory_hits=14
+[claim-audit] critical_blockers=0 advisory_hits=9
 OK claim/evidence audit passed
 
 [6] PDF first-read audit

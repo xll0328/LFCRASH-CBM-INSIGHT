@@ -85,6 +85,7 @@ Completion criterion:
 - [x] Completed 5-attack rebuttal dry-run (`EMNLP_REBUTTAL_DRYRUN_20260506.md`).
 - [x] Generated human read-through packet (`EMNLP_HUMAN_READTHROUGH_PACKET_20260506.md`).
 - [x] Synced quick-map/playbook/templates with the latest bounded wording.
+- [x] Completed minimal risk-phrase pass in EMNLP source (`advisory_hits: 14 -> 9`, sanity still green).
 - [ ] Commit and push 2026-05-06 refresh artifacts.
 
 ## Stop Conditions
