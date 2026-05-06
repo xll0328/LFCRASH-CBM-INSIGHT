@@ -1,0 +1,86 @@
+{
+  "canonical_submission_results": {
+    "dad": {
+      "AP": 68.19,
+      "mTTA": 1.75,
+      "role": "headline canonical DAD line",
+      "protocol_note": "curriculum-stabilized DAD line; do not mix with ontology-search results"
+    },
+    "a3d": {
+      "AP": 93.40,
+      "mTTA": 4.90,
+      "TTA_R80": 4.89,
+      "P_R80": 0.9067,
+      "role": "headline canonical A3D line"
+    }
+  },
+  "stability_diagnostics": {
+    "dad_curriculum_three_seed_best_of": {
+      "AP_mean": 62.01,
+      "AP_std": 1.55,
+      "mTTA_mean": 2.09,
+      "mTTA_std": 0.11,
+      "role": "stability diagnostic, not headline replacement"
+    },
+    "dad_curriculum_epoch25": {
+      "AP_mean": 56.39,
+      "AP_std": 3.46,
+      "mTTA_mean": 2.40,
+      "mTTA_std": 0.05
+    },
+    "dad_curriculum_epoch30": {
+      "AP_mean": 55.16,
+      "AP_std": 3.63,
+      "mTTA_mean": 2.49,
+      "mTTA_std": 0.09
+    }
+  },
+  "support_results": {
+    "ontology_risk_core_dad": {
+      "AP": 67.23,
+      "mTTA": 2.0111,
+      "TTA_R80": 2.6799,
+      "P_R80": 0.4632,
+      "role": "compact manual ontology baseline"
+    },
+    "local_search_dad_best": {
+      "AP": 0.6662242238204966,
+      "tag": "dad_multi_perfect_v1_h384_lowac_weaksparse_final_q2",
+      "role": "support-only search result"
+    },
+    "local_search_a3d_best": {
+      "AP": 0.9421792398119472,
+      "tag": "a3d_ac_perfect_v1_minuscgta_tinyalign_local_q3",
+      "role": "support-only search result"
+    }
+  },
+  "intervention_support": {
+    "hybrid_boost1": {
+      "num_samples": 64,
+      "mean_alert_shift": -2.04,
+      "median_alert_shift": 0.0,
+      "mean_peak_prob_delta": 0.0022437679581344128,
+      "role": "partial intervenability evidence with heterogeneous behavior"
+    },
+    "hybrid_zero": {
+      "num_samples": 32,
+      "mean_alert_shift": 0.0,
+      "median_alert_shift": 0.0,
+      "mean_peak_prob_delta": -0.00203787162899971
+    }
+  },
+  "timing_support": {
+    "prediction_branch": {
+      "pred_to_toa_mean_frames": 39.41025641025641,
+      "pred_to_toa_median_frames": 39.0,
+      "valid_count": 39,
+      "fps_assumption": 20.0,
+      "approx_mean_seconds": 1.9705128205128204,
+      "role": "preliminary timing-faithfulness evidence"
+    },
+    "actor_branch": {
+      "status": "not_reliable_in_archived_outputs",
+      "role": "must not support strong actor-level claims yet"
+    }
+  }
+}

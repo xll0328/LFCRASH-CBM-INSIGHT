@@ -1,0 +1,85 @@
+\section{Related Work}
+\label{sec:related}
+
+\paragraph{Traffic accident anticipation.}
+The accident anticipation literature has focused primarily on improving
+prediction accuracy from video. The seminal DSA-RNN~\citep{ref4} established
+the DAD benchmark and showed that soft attention over detected objects enables
+anticipation roughly 2\,s before impact. Subsequent work explored richer
+interaction modelling, better spatio-temporal fusion, and larger-capacity
+architectures. Examples include agent-centric risk assessment and risky-region
+localisation~\citep{ref45}, uncertainty-aware relational reasoning~\citep{ref1},
+adaptive learning for rare incidents~\citep{ref1}, dynamic spatio-temporal
+attention~\citep{ref17}, graph-based interaction modelling~\citep{ref32,ref36,ref37},
+and recent high-capacity fusion pipelines such as CRASH~\citep{liao2024crash},
+CCAF-Net~\citep{liu2025ccaf}, and LATTE~\citep{ZHANG2025103173}. Recent work
+has also begun to target timing more explicitly through temporal occurrence
+prediction, risk propagation, and other formulations that model warning timing
+more directly than a pure per-frame binary score. Other recent directions bring
+language or textual supervision into anticipation, which is relevant to our use
+of concept pseudo-labels even when the mechanism is not an explicit concept
+bottleneck.
+
+Despite their architectural diversity, most existing methods still optimize
+anticipation mainly through prediction quality, with timing handled indirectly
+through the shape of the confidence trajectory rather than through an explicit,
+interpretable decision state. This has produced impressive AP numbers, but it
+leaves two safety-critical gaps unresolved: the models are rewarded mainly for
+being correct rather than early in a decision-theoretic sense, and the
+internal evidence driving the alert remains largely latent.
+
+\paragraph{Interpretability in accident anticipation.}
+Table~\ref{tab:interp_comparison} (Experiments) makes the key point clear:
+existing approaches, when they provide explanation at all, do so in ways that
+remain external to the actual decision pathway. \citet{ref2} (DRIVE, MM'21) is
+the closest prior work because it couples anticipation with reinforcement
+learning and visual explanation. However, its Grad-CAM maps are still
+\emph{post-hoc}: they are generated after prediction and do not constitute a
+semantic state through which the decision is made. \citet{liao2024and}
+(W3AL, MM'24) uses an LLM to verbalise accident location and timing, which is
+interesting for description but fundamentally different from exposing a
+human-auditable risk representation that directly controls the warning policy.
+Other explanation-oriented studies remain similarly limited to heatmaps,
+localisation, or auxiliary user-facing outputs~\citep{ref102,karim2023attention}.
+
+This distinction matters. In a safety setting, an explanation is most useful
+when it is not merely attached to a decision but structurally involved in the
+decision itself. \method{} is designed around exactly this requirement: the
+concept activations are not generated after the alert, but are part of the
+forward path that produces it. This is why we emphasise \emph{intrinsic}
+WHY/WHEN interpretability rather than post-hoc explanation quality alone.
+
+\paragraph{Actor-Critic for temporal decisions.}
+\citet{sutton2018reinforcement} establish the Actor-Critic framework.
+\citet{ref2} (DRIVE) applies REINFORCE to learn a spatial attention
+policy for object selection, using RL as a training signal rather than
+for optimizing the final alert rule. Recent timing-oriented accident
+anticipation methods have also explored temporal occurrence prediction and
+related formulations without exposing an explicit semantic decision state. The
+main distinction of \caac{} in the current paper is therefore not simply that
+it uses RL, but that the state $\mathbf{s}_t=[\mathbf{h}_t\|\mathbf{c}_t]$
+contains concept activations and thus provides a direct route from semantic
+risk evidence to timing control.
+
+\paragraph{Concept Bottleneck Models and knowledge distillation.}
+Concept Bottleneck Models (CBMs) constrain predictions through interpretable
+bottlenecks~\citep{ref102}, offering human-readable intermediate representations
+that support user intervention.
+Applying CBMs to \emph{video} accident anticipation is non-trivial:
+concepts must be dynamic across frames, and temporal dependencies must be
+preserved through the bottleneck.
+\method{} addresses both challenges through \cgta{} (linking temporal
+attention to concept dynamics) and the \caac{} state design (placing
+concepts directly inside the MDP state).
+
+For concept supervision, \method{} leverages CLIP~\citep{radford2021learning},
+which provides rich semantic visual representations from natural language
+supervision and enables pseudo-labelling of 837 traffic-relevant concepts
+without manual annotation. This choice should be read as a practical semantic
+bootstrap rather than as a claim that the resulting pseudo-concepts are fully
+noise-free; in the current paper, the strongest support for the concept layer
+comes from architectural transparency, ontology analysis, and downstream
+ablation evidence rather than from a standalone concept-label benchmark.
+The \tsd{} component distils CLIP future-frame features into current
+representations, providing anticipatory semantic grounding inspired by
+self-predictive representation learning~\citep{fang2022traffic}.

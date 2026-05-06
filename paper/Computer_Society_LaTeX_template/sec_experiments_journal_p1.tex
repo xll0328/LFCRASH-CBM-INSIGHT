@@ -1,0 +1,84 @@
+% sec_experiments_journal.tex
+% Journal version: appendix content merged in-text, two-column layout fixes.
+
+\section{Experiments}
+\label{sec:experiments}
+
+\subsection{Experimental Setup}
+
+\paragraph{Datasets.}
+\textbf{DAD}~\citep{ref4}: 1,750 dashcam videos (620 accident,
+1,130 non-accident) from six Taiwanese cities, split 1,280/450
+train/test at 20\,fps (100 frames).
+\textbf{A3D}~\citep{liao2024crash}: 1,199 videos (960/239) at 10\,fps,
+100 frames, diverse East Asian urban accident types.
+
+\paragraph{Metrics.}
+\textbf{AP}: area under the precision-recall curve.
+\textbf{mTTA}: mean lead time at first issued alert.
+\textbf{TTA@R80} / \textbf{P@R80}: TTA and precision at 80\% recall.
+
+\paragraph{Input representation and concept vocabulary.}
+Each frame provides $N{=}19$ object-centric VGG16~\citep{ref31} ROI
+features of dimension $D{=}4096$.
+The concept bottleneck uses $K{=}837$ traffic-relevant concepts spanning
+agent behaviour, spatial risk, road condition, and environmental context,
+derived from a large candidate set filtered for semantic plausibility.
+
+\paragraph{Optimisation.}
+AdamW, lr $3 \times 10^{-4}$ with cosine decay to $10^{-5}$, batch 16,
+$h=256$, $z=128$. Training uses staged scheduling: classification and
+concept supervision dominate early epochs; Actor--Critic grows later.
+For DAD, a \emph{curriculum-stabilised} variant trains the backbone
+for 20 epochs without CBM loss, then ramps concept losses over 30 epochs.
+
+\subsection{Interpretability Taxonomy}
+
+\begin{table*}[t]
+\caption{Interpretability comparison. \textbf{WHY}: intrinsic concept
+explanation. \textbf{WHEN}: intrinsic alert-timing explanation.
+\method{} provides both within a single model.}
+\label{tab:interp_comparison}
+\centering\small
+\begin{tabular}{lcccc}
+\toprule
+Method & WHY & WHEN & Intrinsic? & Params\\
+\midrule
+DSA-RNN~\citep{ref4}         & \texttimes & \texttimes & -- & 12M\\
+DRIVE~\citep{ref2}           & Grad-CAM  & \texttimes & post-hoc & 31M\\
+DSTA~\citep{ref17}           & \texttimes & \texttimes & -- & 180M\\
+DAA-GNN~\citep{ref32}        & \texttimes & \texttimes & -- & 183M\\
+W3AL~\citep{liao2024and}     & \texttimes & verbal    & post-hoc & 7B\\
+CRASH~\citep{liao2024crash}  & \texttimes & \texttimes & -- & 26M\\
+CCAF-Net~\citep{liu2025ccaf} & \texttimes & \texttimes & -- & 191M\\
+LATTE~\citep{ZHANG2025103173}& \texttimes & \texttimes & -- & 45M\\
+\midrule
+\textbf{\method{} (Ours)} & \textbf{837 concepts} &
+  \textbf{AC policy} & \textbf{\checkmark} & \textbf{30M}\\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+Table~\ref{tab:interp_comparison} shows a clear gap: no prior method provides
+both WHY and WHEN interpretability intrinsically.
+DRIVE's Grad-CAM is post-hoc and carries no concept structure;
+W3AL requires a 7B LLM for verbal localisation.
+\method{} closes both gaps within only 30M parameters.
+
+\subsection{Why the Dual-Layer Decomposition Is Well Motivated}
+
+A conventional recurrent anticipation model predicts risk from a single latent
+state $\mathbf{h}_t$, offering no separation between evidence extraction and
+decision timing. \method{} decomposes these roles: the WHY layer extracts
+$\mathbf{c}_t$, and the WHEN layer learns a timing policy over
+$\mathbf{s}_t=[\mathbf{h}_t\|\mathbf{c}_t]$.
+
+This changes the information geometry of the problem. If a hazard concept rises
+before impact, the policy can cross its alert boundary before the latent
+classifier reaches peak confidence---the concept channel acts as an
+\emph{early-warning basis}. Furthermore, a perturbation
+$\Delta\mathbf{c}_t$ to a concept in the pre-crash window induces
+$\mathbf{s}'_t=[\mathbf{h}_t\|\mathbf{c}_t+\Delta\mathbf{c}_t]$, so
+semantics have \emph{direct causal leverage} on timing decisions rather than
+being computed post hoc. Section~\ref{sec:intervention} provides empirical
+evidence for this claim.

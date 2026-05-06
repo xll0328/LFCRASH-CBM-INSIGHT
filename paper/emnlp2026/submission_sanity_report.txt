@@ -1,0 +1,137 @@
+INSIGHT submission sanity report
+generated_at=2026-05-02T15:51:42Z
+
+[1] Core files
+OK insight_emnlp.tex
+OK insight_emnlp.pdf
+OK insight_emnlp_first25.pdf
+OK insight.bib
+OK sec_intro_emnlp.tex
+OK sec_related_emnlp.tex
+OK sec_method_emnlp.tex
+OK sec_experiments_emnlp.tex
+OK sec_conclusion_emnlp.tex
+OK sec_appendix.tex (/data/sony/LFCRASH/LFCRASH-CBM/paper/neurips2026/sec_appendix.tex)
+OK insight_emnlp_first25.pdf freshness
+OK insight_emnlp.pdf newer than manuscript sources
+
+[2] Compilation warnings
+530:Underfull \hbox (badness 1142) in paragraph at lines 59--76
+559:Underfull \vbox (badness 2213) has occurred while \output is active []
+562:Underfull \vbox (badness 2213) has occurred while \output is active []
+570:Underfull \hbox (badness 1953) in paragraph at lines 113--114
+577:Underfull \hbox (badness 2582) in paragraph at lines 138--157
+583:Underfull \hbox (badness 4886) in paragraph at lines 165--166
+588:Underfull \hbox (badness 3884) in paragraph at lines 52--60
+593:Underfull \hbox (badness 4353) in paragraph at lines 80--88
+599:Underfull \vbox (badness 2980) has occurred while \output is active []
+608:Underfull \hbox (badness 1888) in paragraph at lines 51--58
+621:Underfull \vbox (badness 2293) has occurred while \output is active []
+625:Underfull \hbox (badness 1742) in paragraph at lines 238--242
+630:Underfull \hbox (badness 1975) in paragraph at lines 244--247
+643:Underfull \hbox (badness 1742) in paragraph at lines 282--289
+648:Underfull \hbox (badness 3439) in paragraph at lines 89--89
+653:Underfull \hbox (badness 10000) in paragraph at lines 89--89
+658:Underfull \hbox (badness 10000) in paragraph at lines 89--89
+663:Underfull \hbox (badness 10000) in paragraph at lines 89--89
+668:Underfull \hbox (badness 10000) in paragraph at lines 89--89
+673:Underfull \hbox (badness 10000) in paragraph at lines 89--89
+678:Underfull \hbox (badness 10000) in paragraph at lines 89--89
+683:Underfull \hbox (badness 10000) in paragraph at lines 89--89
+688:Underfull \hbox (badness 10000) in paragraph at lines 89--89
+693:Underfull \hbox (badness 10000) in paragraph at lines 89--89
+698:Underfull \hbox (badness 3219) in paragraph at lines 89--89
+703:Underfull \hbox (badness 10000) in paragraph at lines 89--89
+708:Underfull \hbox (badness 3612) in paragraph at lines 115--116
+713:Underfull \hbox (badness 10000) in paragraph at lines 158--158
+718:Underfull \hbox (badness 10000) in paragraph at lines 160--160
+723:Underfull \hbox (badness 3690) in paragraph at lines 161--161
+728:Underfull \hbox (badness 10000) in paragraph at lines 163--163
+733:Underfull \hbox (badness 10000) in paragraph at lines 164--164
+738:Underfull \hbox (badness 10000) in paragraph at lines 164--165
+743:Underfull \hbox (badness 10000) in paragraph at lines 165--165
+748:Underfull \hbox (badness 1014) in paragraph at lines 165--165
+818:Underfull \vbox (badness 2753) has occurred while \output is active []
+821:Underfull \vbox (badness 10000) has occurred while \output is active []
+824:Underfull \hbox (badness 10000) in paragraph at lines 440--448
+829:Underfull \hbox (badness 10000) in paragraph at lines 440--448
+834:Underfull \hbox (badness 10000) in paragraph at lines 440--448
+
+[3] Obvious identity / link scan
+OK no obvious identity/link matches
+
+[4] PDF checks
+pdfinfo not available
+OK PDF page counts full=35 first25=25
+OK PDF metadata /Author empty
+OK PDF metadata /Title empty
+OK PDF metadata /Subject empty
+OK PDF metadata /Keywords empty
+
+[5] Claim/evidence text audit
+[claim-audit] wrote /data/sony/LFCRASH/LFCRASH-CBM/paper/emnlp2026/claim_evidence_audit_report.md
+[claim-audit] critical_blockers=0 advisory_hits=14
+OK claim/evidence audit passed
+
+[6] PDF first-read audit
+[pdf-first-read] wrote /data/sony/LFCRASH/LFCRASH-CBM/paper/emnlp2026/pdf_first_read_audit_report.md
+[pdf-first-read] critical_blockers=0
+OK PDF first-read audit passed
+
+[7] Reviewer defense coverage audit
+[reviewer-defense-audit] wrote /data/sony/LFCRASH/LFCRASH-CBM/paper/emnlp2026/reviewer_defense_coverage_report.md
+[reviewer-defense-audit] critical_blockers=0 advisory_items=0
+OK reviewer defense coverage audit passed
+
+[8] Top-conference quality audit
+[wrote] /data/sony/LFCRASH/LFCRASH-CBM/output/emnlp2026_support/top_conference_quality_audit.json
+[wrote] /data/sony/LFCRASH/LFCRASH-CBM/EMNLP_TOP_CONFERENCE_QUALITY_AUDIT_20260427.md
+[top-conference-quality] best_paper_ready=false
+OK top-conference quality audit generated
+
+[9] Key support artifacts
+OK /data/sony/LFCRASH/LFCRASH-CBM/EMNLP_STAGE_STATUS.md
+OK /data/sony/LFCRASH/LFCRASH-CBM/EMNLP_MASTER_EXECUTION_PLAN.md
+OK /data/sony/LFCRASH/LFCRASH-CBM/EMNLP_ORAL_PUSH_PLAN.md
+OK /data/sony/LFCRASH/LFCRASH-CBM/EMNLP_ORAL_ACCEPT_CASE_ONEPAGER_20260427.md
+OK /data/sony/LFCRASH/LFCRASH-CBM/EMNLP_ORAL_BEST_PAPER_GAP_LEDGER_20260427.md
+OK /data/sony/LFCRASH/LFCRASH-CBM/EMNLP_ORAL_BEST_PAPER_EXECUTION_DASHBOARD_20260427.md
+OK /data/sony/LFCRASH/LFCRASH-CBM/EMNLP_DAD_MECHANISM_HARDENING_PREDECLARED_PLAN_20260427.md
+OK /data/sony/LFCRASH/LFCRASH-CBM/EMNLP_RERUN_PLAN.md
+OK /data/sony/LFCRASH/LFCRASH-CBM/EMNLP_REVIEW_RESPONSE_MAP.md
+OK /data/sony/LFCRASH/LFCRASH-CBM/EMNLP_REVIEW_RESPONSE_PLAYBOOK.md
+OK /data/sony/LFCRASH/LFCRASH-CBM/EMNLP_REVIEW_RESPONSE_TEMPLATES.md
+OK /data/sony/LFCRASH/LFCRASH-CBM/EMNLP_REVIEW_RESPONSE_TRACKER.md
+OK /data/sony/LFCRASH/LFCRASH-CBM/EMNLP_SUPPORT_RESULTS.md
+OK /data/sony/LFCRASH/LFCRASH-CBM/EMNLP_INTERVENTION_STATUS.md
+OK /data/sony/LFCRASH/LFCRASH-CBM/EMNLP_CONTROLLED_ONTOLOGY_STATUS.md
+OK /data/sony/LFCRASH/LFCRASH-CBM/EMNLP_FINAL_READINESS_AUDIT.md
+OK /data/sony/LFCRASH/LFCRASH-CBM/EMNLP_REVIEWER_QUICK_MAP.md
+OK /data/sony/LFCRASH/LFCRASH-CBM/output/emnlp2026_support/controlled_ontology_status.md
+OK /data/sony/LFCRASH/LFCRASH-CBM/output/emnlp2026_support/multiseed_ontology_status.md
+OK /data/sony/LFCRASH/LFCRASH-CBM/output/emnlp2026_support/a3d_headline_multiseed_status.md
+OK /data/sony/LFCRASH/LFCRASH-CBM/output/emnlp2026_support/dad_hardening_status.md
+OK /data/sony/LFCRASH/LFCRASH-CBM/output/emnlp2026_support/dad_mechanism_lightreg_status.md
+OK /data/sony/LFCRASH/LFCRASH-CBM/output/emnlp2026_support/top_conference_quality_audit.json
+OK /data/sony/LFCRASH/LFCRASH-CBM/output/emnlp2026_support/oral_readiness_audit.md
+OK /data/sony/LFCRASH/LFCRASH-CBM/output/emnlp2026_support/human_ontology_audit_summary.md
+OK /data/sony/LFCRASH/LFCRASH-CBM/output/emnlp2026_support/topm_pseudolabel_sensitivity_dad500.json
+OK /data/sony/LFCRASH/LFCRASH-CBM/output/emnlp2026_support/concept_verbalization_sensitivity_dad500.json
+OK /data/sony/LFCRASH/LFCRASH-CBM/output/emnlp2026_support/dad500_frame_manifest.json
+OK /data/sony/LFCRASH/LFCRASH-CBM/paper/emnlp2026/run_claim_evidence_audit.py
+OK /data/sony/LFCRASH/LFCRASH-CBM/paper/emnlp2026/claim_evidence_audit_report.md
+OK /data/sony/LFCRASH/LFCRASH-CBM/paper/emnlp2026/run_pdf_first_read_audit.py
+OK /data/sony/LFCRASH/LFCRASH-CBM/paper/emnlp2026/pdf_first_read_audit_report.md
+OK /data/sony/LFCRASH/LFCRASH-CBM/paper/emnlp2026/run_reviewer_defense_audit.py
+OK /data/sony/LFCRASH/LFCRASH-CBM/paper/emnlp2026/reviewer_defense_coverage_report.md
+OK /data/sony/LFCRASH/LFCRASH-CBM/paper/emnlp2026/run_top_conference_quality_audit.py
+OK /data/sony/LFCRASH/LFCRASH-CBM/EMNLP_TOP_CONFERENCE_QUALITY_AUDIT_20260427.md
+OK /data/sony/LFCRASH/LFCRASH-CBM/paper/emnlp2026/run_dad_mechanism_lightreg_block.sh
+OK /data/sony/LFCRASH/LFCRASH-CBM/paper/emnlp2026/summarize_dad_mechanism_lightreg_status.py
+OK /data/sony/LFCRASH/LFCRASH-CBM/paper/emnlp2026/watch_dad_mechanism_lightreg_status.py
+
+[10] Stale project-state reference scan
+OK no stale project-state references matched
+
+[11] Sanity verdict
+OK fatal_count=0

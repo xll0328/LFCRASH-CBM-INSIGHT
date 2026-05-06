@@ -1,0 +1,116 @@
+\documentclass{article}
+\usepackage{neurips_2026}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{nicefrac}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{subcaption}
+\usepackage{makecell}
+\usepackage{enumitem}
+\usepackage{ulem}
+
+% ── Caption / float spacing ────────────────────────────────────────────────
+\captionsetup{font=small,labelfont=bf,singlelinecheck=false}
+\setlength{\textfloatsep}{10pt plus 2pt minus 2pt}
+\setlength{\floatsep}{8pt plus 2pt minus 2pt}
+\setlength{\intextsep}{8pt plus 2pt minus 2pt}
+
+% ── Colours (inspired by mm25 CAMERA paper) ────────────────────────────────
+\definecolor{accentblue}{RGB}{31,119,180}
+\definecolor{accentorange}{RGB}{255,127,14}
+\definecolor{accentgreen}{RGB}{44,160,44}
+\definecolor{accentred}{RGB}{214,39,40}
+
+% ── Commands ────────────────────────────────────────────────────────────────
+\newcommand{\method}{\textsc{INSIGHT}}
+\newcommand{\methodfull}{Interpretable Safety-Guided Accident Anticipation
+  via Concept Bottleneck and Temporal Actor-Critic}
+\newcommand{\cbm}{\textsc{CBM}}
+\newcommand{\caac}{\textsc{CAAC}}
+\newcommand{\cgta}{\textsc{CGTA}}
+\newcommand{\crs}{\textsc{CRS}}
+\newcommand{\tsd}{\textsc{TSD}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\etal}{et~al.}
+
+\title{\method: Interpretable Accident Anticipation with Concept-Guided Risk Reasoning and Timing}
+
+\author{Anonymous Authors \\ Anonymous Institution}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Traffic accident anticipation is usually framed as a binary prediction task:
+given a video prefix, estimate whether an accident will occur.
+We argue that this framing is incomplete.
+A deployment-ready anticipation system must address two coupled questions:
+what semantic evidence makes the scene dangerous, and how can that evidence be
+used to produce earlier warnings rather than merely later confidence.
+Current methods address these needs only partially: most optimize
+classification accuracy rather than warning timeliness, and almost all remain
+black boxes or rely on post-hoc explanation.
+We therefore reformulate accident anticipation as a
+\emph{concept-conditioned sequential decision problem}.
+
+We present \method{} (\textbf{In}terpretable \textbf{S}afety-\textbf{G}uided
+accident ant\textbf{i}cipation via Concept Bott\textbf{le}neck and
+Concep\textbf{t}-aware Actor-Critic), a framework with two tightly coupled
+parts. A Concept Bottleneck Module (\cbm) maps per-frame object features to
+human-interpretable risk concepts, providing the paper's strongest and most
+directly supported interpretability layer. A concept-conditioned timing module
+then uses these concepts inside the decision state, supplying an explicit route
+from semantic evidence to warning control, although the current paper's
+policy-level evidence is more limited than its WHY-layer evidence. Three
+additional components---Concept-Guided Temporal Attention (\cgta), Concept Risk
+Score (\crs), and Temporally Shifted Distillation (\tsd)---improve temporal
+focus, auditability, and anticipatory representation learning.
+
+Beyond the architecture, we introduce a reproducible multimodal risk concept
+construction pipeline that mines candidate concepts from driving frames,
+performs risk-first refinement, applies family balancing and canonical merge
+consolidation, and yields an auditable ontology with explicit family metadata
+and merge provenance. This turns the concept bottleneck from a fixed handcrafted
+vocabulary into a reusable semantic interface and allows matched ontology
+comparisons under a shared launcher protocol.
+
+On A3D, \method{} achieves \textbf{93.40\% AP}, \textbf{mTTA\,=\,4.90\,s},
+\textbf{TTA@R80\,=\,4.89\,s}, and \textbf{P@R80\,=\,0.9067}.
+On DAD, \method{} achieves \textbf{68.19\% AP} under the headline curriculum
+protocol and remains competitive within the interpretable comparison tier.
+Matched score-source comparisons on representative checkpoints further show
+that actor-based timing remains substantially weaker than classifier-based
+anticipation on DAD, but is much closer on A3D. We also show that ontology
+choice changes the AP--mTTA operating point under matched launchers, and that
+archived intervention analyses provide quantitative but still partial support
+for a concept-conditioned timing story. All results are obtained with only
+$\sim$30M parameters.
+\end{abstract}
+
+\input{sec_intro}
+\input{sec_related}
+\input{sec_method}
+\input{sec_experiments}
+\input{sec_conclusion}
+
+\clearpage
+\appendix
+\input{sec_appendix}
+
+\clearpage
+\bibliographystyle{plainnat}
+\bibliography{insight}
+
+\clearpage
+\input{checklist}
+
+\end{document}

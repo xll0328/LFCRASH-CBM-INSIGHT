@@ -1,0 +1,71 @@
+\documentclass{article}
+\usepackage{neurips_2026}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{nicefrac}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{subcaption}
+\usepackage{enumitem}
+
+\newcommand{\method}{CG-CRASH}
+\newcommand{\caac}{\textsc{CAAC}}
+\newcommand{\cgta}{\textsc{CGTA}}
+\newcommand{\crs}{\textsc{CRS}}
+\newcommand{\tsd}{\textsc{TSD}}
+\newcommand{\cbm}{\textsc{CBM}}
+\newcommand{\R}{\mathbb{R}}
+
+\title{\method{} v4: Dual-Layer Interpretable Accident Anticipation \\
+via Concept Bottleneck and Concept-Aware Actor-Critic}
+
+\author{Anonymous Authors \\ Anonymous Institution}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Traffic accident anticipation demands both accurate classification and timely
+warning, yet all existing systems remain interpretability-agnostic: they cannot
+explain \emph{why} an alert was triggered nor \emph{when} the decision to alert
+was made. We present \method{} v4, the first accident anticipation framework
+achieving \textbf{dual-layer interpretability}: a Concept Bottleneck Module
+(\cbm) provides WHY-layer explanations by mapping visual features to
+human-interpretable concepts, while a Concept-Aware Actor-Critic (\caac)
+provides WHEN-layer explanations by treating concept activations as the Markov
+Decision Process state, making every alert timing decision directly traceable to
+visual concepts. Three additional components reinforce the framework:
+Concept-Guided Temporal Attention (\cgta) links temporal focus to concept
+dynamics; Concept Risk Score (\crs) provides auditable per-concept safety
+weights; and Temporally Shifted Distillation (\tsd) grounds representations in
+CLIP's semantic space. On the AnAn Accident Detection (A3D) dataset,
+\method{} v4 achieves \textbf{93.40\% AP}, \textbf{mTTA\,=\,4.90s},
+\textbf{TTA@R80\,=\,4.89s}, and \textbf{P@R80\,=\,0.9067}, providing a
+strong and fully traceable A3D result in the current submission package. On the Dashcam
+Accident Dataset (DAD), \method{} v4 achieves \textbf{68.19\% AP}, establishing
+a strong interpretable result with a DAD-specific curriculum-stabilized
+training recipe.
+All results are obtained with only $\sim$30M parameters.
+\end{abstract}
+
+\input{sec_intro}
+\input{sec_related}
+\input{sec_method}
+\input{sec_experiments}
+\input{sec_conclusion}
+
+\bibliographystyle{plainnat}
+\bibliography{cgcrash}
+
+\newpage
+\input{checklist}
+
+\end{document}

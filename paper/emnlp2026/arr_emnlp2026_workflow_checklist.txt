@@ -1,0 +1,100 @@
+ARR / EMNLP 2026 practical submission workflow for INSIGHT
+
+Goal:
+Submit the current paper first to ARR, selecting EMNLP 2026 as the preferred venue, and prepare the package so it can later be committed to EMNLP after reviews/meta-review.
+
+Working files in this package:
+- Full PDF: insight_emnlp.pdf
+- First-25-page PDF: insight_emnlp_first25.pdf
+- Main source entrypoint: insight_emnlp.tex
+- Submission notes/checklist: submission_package_notes.txt
+- Last-minute upload check: ARR_LAST_MINUTE_CHECKLIST.md
+
+Recommended workflow:
+
+Phase 1: Freeze the scientific package before ARR submission
+1. Read the latest full PDF manually from page 1 to the appendix start.
+2. Confirm the title, abstract, and contribution framing are final enough for review.
+3. Confirm no further last-minute experiment is required.
+4. Freeze one exact version of:
+   - insight_emnlp.tex and all sec_*_emnlp.tex files
+   - insight.bib
+   - compiled insight_emnlp.pdf
+5. Save a timestamped backup copy of the frozen submission package.
+   Current helper:
+   - `paper/emnlp2026/freeze_arr_submission.sh`
+   Default naming now uses:
+   - `frozen/ARR<UTC timestamp>/`
+   - `frozen/insight_emnlp_arr_freeze_ARR<UTC timestamp>.tar.gz`
+
+Phase 2: Authorship and policy readiness
+1. Finalize author list before ARR submission.
+2. Make sure every coauthor knows:
+   - ARR submission deadline
+   - reviewer registration deadline
+   - author-response discussion window
+   - EMNLP commitment timeline
+3. Confirm that all authors are prepared to complete required ARR reviewer registration.
+4. Confirm no dual submission conflict exists.
+5. Confirm no author-list changes will be needed later; EMNLP commitment does not allow adding/removing authors.
+
+Phase 3: Final anonymity and compliance pass
+1. Check the PDF for any lab, institution, or personal identifiers.
+2. Check appendix text for hidden identity leaks in asset descriptions or release plans.
+3. Check bibliography for self-citations that accidentally de-anonymize the paper.
+4. Confirm limitations are explicitly stated.
+5. Confirm no unsupported or hallucinated citation remains.
+6. Confirm any AI/LLM assistance used in the method is accurately described.
+   Current helper:
+   - `paper/emnlp2026/run_submission_sanity_checks.sh`
+
+Phase 4: ARR submission steps
+1. Submit the anonymized paper to ARR.
+2. Choose EMNLP 2026 as the preferred venue during ARR submission.
+3. Upload the correct anonymized PDF.
+4. If supplementary material is uploaded separately, ensure it is anonymized and consistent with the submitted PDF.
+5. Record the ARR submission ID and exact upload timestamp.
+6. Keep the exact submitted PDF and sources in a frozen archive.
+
+Phase 5: Immediately after ARR submission
+1. Verify that all authors complete required reviewer registration by the ARR deadline.
+2. Create a review-response tracking document for later rebuttal.
+   Current helper:
+   - `EMNLP_REVIEW_RESPONSE_TRACKER.md`
+3. Prepare a short evidence map for likely reviewer questions:
+   - why language-grounded semantic interface?
+   - why ontology construction is a modeling choice?
+   - what is the strongest evidence vs. current limitations?
+   - why actor-based timing is only partial evidence?
+   Current working drafts:
+   - `EMNLP_REVIEW_RESPONSE_MAP.md`
+   - `EMNLP_INTERVENTION_STATUS.md`
+   - `EMNLP_CONTROLLED_ONTOLOGY_STATUS.md`
+4. Keep all post-submission edits in a new revision branch/folder; do not overwrite the frozen submitted version.
+
+Phase 6: After ARR reviews arrive
+1. Read reviews and group them into:
+   - framing / positioning issues
+   - evidence gaps
+   - clarity / writing issues
+   - protocol / robustness concerns
+2. Draft author response with direct claim-evidence mapping.
+3. Decide whether to:
+   - commit current reviewed paper to EMNLP 2026, or
+   - revise and resubmit to a later ARR cycle.
+
+Phase 7: If committing to EMNLP 2026
+1. Use the reviewed ARR paper for EMNLP commitment.
+2. Keep the same author set; only author order may change if needed.
+3. Align the final EMNLP commitment package with reviewer feedback.
+4. If accepted, prepare the camera-ready version using the final ACL publication instructions and updated page allowance.
+
+Practical advice specific to this project:
+- Keep the paper positioned as a language-grounded multimodal semantics / ontology paper, not as a pure accident-prediction leaderboard paper.
+- Keep the strongest claims on ontology-as-modeling, semantic auditability, and beyond-accuracy evaluation.
+- Keep the current caution that actor-based timing evidence is partial and dataset-dependent.
+- Do not reopen large experimental branches unless they clearly change the acceptance picture.
+
+Suggested frozen package naming convention:
+- `frozen/ARR20260416T135900Z/`
+- `frozen/insight_emnlp_arr_freeze_ARR20260416T135900Z.tar.gz`

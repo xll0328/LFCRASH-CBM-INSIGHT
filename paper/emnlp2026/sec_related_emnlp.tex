@@ -1,0 +1,108 @@
+\section{Related Work}
+\label{sec:related}
+
+\paragraph{Accident anticipation and the benchmark tradition.}
+Accident anticipation has moved from early temporal modeling for DAD~\citep{ref4} to larger multi-branch and graph-based predictors~\citep{ref45,ref17,ref32,ref36,ref37,ref208}. Large-capacity fusion systems now report strong AP and mTTA values on benchmark splits~\citep{liao2024crash,liu2025ccaf,ZHANG2025103173}, and several lines also add auxiliary interpretability signals~\citep{ref2,ref102}. The field therefore has a mature predictive toolbox, but most methods still optimize toward one central axis: score quality over time. In safety-critical forecasting, this leaves an unclosed question about what the model is using, and whether that ``why'' can be governed across runs and deployment settings.
+The broader interpretability literature frames this same gap as one between local
+faithfulness and reusable trust, with recent work emphasizing explicit interfaces
+ explanations in risky settings~\citep{ribeiro2016loco,lundberg2017unified,doshi2017towards,rudin2019stop}. Some policy-oriented lines for safety timing introduce explicit uncertainty and control objectives~\citep{osband2016bootstrapped,konda1999actor}, yet they optimize decision behavior rather than providing a governed semantic vocabulary as an explicit method object.
+In road-safety settings, deployment practice also raises this question to system
+validity: interpretation is part of validation, not only visualization~\citep{who2023global,NHTSA2023}.
+Related forecasting and trajectory work motivates the same concern about whether the
+underlying representation is trustworthy under operational decisions~\citep{liao2024cognitive,ref13,ref23}.
+The transportation literature further shows that operator safety judgment is tied to
+semantic alignment and interpretable cueing, not solely raw confidence scores~\citep{kim2025understanding,guan2025experimental}.
+Recent works on richer localization and accident context estimation~\citep{ref100,wang2024deepaccident} strengthen practical utility, while still leaving the semantic interface design itself mostly implicit.
+Related datasets and precursor lines, including uncertainty-aware anticipation
+and driver-attention-oriented benchmarks~\citep{ref1,ref33,fang2021dada,karim2023attention},
+similarly emphasize predictive behavior more than governed semantic interfaces.
+
+\paragraph{Governance and human factors context.}
+Recent safety standards and practitioner guidance stress that model evidence is one part of readiness.
+Validation protocols for safety-critical forecasting increasingly require interpretable
+artifacts, explicit uncertainty behavior, and auditability paths, especially when
+warnings trigger human or automation actions~\citep{who2023global,NHTSA2023}.
+\method{} positions the semantic interface as one such artifact: a method-level
+object whose names, families, and timing behavior are reviewable across protocol
+choices.
+
+In high-stakes settings, this matters because interpretability without governance
+is often non-actionable. Concept-level claims require evidence about how concepts are
+constructed, maintained, and constrained across runs; the paper therefore treats the
+ontology and scoring pipeline as part of the model method and not as a detached
+annotation step. This aligns with the broader call in high-stakes ML to keep
+modeling choices auditable by design rather than evaluated only after training
+~\citep{doshi2017towards,rudin2019stop}.
+
+\paragraph{Post-hoc explanation versus embedded semantics.}
+Post-hoc methods such as feature attribution and verbalization provide useful
+diagnostics (e.g., LIME and SHAP) but are often attached after prediction.
+DRIVE adds attention
+visualizations to the output path~\citep{ref2}; W3AL introduces natural language
+reporting around location and timing~\citep{liao2024and}. These designs increase
+transparency to users but do not usually enforce a stable semantic state that is
+shared by training, evaluation, and intervention. In our setting, this distinction is
+critical: an attached explanation can show what looked important for one
+prediction, while an embedded semantic interface must support reusable claims
+about what risk concepts are consistently represented by the model.
+\method{} positions itself in this gap by making the concept state part of the
+model's forward computation.
+
+\paragraph{Interpretability and concept-level learning.}
+Concept bottlenecks provide a principled intermediate layer that remains
+human-interpretable and mathematically tractable~\citep{tishby2000information,koh2020concept}.  
+Subsequent work has reduced reliance on dense annotations and expanded
+concept-supervision design~\citep{zarlenga2022concept,yuksekgonul2023posthoc,oikarinen2023label}.  
+In accident anticipation, those ideas are harder to apply because concepts must
+be temporally meaningful and task-governable across long horizons. This is why
+our method treats concept vocabulary construction as a first-class component,
+not a fixed side input.
+
+This framing also distinguishes \method{} from post-hoc explanation pipelines.
+In the broader accident-anticipation literature, most prior work does not treat
+concept vocabulary as a tunable, auditable method component, so semantic signals
+cannot be directly governed across matched launches.
+Attribution methods such as Grad-CAM
+\citep{selvaraju2017gradcam} explain individual predictions, while
+concept-activation techniques such as TCAV
+\citep{kim2018tcav} test global class-level concept sensitivity.
+Both are useful, but neither becomes a reusable interface artifact unless the
+concept layer is constructed, constrained, and audited as part of the model.
+This also makes the actor-policy caution more central: prior reinforcement-learning
+and credit-assignment work emphasize that policy- or intervention-level claims require explicit control-focused validation, not prediction-only benchmarking~\citep{konda1999actor,meulemans2023cocoa}.
+Our contribution is therefore not only semantic readability, but the governance
+of that interface under matched launchers and matched family-level controls.
+Automatic concept discovery lines such as ACE~\citep{ghorbani2019ace} are also
+relevant here: they motivate scalable concept proposal, but our focus is the
+downstream governance and deployment of a fixed, auditable concept interface.
+
+\paragraph{Language-grounded ontology for multimodal safety systems.}
+Recent progress in vision-language pretraining enables language to act as
+semantic glue for risky-scene understanding~\citep{radford2021learning,jia2021align}.  
+In driving, VL supervision has improved scene grounding and text-aware
+reasoning~\citep{liao2024gpt,shi2025scvlm}. In contrast to trajectory-prediction systems that rely heavily on map constraints and route semantics~\citep{ref215}, we use it as a conservative
+bootstrap: CLIP-style pseudo-labeling and paraphrase stress tests produce
+candidate semantic structure while avoiding claims of full semantic correctness.
+Temporal distillation then anchors the interface to future-aware representations,
+so the semantic layer is coupled to anticipation timing~\citep{fang2022traffic}.
+
+\paragraph{Ontology governance as method, not ornament.}
+Compared with systems where semantic terms are implicit prompts, prompt templates,
+or uncontrolled phrase pools, our pipeline explicitly performs mining,
+canonicalization, family balancing, and light review. This changes the research
+question from \emph{``Can we predict with higher AP?''} to \emph{``How does
+semantic design change behavior under matched training and evaluation?''}.  
+That shift aligns with current language-oriented evaluation culture because the
+interface itself is now an accountable artifact: its names, merges, and coverage can
+be inspected and compared.
+
+\paragraph{Position in this paper.}
+Our paper is not attempting to turn accident anticipation into a text-generation
+task. Instead, it studies whether a governed, language-grounded interface can be
+designed for a forecasting pipeline, and whether that interface changes what can
+be audited and compared. In this framing, \method{} contributes primarily at the
+representation-design layer: a reproducible ontology construction path and a
+matched-evaluation protocol that turns ontology choice into an explicit variable.
+\method{} is strongest where this differs from prior accident systems: it links
+concept construction, model training, and intervention-oriented auditing into one
+methodological unit rather than treating semantics as a visualization overlay.

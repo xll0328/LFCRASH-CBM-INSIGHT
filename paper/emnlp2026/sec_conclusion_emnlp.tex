@@ -1,0 +1,65 @@
+\section{Conclusion}
+\label{sec:conclusion}
+
+We presented \method{}, a framework built around a language-grounded risk
+concept interface for accident anticipation. The central contribution of the
+paper is to show that such an interface can be constructed explicitly and
+studied as a scientific object. In our setting, that means treating ontology
+construction as part of the method rather than as hidden preprocessing, then
+training an interpretable anticipation model on top of the resulting ontology.
+
+This shift in perspective changes what the paper contributes. First, we provide
+a reproducible pipeline for mining, refining, merging, balancing, and lightly
+reviewing risk concepts from driving frames. Second, we show that the resulting
+ontology is not merely descriptive: when deployed as the concept bottleneck of
+the model, ontology choice changes the AP--mTTA operating point under matched
+launchers. Third, we show that strong anticipation can coexist with a compact
+and auditable semantic layer, including a competitive interpretable tier on DAD
+and cleaner timing behavior on A3D.
+
+Empirically, the paper is strongest on the semantic layer: the ontology
+pipeline, the concept bottleneck, the controlled ontology comparisons, and the
+case-study and audit artifacts. The timing module remains important as the
+downstream consumer of semantic state, but the paper should be read first as a
+semantic-interface contribution and only second as a policy-timing paper. The
+actor-policy results are therefore useful mainly insofar as they clarify how
+much of that behavior transfers beyond the classifier trajectory.
+
+\paragraph{Limitations and future work.}
+The concept labels are still based on CLIP-style pseudo-annotations rather than
+human-verified frame-level concept supervision. The current semantic interface
+is therefore auditable and trainable, but not yet a finished concept benchmark.
+The evaluation also relies on offline visual features rather than end-to-end
+video backbones. More importantly, while the timing module consumes the concept
+state by construction, a complete policy-level causal intervention study
+remains future work. We have strengthened the language-facing evidence with a
+larger frame audit and full light-touch review of the released ontology, so the
+main remaining empirical weakness is no longer missing ontology coverage but
+DAD-side instability, limited cross-dataset ontology transfer evidence, and the
+gap between classifier-derived anticipation scores and mature policy-level
+timing behavior.
+
+\paragraph{Evidence scope.}
+To keep methodological integrity, the paper explicitly treats DAD as a
+stress setting, not a universal performance frontier, and treats actor-policy
+timing as a partial, support-only account. This choice keeps the central claim
+on the part of the evidence that is strongest: concept-interface construction,
+matched protocol contrast, and clean A3D flagship stability.
+
+\paragraph{Broader impact.}
+For safety-critical prediction, the practical value of \method{} is not merely
+that it forecasts accidents, but that it exposes a more inspectable semantic
+state than a purely opaque predictor. This could help engineers reason about
+failure modes, ontology design, and warning behavior. At the same time, the
+current paper does not establish that exposed concepts or CRS scores are
+already reliable enough for direct human override in a deployment pipeline.
+Any real-world use would still require much stronger calibration, robustness,
+and human-factors validation.
+
+\paragraph{Final takeaway.}
+\method{} is strongest as a semantic-interface methodology paper:
+ontology construction is explicit, auditable, and empirically linked to model
+behavior.
+The main remaining research direction is a tighter, uniformly decisive stress
+envelope for short-horizon timing on DAD; ontology coverage is no longer the
+primary gap.

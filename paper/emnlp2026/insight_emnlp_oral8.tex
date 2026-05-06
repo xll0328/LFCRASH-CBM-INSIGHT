@@ -1,0 +1,535 @@
+\documentclass[11pt]{article}
+\usepackage[review]{acl}
+\usepackage{times}
+\usepackage{latexsym}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{microtype}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{subcaption}
+\usepackage{makecell}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{placeins}
+
+\setlength\titlebox{6.5cm}
+\setlength{\textfloatsep}{9pt plus 1pt minus 2pt}
+\setlength{\floatsep}{7pt plus 1pt minus 2pt}
+\setlength{\intextsep}{8pt plus 1pt minus 2pt}
+\setlist[itemize]{leftmargin=1.25em,topsep=2pt,itemsep=1pt,parsep=0pt}
+
+\newcommand{\method}{\textsc{INSIGHT}}
+\newcommand{\cbm}{\textsc{CBM}}
+\newcommand{\caac}{\textsc{CAAC}}
+\newcommand{\cgta}{\textsc{CGTA}}
+\newcommand{\crs}{\textsc{CRS}}
+\newcommand{\tsd}{\textsc{TSD}}
+
+\title{\method: A Language-Grounded Risk Concept Interface for Interpretable Accident Anticipation}
+
+\author{Anonymous Submission}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Accident anticipation is usually evaluated as an opaque binary prediction task.
+For safety-critical use, however, a strong score is not enough: researchers
+also need an auditable semantic interface that exposes what the model treats as
+risky and how those semantics affect warning behavior. We present
+\method{}, an interpretable anticipation framework built around a governed
+language-grounded risk concept interface. The method mines candidate concepts
+from driving frames, refines them into canonical risk primitives, balances
+semantic families, and exports a trainable ontology with review metadata and
+merge provenance. The ontology is then used as the concept bottleneck of an
+anticipation model, enabling matched comparisons of how semantic-interface
+design changes the AP--mTTA operating point. Across DAD and A3D, \method{}
+reaches a strong interpretable operating point, including 93.40\% AP and
+4.90s mTTA on A3D and 68.19\% AP on the canonical DAD curriculum line, while
+using only about 30M parameters. The paper's strongest claim is semantic
+interface methodology: ontology construction is not hidden preprocessing, but a
+governed modeling choice whose downstream effects are measurable.
+\end{abstract}
+
+\section{Introduction}
+
+Useful accident anticipation systems should do more than produce a final risk
+score. In ADAS and autonomous-driving pipelines, the model should expose a
+stable intermediate object: a semantic layer that identifies what the system
+regards as dangerous, lets alternative risk vocabularies be compared, and
+supports audit of how semantics influence warning behavior. Current systems
+rarely provide this object. Many strong models optimize AP and timing metrics
+while leaving their internal evidence latent; others attach post-hoc
+visualization or verbalization after prediction~\citep{ref2,liao2024and}. This
+is useful for explanation, but it is not the same as a trainable and governed
+semantic interface.
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=0.98\textwidth]{../figures/emnlp_fig1_case_interface.pdf}
+  \caption{\textbf{Semantic interface in action.}
+  A real crash sequence is paired with a compact risk trajectory and named
+  concept activations. The figure is a motivated example: the risk score,
+  concept evidence, and alert marker are quantified separately by the headline,
+  ontology, and support/stress evidence blocks in
+  Tables~\ref{tab:headline}--\ref{tab:trigger_compare}.}
+  \label{fig:motivation}
+\end{figure*}
+
+We argue that the missing object is a \emph{language-grounded risk concept
+interface}. The interface is not a prompt artifact or a presentation device. It
+is a governed ontology that becomes the model's semantic bottleneck and can
+therefore be evaluated as part of the method. This shift changes the main
+scientific question from ``which black-box model has the best leaderboard
+score?'' to ``how does the design of the semantic interface change the
+accuracy--timeliness frontier?'' Figure~\ref{fig:motivation} shows the intended
+reading: named concepts, temporal evidence, and warning behavior should be
+visible together, while the experiments below keep the corresponding
+quantitative claims in protocol-separated evidence tiers.
+
+Our contributions are:
+\begin{itemize}
+  \item We formulate accident anticipation around an auditable semantic
+  interface, treating ontology construction as a modeling choice rather than
+  hidden preprocessing.
+  \item We introduce a reproducible multimodal concept-construction pipeline
+  that mines, refines, merges, balances, and lightly reviews risk concepts into
+  a trainable ontology.
+  \item We build \method{}, a concept-bottleneck anticipation model that exposes
+  concept-level risk evidence while remaining in a compact 30M-parameter regime.
+  \item We show that ontology choice changes the AP--mTTA operating point under
+  matched launchers on DAD and A3D. We keep DAD fragility and actor-policy
+  timing evidence scoped as support, not as the central claim.
+\end{itemize}
+
+\section{Related Work}
+
+\paragraph{Accident anticipation.}
+Early and recent accident anticipation methods model pre-crash video as a
+prediction problem, combining recurrent, graph, attention, or multimodal
+architectures to improve AP and warning time~\citep{ref4,ref17,ref32,liao2024crash}.
+Recent systems such as CCAF-Net~\citep{liu2025ccaf} and
+LATTE~\citep{ZHANG2025103173} push DAD scores higher, but they do not expose a
+trainable semantic state that can be named, compared, and audited across runs.
+
+\paragraph{Explanation and language grounding.}
+Post-hoc visual explanations such as Grad-CAM can localize evidence after the
+fact, and language-based systems can verbalize accident regions or scene
+descriptions~\citep{ref2,liao2024and}. \method{} instead places language-derived
+risk concepts inside the forward path. It is therefore closer in spirit to
+concept bottlenecks and interpretable representation learning: a constrained
+intermediate space is optimized for utility while remaining inspectable
+\citep{tishby2000information}. Our contribution is to make the vocabulary itself
+governed and experimentally variable in accident anticipation.
+
+\section{Method}
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=0.98\textwidth]{../figures/emnlp_fig2_framework_image2_overlay.pdf}
+  \caption{\textbf{\method{} as a governed semantic-interface pipeline.}
+  The figure separates video evidence, language-grounded concept governance,
+  the trainable \cbm{} state, and downstream warning/audit behavior. Exact
+  scientific labels are drawn deterministically; the visual design emphasizes
+  that the same named concepts support prediction, timing, and audit.}
+  \label{fig:framework}
+\end{figure*}
+
+Given a dashcam video $\{\mathbf{x}_t\}_{t=1}^T$, accident label $y$, and
+accident time $\tau$, standard anticipation predicts whether an accident will
+occur from a prefix. We instead optimize for a useful operating region:
+high predictive quality with warning lead time and an inspectable semantic
+state. The idealized target is
+\begin{equation}
+  \max_{\theta}\; \mathbb{E}[\mathrm{TTA}]
+  \quad \mathrm{s.t.}\quad
+  \mathrm{AP}(\theta)\geq \mathrm{AP}_{\text{base}},
+\end{equation}
+where AP is precision--recall area and TTA is warning lead time. The key
+methodological claim is that the semantic interface determines how this
+operating point can be studied.
+
+\paragraph{Ontology construction.}
+The concept vocabulary is built through five stages. First, we mine pre-crash
+frames that cover diverse traffic geometries, actor interactions, visibility
+conditions, and precursor patterns. Second, a multimodal model proposes
+risk-first concepts rather than generic scene captions. Third, noisy proposals
+are refined into reusable risk primitives by removing background clutter,
+merging near-duplicates, and normalizing names. Fourth, family-level balancing
+and light human review prevent the ontology from collapsing into a small
+hand-written list or an ungoverned phrase pool. Fifth, the ontology is exported
+with canonical names, family metadata, merge provenance, and review notes.
+
+\paragraph{Concept-bottleneck anticipation.}
+Once an ontology is fixed, \method{} maps object-focused frame features to
+concept activations $\mathbf{c}_t\in[0,1]^K$ using a \cbm{}:
+\begin{equation}
+  \begin{split}
+  \mathbf{c}_t &= \sigma(\mathbf{W}_c\mathbf{o}_t+\mathbf{b}_c),\\
+  \mathbf{e}_t &= \mathrm{LayerNorm}(\mathbf{W}_d\mathbf{c}_t+\mathbf{b}_d).
+  \end{split}
+\end{equation}
+The bottleneck is supervised with CLIP-derived top-$m$ pseudo-labels
+($m=3$ in the main recipe), treated as a semantic bootstrap rather than
+frame-level human ground truth. We then compute a global concept risk score
+$\rho_t=\sigma(\mathbf{w}_{\mathrm{risk}})^\top\mathbf{c}_t$ and use
+concept-delta temporal attention (\cgta{}) to focus history on semantic changes.
+\tsd{} distills future CLIP features into current representations, and \caac{}
+consumes the concept-augmented state for timing. In the current paper, actor
+timing is support evidence; the primary claim is the governed semantic interface.
+
+\section{Experiments}
+
+\paragraph{Setup.}
+We evaluate on DAD~\citep{ref4} and A3D~\citep{liao2024crash}. DAD contains
+1,750 dashcam clips (620 accident, 1,130 non-accident) and stresses noisy,
+short-horizon pre-crash transitions. A3D contains 1,199 accident videos and
+serves as the cleaner flagship setting where precursor concepts emerge earlier.
+Models use VGG16 ROI features~\citep{ref31}, AdamW, and matched launcher
+families. We keep headline runs, controlled support analyses, and stress
+evidence separate to avoid pooling heterogeneous checkpoints into a single
+leaderboard narrative.
+
+\begin{table}[t]
+\centering\scriptsize
+\setlength{\tabcolsep}{2.5pt}
+\caption{\textbf{Evidence map.} Each result block has one role, preventing
+headline, support, and stress evidence from being read as one pooled
+leaderboard.}
+\label{tab:protocol_map_main}
+\begin{tabular}{p{0.29\linewidth}p{0.29\linewidth}p{0.30\linewidth}}
+\toprule
+Block & Role & Score source \\
+\midrule
+Headline DAD/A3D & Direct comparison & classifier \\
+Ontology cells & Interface science & classifier \\
+Ablation & Component support & classifier \\
+Trigger-source & Timing stress & classifier / actor \\
+DAD robustness & Fragility disclosure & classifier \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The protocol map in Table~\ref{tab:protocol_map_main} is part of the paper's
+submission discipline. \method{} should not be read as a single best checkpoint
+selected from all historical runs. The main paper reports one canonical DAD
+line, one canonical A3D line, controlled ontology comparisons under matched
+launchers, and support-only mechanism tests. This organization is especially
+important for DAD, where short warning windows and noisier visual evidence make
+the mechanism story less stable than on A3D.
+The visual bridge in Figure~\ref{fig:motivation} follows the same discipline:
+its score trace points to headline classifier evidence, its named activations
+point to ontology and language-side support evidence, and its alert marker
+points to timing diagnostics rather than a deployment-level policy claim.
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=0.92\textwidth]{../figures/insight_fig_concept_pipeline.pdf}
+  \caption{\textbf{Risk ontology construction is part of the method.}
+  The pipeline turns sampled pre-crash frames into a trainable concept ontology
+  through multimodal proposal, risk-first refinement, duplicate consolidation,
+  family balancing, and light review. This figure is the EMNLP-facing bridge
+  from language artifacts to model behavior.}
+  \label{fig:concept_pipeline}
+\end{figure*}
+
+\begin{table*}[t]
+\centering\small
+\setlength{\tabcolsep}{4pt}
+\caption{\textbf{Headline predictive evidence.} DAD is reported as a fragile
+stress setting; A3D is the cleaner flagship result. The table positions
+\method{} as a compact semantic-interface model, not as a global leaderboard
+claim.}
+\label{tab:headline}
+\label{tab:dad}
+\label{tab:a3d}
+\begin{tabular}{llcccccc}
+\toprule
+Data & Method & Venue & AP$\uparrow$ & mTTA$\uparrow$ & TTA@R80$\uparrow$ & P@R80$\uparrow$ & Interface \\
+\midrule
+DAD & DRIVE~\citep{ref2} & ICCV'21 & 58.4\% & 2.31s & -- & -- & post-hoc \\
+DAD & CRASH~\citep{liao2024crash} & MM'24 & 65.3\% & 1.75s & -- & -- & none \\
+DAD & W3AL~\citep{liao2024and} & MM'24 & 69.2\% & -- & -- & -- & verbal \\
+DAD & CCAF-Net~\citep{liu2025ccaf} & -- & 81.3\% & 4.15s & -- & -- & none \\
+DAD & LATTE~\citep{ZHANG2025103173} & -- & 89.7\% & 4.49s & -- & -- & none \\
+DAD & \textbf{\method{}} & -- & \textbf{68.19\%} & \textbf{1.75s} & -- & -- & semantic \\
+\midrule
+A3D & CRASH~\citep{liao2024crash} & MM'24 & 96.0\% & 4.27s & -- & -- & none \\
+A3D & W3AL~\citep{liao2024and} & MM'24 & 92.4\% & 4.52s & -- & -- & verbal \\
+A3D & \textbf{\method{}} & -- & \textbf{93.40\%} & \textbf{4.90s} & \textbf{4.89s} & \textbf{0.9067} & semantic \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+Table~\ref{tab:headline} gives the bounded headline reading. On DAD,
+\method{} remains competitive within the interpretable/explanation-oriented
+tier, but the paper does not claim global DAD dominance. On A3D, \method{}
+achieves a strong operating point with better warning lead time than CRASH while
+retaining competitive AP. A dedicated A3D three-seed audit gives
+$94.16\%\pm0.95$ AP and $4.62\pm0.42$s mTTA, supporting A3D as the cleaner
+semantic-interface setting.
+
+\paragraph{DAD robustness and hardening.}
+The canonical DAD line is useful, but it is not the whole story. Three clean
+curriculum seeds at synchronized checkpoints yield 56.39\%$\pm$3.46 AP and
+2.40$\pm$0.05s mTTA at epoch 25, and 55.16\%$\pm$3.63 AP and
+2.49$\pm$0.09s mTTA at epoch 30. A fixed-vocabulary recovery family improves
+the stress envelope to 63.64\%$\pm$0.80 AP and 2.33$\pm$0.27s mTTA, while a
+low-regularization follow-up reaches 64.42\%$\pm$0.97 AP and
+2.35$\pm$0.20s mTTA. These runs narrow the gap, but they do not make DAD the
+paper's clean mechanism dataset. We therefore report DAD as a meaningful stress
+case and A3D as the clean flagship.
+
+\begin{table*}[t]
+\centering\small
+\caption{\textbf{Controlled ontology evidence.} Only the ontology source varies;
+the training launcher family is held fixed. Ontology choice moves the AP--mTTA
+operating point, which is the paper's most direct evidence that semantic
+interface design is a modeling variable.}
+\label{tab:ontology}
+\label{tab:concept_sets}
+\begin{tabular}{llccccc}
+\toprule
+Dataset & Concept set & \#Concepts & AP$\uparrow$ & mTTA$\uparrow$ & TTA@R80$\uparrow$ & P@R80$\uparrow$\\
+\midrule
+DAD & Historical full & 837 & 64.91\% & 1.88s & 2.51s & 0.492 \\
+DAD & Risk-core manual & 30 & \textbf{65.25\%} & 2.15s & \textbf{2.92s} & 0.462 \\
+DAD & Perfect concept set v1 & 80 & 64.15\% & \textbf{2.30s} & 2.67s & 0.467 \\
+\midrule
+A3D & Historical full & 837 & 93.88\% & 9.41s & 8.13s & 0.940 \\
+A3D & Risk-core manual & 30 & 94.36\% & \textbf{9.57s} & \textbf{8.60s} & \textbf{0.944} \\
+A3D & Perfect concept set v1 & 80 & \textbf{96.54\%} & 8.69s & 7.11s & 0.934 \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+Table~\ref{tab:ontology} shows that there is no universally dominant
+vocabulary. On DAD, the compact manual set has the highest AP while the
+polished discovered ontology gives the best mTTA. On A3D, the discovered
+ontology has the strongest AP while the compact manual set gives the best timing
+metrics. A completed three-seed extension over all six ontology cells confirms
+that the A3D discovered ontology remains competitive in aggregate
+($93.35\%\pm0.49$ AP, $8.71\pm0.77$s mTTA), while DAD variance remains large.
+This is exactly the intended claim: ontology design changes the operating
+frontier, and DAD remains the harder stress setting.
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=0.92\textwidth]{../figures/emnlp_fig3_operating_points.pdf}
+  \caption{\textbf{Safety--utility view under semantic-interface constraints.}
+  Literature baselines and ontology-support points are separated by dataset.
+  The figure emphasizes a strong interpretable operating point rather than an
+  unbounded leaderboard claim.}
+  \label{fig:safety_utility}
+\end{figure*}
+
+\begin{table*}[t]
+\centering\scriptsize
+\setlength{\tabcolsep}{4pt}
+\caption{\textbf{Support and stress evidence.} These diagnostics make the
+mechanism story readable without upgrading support analyses into headline
+claims.}
+\label{tab:trigger_compare}
+\label{tab:ablation}
+\label{tab:interp_quant}
+\begin{tabular}{p{0.16\textwidth}p{0.20\textwidth}p{0.27\textwidth}p{0.28\textwidth}}
+\toprule
+Evidence block & Condition & Main statistic & Reading \\
+\midrule
+Score-source transfer & DAD classifier $\rightarrow$ actor &
+61.94\% AP / 2.16s mTTA $\rightarrow$ 34.67\% AP / 2.08s mTTA &
+DAD actor timing remains stress evidence, not the headline source. \\
+Score-source transfer & A3D classifier $\rightarrow$ actor &
+93.88\% AP / 4.71s mTTA $\rightarrow$ 91.14\% AP / 4.97s mTTA &
+A3D preserves much more timing behavior under the actor source. \\
+Component ablation & Full \method{} vs.\ w/o \cbm{} &
+68.84\% AP / 2.42s mTTA vs.\ 65.3\% AP / 1.82s mTTA &
+The semantic bottleneck matters in the controlled support line. \\
+Component ablation & w/o \caac{}, \cgta{}, \crs{}, \tsd{} &
+AP range 67.1--68.2\%, mTTA range 1.75--2.31s &
+Timing and audit modules shape the operating point. \\
+Concept intervention & Hybrid amplification on DAD &
+mean shift $-2.04$ frames; earlier/same/later = 14/84/2\% &
+Concept edits can move alerts, but the effect is heterogeneous. \\
+Null and actor checks & zero edit / actor diagnostic &
+0.00-frame null shift; mean actor peak 0.498 &
+The current evidence is partial structural intervenability, not causal proof. \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+Table~\ref{tab:trigger_compare} makes the mechanism
+story readable without overclaiming. On A3D, actor-based evaluation is close to
+classifier-based evaluation, suggesting that concept-conditioned timing can
+survive beyond the classifier trajectory. On DAD, the actor branch is much
+weaker, so classifier-derived metrics remain the headline source. Archived
+concept-intervention analyses similarly support partial structural
+intervenability, not a full causal timing proof.
+
+\paragraph{Language-side audits.}
+The ontology is also audited as a language artifact. Over a 500-frame DAD slice,
+top-1 pseudo-labeling is too concentrated, while top-10 is much more diffuse.
+Top-3 produces 2.34 concept families per frame and 16.0\% of the cumulative
+top-20 similarity mass, giving a practical balance between coverage and noise.
+Across 12 canonical concepts with two paraphrases each, canonical and variant
+prompts achieve mean text cosine 0.939, frame-score correlation 0.887, top-10
+frame overlap 0.525, and mean absolute score difference 0.013. These numbers do
+not make the ontology a finished human concept benchmark, but they support the
+paper's naming policy: short canonical risk phrases are stable enough to act as
+a governed interface.
+
+\section{Discussion}
+
+\paragraph{Why A3D carries the clean mechanism claim.}
+The strongest mechanistic reading comes from A3D rather than DAD. A3D contains
+longer and cleaner precursor intervals, so concept activations have room to
+change before the warning threshold is crossed. In that regime, the discovered
+ontology and the compact manual ontology occupy different points on the
+AP--mTTA frontier, and actor-source diagnostics preserve much of the
+classifier-side timing behavior. This is the evidence pattern expected if the
+semantic interface is genuinely participating in anticipation rather than only
+decorating a late binary score. By contrast, DAD is useful precisely because it
+is less forgiving. Several DAD runs show that warning behavior can be sensitive
+to checkpoint choice, trigger source, and vocabulary size. We therefore do not
+use DAD to claim a clean causal timing mechanism. We use it to test whether a
+language-grounded interface can remain interpretable under a short-horizon
+stress setting while still producing a bounded, competitive operating point.
+
+\paragraph{What the controlled comparisons rule out.}
+The ontology comparisons rule out two easy explanations. First, the gain is not
+explained by simply increasing the number of phrases: the 837-concept historical
+vocabulary is not uniformly better than the compact or polished alternatives.
+Second, the result is not a pure visualization layer: changing the ontology
+while holding the launcher family fixed changes AP, mTTA, TTA@R80, and P@R80.
+The correct interpretation is narrower and more useful. The ontology is a
+modeling interface with measurable downstream effects, and different
+interfaces favor different regions of the accuracy--timeliness frontier. This
+also explains why the paper separates headline rows, ontology cells,
+component ablations, actor-source diagnostics, and intervention analyses. A
+single pooled table would make the package look stronger at first glance, but
+would hide the distinction between direct predictive evidence, support
+evidence, and stress evidence.
+
+\paragraph{Reviewer-facing read of the contribution.}
+\method{} should be read as semantic-interface methodology for anticipation,
+not as a claim that language supervision alone solves accident prediction. The
+paper contributes a reproducible path from multimodal phrase discovery to a
+governed ontology, then evaluates that ontology as a trainable bottleneck
+rather than as post-hoc prose. This framing gives reviewers three concrete
+objects to inspect: the exported concept vocabulary, the matched ontology
+experiments, and the concept-level audit traces attached to warning behavior.
+It also keeps the remaining weaknesses visible. The concept labels are
+pseudo-annotated, the ontology is not yet a human factors benchmark, and the
+DAD actor branch is not strong enough to support a deployment-level timing
+claim. Those limitations do not undercut the central result; they define the
+next step from an auditable research interface to a fully validated
+human-centered anticipation system.
+
+\paragraph{How the interface can be falsified.}
+The framework is useful only if the semantic layer can be challenged. A
+post-hoc explanation can often be adjusted after a model has succeeded; a
+governed bottleneck is less forgiving because the ontology is fixed before the
+matched runs are compared. The current evidence exposes several falsification
+routes. If a large uncurated phrase pool had dominated every compact ontology,
+the governance story would be weak. If ontology swaps had left AP and timing
+unchanged, the interface would be cosmetic. If concept edits had no measurable
+effect on alert timing even in archived intervention tests, the bottleneck
+would be difficult to interpret as a structural object. The observed results
+are mixed in a productive way: ontology choice matters, A3D provides a clean
+mechanism setting, and DAD reveals where the current actor-timing story breaks.
+This is the kind of evidence profile we expect from an interface paper rather
+than a pure architecture paper.
+
+\paragraph{Practical scope.}
+The method is intentionally compact: the reported \method{} configuration stays
+near 30M parameters and uses offline ROI features, so the contribution is not
+dependent on an unusually large video backbone. This matters for the paper's
+scientific reading. The semantic interface can be swapped, audited, and
+stress-tested without reinterpreting every result as a backbone scaling effect.
+At the same time, the compact setting should not be mistaken for a deployment
+recipe. Better end-to-end features, calibrated alert policies, and denser human
+concept labels are natural next steps. The point of the current submission is
+to make those future upgrades comparable: once the ontology is a first-class
+artifact with provenance and matched evaluation cells, later work can improve
+the perceptual front end without losing the ability to ask how semantic design
+changes warning behavior.
+
+\paragraph{Why governed concepts instead of captions alone.}
+Free-form captions are attractive because they are expressive, but expression
+alone does not create a stable experimental interface. Two captions can describe
+the same road hazard with different surface forms, and a single caption can mix
+actor identity, scene context, weather, and speculative intent in ways that are
+hard to compare across runs. \method{} deliberately compresses language into
+canonical risk primitives before the anticipation model sees it. This loses some
+descriptive richness, but it gains three properties that matter for a scientific
+paper: the vocabulary can be versioned, concept families can be balanced, and
+downstream changes can be attributed to a known interface rather than to
+uncontrolled prompt variation. The language contribution is therefore not that
+the model says more words; it is that language defines a controlled semantic
+state that can be trained, swapped, ablated, and audited.
+
+\paragraph{What would make the claim stronger.}
+The most valuable next experiment is not another unconstrained DAD leaderboard
+run. It is a human-centered ontology validation pass that asks whether drivers,
+safety engineers, and annotators agree that the canonical concepts are
+semantically meaningful, separable, and useful for early warning review. A
+second useful extension is to pair the current offline ROI features with a
+modern video backbone while preserving the same ontology cells and audit
+protocol. If the same frontier shifts persist under stronger features and
+human-vetted concepts, the paper's methodological claim would become much
+closer to a validated design principle for interpretable anticipation. The
+current submission stops one step earlier: it establishes the interface, the
+matched evaluation protocol, and the evidence that ontology design changes
+model behavior.
+
+\FloatBarrier
+
+\section{Conclusion}
+
+\method{} reframes accident anticipation around a governed semantic interface.
+The central contribution is not a new black-box leaderboard entry, but a
+methodology for building, deploying, and evaluating language-grounded risk
+concepts as a trainable model component. Empirically, the interface supports a
+strong interpretable operating point, especially on A3D, and controlled ontology
+comparisons show that semantic-interface design measurably changes downstream
+behavior. The main remaining weakness is DAD-side mechanism fragility and the
+gap between classifier-derived anticipation and mature policy-level timing.
+
+\section*{Limitations}
+The concept labels are based on CLIP-style pseudo-annotations rather than dense
+human frame-level concept supervision. The current ontology is auditable and
+reviewed, but not a finished human-validated concept benchmark. The evaluation
+uses offline visual features rather than end-to-end video backbones, and
+actor-policy timing remains support evidence rather than a complete causal
+control account. Any deployment would require stronger calibration, robustness,
+and human-factors validation.
+
+\section*{Ethics and Reproducibility}
+The paper studies offline accident anticipation and should not be read as a
+deployment-ready ADAS component. The semantic interface can make model evidence
+more inspectable, but it can also expose dataset bias when concepts are mined
+from limited visual domains. We therefore keep the DAD stress evidence explicit,
+avoid upgrading actor-policy timing diagnostics into deployment claims, and
+treat concept names as auditable research artifacts rather than verified human
+factors labels.
+
+For reproducibility, the submission package separates headline checkpoints,
+controlled ontology cells, support diagnostics, and stress evidence. The
+ontology export retains canonical names, family metadata, merge provenance, and
+review notes so that future work can replace the pseudo-labeled interface with
+denser human concept supervision without changing the paper's evaluation
+question.
+
+\bibliography{insight}
+
+\clearpage
+\appendix
+\input{../neurips2026/sec_appendix}
+
+\end{document}

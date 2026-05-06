@@ -1,0 +1,178 @@
+{
+  "notes": {
+    "selection_rule": "Use prediction-branch behavior only because alert branch is nearly flat at ~0.50001 and not trustworthy for ranking.",
+    "strong_case": "Highest usable prediction TTA with solid pred_max.",
+    "borderline_cases": "Near-threshold / weak-advance cases useful for appendix qualitative contrast.",
+    "distinct_scene_case": "Case with more night / low-visibility semantics for diversity."
+  },
+  "selected": {
+    "strong_primary": {
+      "idx": 40,
+      "toa": 90,
+      "pred_tta": 2.75,
+      "alert_tta": 4.45,
+      "pred_max": 0.6110675930976868,
+      "alert_max": 0.5000163912773132,
+      "top_idx": [
+        267,
+        56,
+        180,
+        241,
+        244,
+        47,
+        577,
+        207
+      ],
+      "top_names": [
+        "parked vehicle partially obstructing the sidewalk",
+        "car attempting to overtake in oncoming traffic",
+        "large truck merging into traffic.",
+        "motorcyclist unexpectedly merging in front of a car.",
+        "motorcyclist with a passenger wearing pink rain gear navigating an intersection.",
+        "bus turning at an intersection near a pedestrian crosswalk",
+        "icy road conditions with snow piles narrowing lanes",
+        "motorcyclist crossing an intersection."
+      ]
+    },
+    "strong_secondary": {
+      "idx": 0,
+      "toa": 90,
+      "pred_tta": 0.85,
+      "alert_tta": 4.45,
+      "pred_max": 0.6133905053138733,
+      "alert_max": 0.500015377998352,
+      "top_idx": [
+        180,
+        244,
+        335,
+        597,
+        510,
+        509,
+        231,
+        280
+      ],
+      "top_names": [
+        "large truck merging into traffic.",
+        "motorcyclist with a passenger wearing pink rain gear navigating an intersection.",
+        "poorly lit pedestrian crossing sign at night",
+        "motorcycles running a red light at an intersection",
+        "an upcoming curved intersection with limited visibility due to trees and foliage",
+        "an overturned vehicle blocking the road.",
+        "motorcyclist riding near congested traffic without separation from cars.",
+        "pedestrian crossing near a marked crosswalk."
+      ]
+    },
+    "borderline_positive": {
+      "idx": 111,
+      "toa": 90,
+      "pred_tta": 0.4,
+      "alert_tta": 4.45,
+      "pred_max": 0.6294480562210083,
+      "alert_max": 0.5000173449516296,
+      "top_idx": [
+        267,
+        241,
+        56,
+        180,
+        292,
+        244,
+        207,
+        577
+      ],
+      "top_names": [
+        "parked vehicle partially obstructing the sidewalk",
+        "motorcyclist unexpectedly merging in front of a car.",
+        "car attempting to overtake in oncoming traffic",
+        "large truck merging into traffic.",
+        "pedestrian jaywalking across the street.",
+        "motorcyclist with a passenger wearing pink rain gear navigating an intersection.",
+        "motorcyclist crossing an intersection.",
+        "icy road conditions with snow piles narrowing lanes"
+      ]
+    },
+    "borderline_negative": {
+      "idx": 160,
+      "toa": 90,
+      "pred_tta": -0.15,
+      "alert_tta": 4.45,
+      "pred_max": 0.6354904770851135,
+      "alert_max": 0.5000188946723938,
+      "top_idx": [
+        267,
+        56,
+        241,
+        180,
+        47,
+        577,
+        244,
+        799
+      ],
+      "top_names": [
+        "parked vehicle partially obstructing the sidewalk",
+        "car attempting to overtake in oncoming traffic",
+        "motorcyclist unexpectedly merging in front of a car.",
+        "large truck merging into traffic.",
+        "bus turning at an intersection near a pedestrian crosswalk",
+        "icy road conditions with snow piles narrowing lanes",
+        "motorcyclist with a passenger wearing pink rain gear navigating an intersection.",
+        "wet pavement increasing the risk of reduced traction."
+      ]
+    },
+    "near_threshold_alt": {
+      "idx": 112,
+      "toa": 90,
+      "pred_tta": 0.9,
+      "alert_tta": 4.45,
+      "pred_max": 0.5900887846946716,
+      "alert_max": 0.500018298625946,
+      "top_idx": [
+        267,
+        241,
+        180,
+        56,
+        292,
+        207,
+        244,
+        577
+      ],
+      "top_names": [
+        "parked vehicle partially obstructing the sidewalk",
+        "motorcyclist unexpectedly merging in front of a car.",
+        "large truck merging into traffic.",
+        "car attempting to overtake in oncoming traffic",
+        "pedestrian jaywalking across the street.",
+        "motorcyclist crossing an intersection.",
+        "motorcyclist with a passenger wearing pink rain gear navigating an intersection.",
+        "icy road conditions with snow piles narrowing lanes"
+      ]
+    },
+    "night_visibility_alt": {
+      "idx": 73,
+      "toa": 90,
+      "pred_tta": -1,
+      "alert_tta": 4.45,
+      "pred_max": 0.35517606139183044,
+      "alert_max": 0.5000160336494446,
+      "top_idx": [
+        180,
+        515,
+        244,
+        267,
+        343,
+        56,
+        241,
+        292
+      ],
+      "top_names": [
+        "large truck merging into traffic.",
+        "cars driving at night with reduced visibility.",
+        "motorcyclist with a passenger wearing pink rain gear navigating an intersection.",
+        "parked vehicle partially obstructing the sidewalk",
+        "poorly marked intersection with obstructed visibility",
+        "car attempting to overtake in oncoming traffic",
+        "motorcyclist unexpectedly merging in front of a car.",
+        "pedestrian jaywalking across the street."
+      ]
+    }
+  }
+}

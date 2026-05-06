@@ -1,0 +1,91 @@
+\documentclass[11pt]{article}
+\usepackage[review]{acl}
+\usepackage{times}
+\usepackage{latexsym}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{microtype}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{subcaption}
+\usepackage{makecell}
+\usepackage{enumitem}
+\usepackage{xcolor}
+
+\setlength\titlebox{6.5cm}
+
+\newcommand{\method}{\textsc{INSIGHT}}
+\newcommand{\methodfull}{Interpretable Safety-Guided Accident Anticipation via Concept Bottleneck and Temporal Actor-Critic}
+\newcommand{\cbm}{\textsc{CBM}}
+\newcommand{\caac}{\textsc{CAAC}}
+\newcommand{\cgta}{\textsc{CGTA}}
+\newcommand{\crs}{\textsc{CRS}}
+\newcommand{\tsd}{\textsc{TSD}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\etal}{et~al.}
+
+\title{\method: A Language-Grounded Risk Concept Interface for Interpretable Accident Anticipation}
+
+\author{Anonymous Submission}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Traffic accident anticipation models are usually evaluated as opaque binary
+predictors: given a video prefix, estimate whether an accident will occur.
+For safety-critical use, the missing object is not only a better score, but an
+auditable semantic interface. Such an interface should expose what the model
+treats as risky, make alternative vocabularies comparable, and let researchers
+ask how semantic evidence affects anticipation behavior. Current methods rarely
+offer this object; most optimize prediction quality while leaving their
+internal evidence latent or relying on post-hoc explanation.
+
+We present \method{}, a framework for interpretable accident anticipation built
+around a governed language-grounded risk concept interface. The core
+contribution is a reproducible multimodal concept construction pipeline that
+mines candidate risk concepts from driving frames, performs risk-first
+refinement, applies family balancing and canonical merge consolidation, and
+exports a trainable ontology with explicit review metadata, family structure,
+and merge provenance. This ontology becomes the semantic bottleneck of the
+anticipation model rather than an appendix-only descriptive artifact.
+
+On top of this interface, \method{} trains a concept-bottleneck anticipation
+model with concept-linked temporal modeling and auditable per-concept scoring.
+This design lets us study not only prediction quality, but also how ontology
+choice changes the predictive--timing operating point under matched launchers.
+Across DAD and A3D, matched ontology comparisons show that ontology source
+materially affects the AP--mTTA frontier, making semantic interface design a
+first-class modeling decision rather than hidden preprocessing. We pair these
+model-side results with language-side audits over a 500-frame DAD slice,
+canonical naming and paraphrase robustness checks, and light human review
+across all 80 released concepts, so that the ontology can be evaluated as a
+governed semantic artifact rather than as a prompt byproduct. The resulting model
+reaches a strong interpretable operating point, including \textbf{93.40\% AP}
+and \textbf{4.90\,s mTTA} on A3D, and \textbf{68.19\% AP} on the canonical DAD
+curriculum line, while using only $\sim$30M parameters. We further present
+semantic audit and intervention analyses showing that the concept layer is
+structurally meaningful and partially intervenable; actor-policy timing is
+reported as scoped supporting evidence rather than as the main claim.
+\end{abstract}
+
+\input{sec_intro_emnlp}
+\input{sec_related_emnlp}
+\input{sec_method_emnlp}
+\input{sec_experiments_emnlp}
+\input{sec_conclusion_emnlp}
+
+\clearpage
+\appendix
+\input{../neurips2026/sec_appendix}
+
+\clearpage
+\bibliography{insight}
+
+\end{document}

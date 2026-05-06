@@ -1,0 +1,126 @@
+{
+  "project": "INSIGHT / CG-CRASH NeurIPS 2026",
+  "north_star_thesis": "Interpretable accident anticipation should be built on an intervenable semantic state space, not post-hoc explanation over a black-box predictor.",
+  "audit_timestamp_note": "Compiled from stable artifacts currently present in the repository and paper-facing analysis outputs.",
+  "headline_results": {
+    "dad_current_submission_line": {
+      "status": "proven",
+      "value": {
+        "AP": 68.19,
+        "mTTA": 1.75
+      },
+      "source": "paper/neurips2026/sec_experiments.tex",
+      "note": "Use as canonical DAD submission line; do not mix with ontology-search or local-search runs."
+    },
+    "a3d_current_submission_line": {
+      "status": "proven",
+      "value": {
+        "AP": 93.40,
+        "mTTA": 4.90,
+        "TTA_R80": 4.89,
+        "P_R80": 0.9067
+      },
+      "source": "paper/neurips2026/insight_main.tex and sec_experiments.tex",
+      "note": "Current stable paper-facing A3D line."
+    },
+    "dad_local_search_best_new": {
+      "status": "proven_but_support_only",
+      "value": {
+        "AP": 0.6662242238204966,
+        "epoch": 35,
+        "tag": "dad_multi_perfect_v1_h384_lowac_weaksparse_final_q2"
+      },
+      "source": "output/dad_ac/dad_multi_perfect_v1_h384_lowac_weaksparse_final_q2/results.json",
+      "note": "Useful for support analysis, not canonical submission line."
+    },
+    "a3d_local_search_best_new": {
+      "status": "proven_but_support_only",
+      "value": {
+        "AP": 0.9421792398119472,
+        "epoch": 40,
+        "tag": "a3d_ac_perfect_v1_minuscgta_tinyalign_local_q3"
+      },
+      "source": "output/a3d_ac/a3d_ac_perfect_v1_minuscgta_tinyalign_local_q3/results.json",
+      "note": "Useful for support analysis, not canonical submission line."
+    }
+  },
+  "core_claims": [
+    {
+      "claim": "Accident anticipation should be formulated as concept-conditioned sequential decision making rather than binary classification with post-hoc explanation.",
+      "status": "partially_supported",
+      "evidence": [
+        "Method design with concept-augmented policy state in sec_method.tex",
+        "DAD/A3D empirical results showing interpretable competitive operating points",
+        "Current timing-faithfulness outputs show prediction timing but not yet a fully functioning actor-policy crossing story"
+      ],
+      "gaps": [
+        "Need stronger policy-level timing evidence beyond prediction branch",
+        "Need cleaner contrast against threshold-only timing"
+      ]
+    },
+    {
+      "claim": "Ontology construction is part of the method, not a hidden preprocessing assumption.",
+      "status": "proven",
+      "evidence": [
+        "paper/neurips2026/sec_method.tex ontology pipeline section",
+        "output/concept_sets/neurips2026_controlled_ontology_manifest.json",
+        "paper ontology figures and coverage/evolution/case-study assets"
+      ],
+      "gaps": [
+        "Need full controlled DAD/A3D comparison block under the shared launcher to make this central in the final submission"
+      ]
+    },
+    {
+      "claim": "Semantic concept edits can systematically alter alert timing in semantically aligned ways.",
+      "status": "partially_supported",
+      "evidence": [
+        "Appendix intervention figures and backbone-level rerun assets",
+        "output/insight_analysis/dad_intervention_v4_hybrid_boost1/concept_intervention_summary.json shows mean_alert_shift = -2.04 on 64 samples with heterogeneous case behavior"
+      ],
+      "gaps": [
+        "Current actor branch is effectively flat in archived timing/intervention analysis outputs",
+        "Need family-level intervention protocol and stronger multi-family casebank evidence"
+      ]
+    },
+    {
+      "claim": "INSIGHT is the first fully verified WHY+WHEN interpretable anticipation model with strong policy-level semantic control.",
+      "status": "not_yet_supported",
+      "evidence": [
+        "Current paper supports intrinsic WHY layer and concept-conditioned architecture",
+        "Current repository does not yet contain a complete policy-level intervention rerun with reliable actor dynamics"
+      ],
+      "gaps": [
+        "Need full policy-head checkpoints and actor-branch analyses",
+        "Need stronger comparative evidence against thresholding baselines"
+      ]
+    }
+  ],
+  "claims_to_remove_or_downgrade": [
+    {
+      "claim_text": "absolute SOTA on A3D / surpassing all non-interpretable methods",
+      "action": "remove",
+      "reason": "Current stable paper-facing A3D line is strong but not a verified global SOTA in the repository truth set."
+    },
+    {
+      "claim_text": "DAD >80% or expected 75-80%+ convergence claims",
+      "action": "remove",
+      "reason": "Speculative and unsupported by current stable evidence."
+    },
+    {
+      "claim_text": "full dual-layer policy intervention is already demonstrated",
+      "action": "downgrade",
+      "reason": "Current support is backbone-level / stored-trajectory intervention, not a complete actor-policy causal test."
+    },
+    {
+      "claim_text": "formal convergence theorem for CAAC",
+      "action": "remove_or_move_to_future",
+      "reason": "Current paper package is empirical and does not include a finished theorem/proof stack."
+    }
+  ],
+  "reviewer_sensitive_points": {
+    "actor_branch_issue": "Current archived timing-faithfulness/intervention outputs show actor probabilities near 0.498 with null actor crossings. The paper must not overclaim actor-level timing evidence until refreshed artifacts exist.",
+    "protocol_separation": "Keep canonical submission line, ontology comparison runs, and search runs separated.",
+    "seed_scope": "Multi-seed DAD evidence exists for one curriculum line only and should be presented as stability diagnostics, not universal robustness.",
+    "intervention_scope": "Use intervention evidence as partial support for intervenability, not as definitive causal proof."
+  }
+}

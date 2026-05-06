@@ -1,0 +1,95 @@
+\section{Conclusion}
+\label{sec:conclusion}
+
+We presented \method{}, a framework built on a simple but consequential claim:
+traffic accident anticipation should not be viewed only as frame-wise
+classification with optional explanation, but can also be studied through a
+\emph{concept-conditioned sequential-decision lens}. In the current paper, the
+strongest empirical support is for the WHY layer and for the value of a
+concept-conditioned timing formulation; the policy-level WHEN story remains
+only partially validated.
+
+The central architectural consequence is to place concept activations directly
+inside the policy state, $\mathbf{s}_t=[\mathbf{h}_t\|\mathbf{c}_t]$.
+This turns semantic evidence into part of the decision pathway and makes the
+timing mechanism structurally concept-conditioned, even though the current
+headline metrics are still computed from the classifier trajectory rather than a
+fully validated standalone actor policy.
+
+A second contribution of this work is that the semantic interface is no longer
+treated as a fixed handcrafted assumption. We introduced a reproducible
+multimodal risk concept discovery and adjudication pipeline that mines driving
+frames, performs risk-first refinement, and exports trainable ontologies for
+the concept bottleneck. This matters because a CBM is only as useful as the
+concept vocabulary it exposes. By explicitly constructing and comparing
+historical, manual, and discovered concept sets, the paper elevates ontology
+construction to the same scientific status as architecture design.
+
+Empirically, \method{} achieves strong results on both benchmarks.
+On A3D, it improves mTTA by +14.8\% over CRASH while maintaining
+competitive AP---consistent with concept-conditioned timing being most
+valuable when hazards develop progressively before impact. Matched
+classifier-vs-actor comparisons further show that actor-based evaluation is
+already fairly close to the classifier line on a representative A3D
+checkpoint.
+On DAD, \method{} delivers competitive performance within the
+interpretable comparison tier, with multi-seed curriculum runs confirming
+that prediction quality is reproducible at synchronized checkpoints even though
+CRS robustness is weaker than predictive robustness. The same matched
+comparison also shows that actor-based triggering on DAD remains substantially
+weaker than classifier-based anticipation, which is why the paper continues to
+report classifier-derived headline timing metrics.
+Critically, these results are achieved with only 30M parameters---showing
+that interpretability, parameter efficiency, and performance can be
+mutually reinforcing rather than competing. We further show that compact
+discovered concept sets yield non-trivial DAD/A3D operating-point changes under
+matched launchers, supporting the claim that discovered concepts are trainable
+primitives rather than appendix-only descriptive artifacts.
+Finally, our current intervention package supports a more careful but still
+important claim: the semantic interface is not merely descriptive. In archived
+DAD analyses, positive concept amplification moves alerts earlier in a
+measurable subset of valid edited cases (14\% earlier, 84\% unchanged, 2\%
+later under the hybrid boost setting), although a stronger fully policy-level
+intervention study remains future work.
+
+\paragraph{Limitations and future work.}
+First, concept labels are derived from CLIP pseudo-annotations:
+high-quality human-labelled concept supervision would further strengthen
+the WHY layer and reduce vocabulary noise. More importantly, exposed concept
+channels should not automatically be read as concept correctness; the current
+paper demonstrates architectural transparency and limited semantic auditing,
+not a complete human-verified concept benchmark.
+Second, the current evaluation uses offline VGG16 features;
+end-to-end training with a modern visual backbone (e.g., ResNet-50 or ViT)
+is a natural and important extension.
+Third, the CAAC policy optimises a scalar time-remaining reward;
+a multi-objective policy that jointly balances AP, mTTA, and
+false-alarm rate could better expose deployment trade-offs and
+support jurisdiction-specific calibration.
+Fourth, while we now construct concept ontologies explicitly, broader
+cross-dataset ontology transfer and stronger multi-seed ontology comparisons
+remain open.
+Fifth, a complete policy-level intervention analysis---re-running
+the full Actor--Critic from edited concept states---remains an
+open validation target that would further strengthen the causal
+interpretability claim.
+Sixth, the strongest ontology claim in the current paper is about reproducible
+construction together with matched DAD/A3D operating-point comparisons; a
+broader shared-recipe multi-seed ontology study would be the next major
+empirical strengthening step.
+Seventh, CRS should currently be treated as a tentative audit signal rather
+than as a mature human-override interface, because clean-seed audits still show
+frequent degeneracy.
+
+\paragraph{Broader impact.}
+\method{} is designed for safety-critical deployment settings such as
+Advanced Driver Assistance Systems (ADAS) and autonomous driving research.
+Its main practical value is to expose a more auditable intermediate semantic
+state than a purely black-box anticipation model, which could in principle help
+engineers inspect failure modes and reason about warning behavior. At the same
+time, the current paper does \emph{not} establish that exposed concept channels
+or CRS rankings are already reliable enough for direct human override in a real
+deployment pipeline. As with all accident anticipation systems, false positives
+(unnecessary alerts) must be balanced against false negatives (missed
+accidents), and any real deployment would require substantially stronger
+robustness, calibration, and human-factors validation than what is shown here.

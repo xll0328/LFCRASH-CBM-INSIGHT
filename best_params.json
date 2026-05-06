@@ -1,0 +1,23 @@
+{
+  "dad": {
+    "lambda_align": 0.001,
+    "lambda_sparse": 0.01,
+    "ap_video": 0.5229,
+    "ap_frame": 0.5068,
+    "mtta": 3.5568
+  },
+  "crash": {
+    "lambda_align": 0.001,
+    "lambda_sparse": 0.01,
+    "ap_video": 0.9977,
+    "ap_frame": 0.9636,
+    "mtta": 4.7286
+  },
+  "a3d": {
+    "lambda_align": 0.001,
+    "lambda_sparse": 0.01,
+    "ap_video": 0.9403,
+    "ap_frame": 0.9408,
+    "mtta": 3.6605
+  }
+}

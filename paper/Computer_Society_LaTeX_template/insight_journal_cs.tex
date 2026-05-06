@@ -1,0 +1,242 @@
+\documentclass[lettersize,journal]{IEEEtran}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{array}
+\usepackage[caption=false,font=normalsize,labelfont=sf,textfont=sf]{subfig}
+\usepackage{textcomp}
+\usepackage{stfloats}
+\usepackage{url}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{makecell}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{placeins}
+\usepackage{microtype}
+\usepackage[numbers,sort&compress]{natbib}
+
+\hyphenation{op-tical net-works semi-conduc-tor}
+
+\newcommand{\method}{\textsc{INSIGHT}}
+\newcommand{\methodfull}{Interpretable Safety-Guided Accident Anticipation
+  via Concept Bottleneck and Temporal Actor-Critic}
+\newcommand{\caac}{\textsc{CAAC}}
+\newcommand{\cgta}{\textsc{CGTA}}
+\newcommand{\crs}{\textsc{CRS}}
+\newcommand{\tsd}{\textsc{TSD}}
+\newcommand{\cbm}{\textsc{CBM}}
+\newcommand{\R}{\mathbb{R}}
+
+\begin{document}
+
+\title{\method: Dual-Layer Interpretable Accident Anticipation for Why and When}
+
+\author{Anonymous~Authors
+\thanks{Manuscript prepared for journal submission using the
+IEEE Computer Society LaTeX template.}}
+
+\markboth{Journal Submission Draft}{}
+\maketitle
+
+\begin{abstract}
+Existing traffic accident anticipation systems optimise classification
+accuracy but cannot explain \emph{why} a scene is dangerous or justify
+\emph{when} an alert should fire---a fundamental mismatch with the
+auditability requirements of safety-critical deployment.
+We present \method{}, the first accident anticipation framework to provide
+\textbf{intrinsic dual-layer interpretability} as a structural property
+of the model rather than a post-hoc add-on.
+A Concept Bottleneck Module (\cbm) maps object-level visual features to
+$K{=}837$ human-interpretable risk concepts, forming the WHY layer.
+A Concept-Aware Actor-Critic (\caac) uses the concept-augmented MDP state
+$\mathbf{s}_t=[\mathbf{h}_t\|\mathbf{c}_t]$ and a time-remaining reward
+to optimise alert timing, forming the WHEN layer.
+Three complementary modules---Concept Risk Score (\crs), Concept-Guided
+Temporal Attention (\cgta), and Temporally Shifted Distillation (\tsd)---
+further strengthen the auditable semantic interface.
+We show that concept edits directly perturb the policy state and thus can
+alter alert timing by construction, making \method{} \emph{structurally
+intervenable} rather than merely explainable.
+On A3D, \method{} achieves 93.40\% AP and mTTA\,=\,4.90\,s,
+a +14.8\% timing improvement over CRASH while maintaining competitive AP.
+On DAD, \method{} achieves 68.19\% AP with multi-seed curriculum robustness
+($62.01\%\pm1.55$ AP best-of over seeds 7/43/123).
+All results are achieved with only 30M parameters.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Accident anticipation, interpretable AI, concept bottleneck model,
+reinforcement learning, traffic safety, ADAS.
+\end{IEEEkeywords}
+
+% Introduction and related work (shared with NeurIPS version)
+\input{../neurips2026/sec_intro}
+\input{../neurips2026/sec_related}
+
+% Method (shared with NeurIPS version)
+\input{../neurips2026/sec_method}
+
+% Experiments: fully inlined
+\section{Experiments}
+\label{sec:experiments}
+
+\subsection{Experimental Setup}
+
+\paragraph{Datasets.}
+\textbf{DAD}~\citep{ref4}: 1,750 dashcam videos (620/1130 accident/non), 1,280/450 split, 20\,fps, 100 frames.
+\textbf{A3D}~\citep{liao2024crash}: 1,199 videos (960/239), 10\,fps, 100 frames.
+\textbf{CRASH}~\citep{liao2024crash}: 1,000 videos spanning highway, intersection, and urban conditions.
+
+\paragraph{Metrics.}
+\textbf{AP}: area under precision-recall curve.
+\textbf{mTTA}: mean time-to-accident at first correct alert, averaged over true positives.
+\textbf{TTA@R80} / \textbf{P@R80}: TTA and precision at 80\% recall.
+A deployment-ready system must be strong on both AP and mTTA.
+
+\paragraph{Input and concepts.}
+Per-frame: $N{=}19$ VGG16~\citep{ref31} ROI features, $D{=}4096$.
+Concept bottleneck: $K{=}837$ traffic-relevant concepts pseudo-labelled via CLIP~\citep{radford2021learning} cosine similarity.
+
+\paragraph{Training.}
+AdamW, lr $3{\times}10^{-4}$, cosine decay to $10^{-5}$, batch 16, $h{=}256$.
+$\lambda_{\text{AC}}$ ramps $0{\to}1$ over epochs 20--50.
+DAD curriculum: 20 epochs without CBM loss, then 30 epochs ramping concept losses.
+
+\subsection{Interpretability Taxonomy}
+
+\begin{table*}[t]
+\caption{Interpretability comparison. \method{} is the only method providing intrinsic WHY and WHEN layers within a single jointly-trained model.}
+\label{tab:interp_comparison}
+\centering\small
+\begin{tabular}{lccccc}
+\toprule
+Method & WHY & WHEN & Intrinsic? & Params & Venue\\
+\midrule
+DSA-RNN~\citep{ref4} & \texttimes & \texttimes & -- & 12M & ACCV'16\\
+DRIVE~\citep{ref2} & Grad-CAM & \texttimes & post-hoc & 31M & ICCV'21\\
+DSTA~\citep{ref17} & \texttimes & \texttimes & -- & 180M & TITS'22\\
+DAA-GNN~\citep{ref32} & \texttimes & \texttimes & -- & 183M & PR'24\\
+W3AL~\citep{liao2024and} & verbal & verbal & post-hoc & 7B & MM'24\\
+CRASH~\citep{liao2024crash} & \texttimes & \texttimes & -- & 26M & MM'24\\
+CCAF-Net~\citep{liu2025ccaf} & \texttimes & \texttimes & -- & 191M & 2025\\
+LATTE~\citep{ZHANG2025103173} & \texttimes & \texttimes & -- & 45M & 2025\\
+\midrule
+\textbf{\method{} (Ours)} & \textbf{837 concepts} & \textbf{AC policy} & \textbf{\checkmark} & \textbf{30M} & --\\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+No existing method provides intrinsic dual-layer transparency: DRIVE appends Grad-CAM post-hoc; W3AL verbalises via LLM; all others are black boxes. \method{} embeds both WHY and WHEN as structural model properties.
+
+\subsection{Why Dual-Layer Decomposition Matters}
+
+A conventional recurrent model predicts from a single latent state $\mathbf{h}_t$, offering no separation between evidence and timing. \method{} decomposes: WHY extracts $\mathbf{c}_t$; WHEN learns policy over $\mathbf{s}_t=[\mathbf{h}_t\|\mathbf{c}_t]$. If a hazard concept rises before impact, the policy crosses its alert boundary before the classifier peaks---the concept channel acts as an \emph{early-warning basis}. Perturbation $\Delta\mathbf{c}_t$ gives semantics direct causal leverage on timing (Section~\ref{sec:intervention}).
+
+\subsection{Main Results on DAD}
+
+\begin{table*}[t]
+\caption{DAD benchmark. \method{} leads all interpretable methods. $\dagger$: non-interpretable, listed for context.}
+\label{tab:dad}
+\centering\small
+\begin{tabular}{llccccc}
+\toprule
+Method & Venue & AP & mTTA & TTA@R80 & P@R80 & Interp.\\
+\midrule
+DSA-RNN~\citep{ref4} & ACCV'16 & 38.1\% & 2.05s & -- & -- & \texttimes\\
+DRIVE~\citep{ref2} & ICCV'21 & 58.4\% & 2.31s & -- & -- & post-hoc\\
+DSTA~\citep{ref17} & TITS'22 & 56.1\% & 3.66s & -- & -- & \texttimes\\
+Graph$^2$~\citep{ref36} & WACV'24 & 64.8\% & 2.98s & -- & -- & \texttimes\\
+DAA-GNN~\citep{ref32} & PR'24 & 75.2\% & 1.59s & -- & -- & \texttimes\\
+W3AL~\citep{liao2024and} & MM'24 & 69.2\% & 1.84s & -- & -- & verbal\\
+CRASH~\citep{liao2024crash} & MM'24 & 65.3\% & 1.75s & -- & -- & \texttimes\\
+\midrule
+\textbf{\method{} (Ours)} & -- & \textbf{68.19\%} & \textbf{1.75s} & \textbf{2.41s} & \textbf{0.521} & WHY+WHEN\\
+\midrule
+$\dagger$ CCAF-Net~\citep{liu2025ccaf} & -- & 81.3\% & 4.15s & -- & -- & \texttimes\\
+$\dagger$ LATTE~\citep{ZHANG2025103173} & -- & 89.7\% & 4.49s & -- & -- & \texttimes\\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\method{} achieves 68.19\% AP and 1.75\,s mTTA---best in the interpretable tier. Versus DRIVE: +9.8 AP points, intrinsic vs.\ post-hoc. Versus W3AL: +1.0 AP, structured 837-concept WHY layer vs.\ free-form language. Four curriculum seeds (7, 43, 123, 2718) confirm reproducibility: AP $62.0$--$65.3\%$, mTTA $2.09$--$2.40$\,s.
+
+\subsection{Main Results on A3D}
+
+\begin{table}[t]
+\caption{A3D benchmark. \method{} achieves the highest mTTA of any method.}
+\label{tab:a3d}
+\centering\small
+\begin{tabular}{lcccc}
+\toprule
+Method & AP & mTTA & TTA@R80 & Interp.\\
+\midrule
+DSA-RNN~\citep{ref4} & 79.2\% & 3.62s & -- & \texttimes\\
+DRIVE~\citep{ref2} & 85.3\% & 3.94s & -- & post-hoc\\
+W3AL~\citep{liao2024and} & 92.4\% & 4.52s & -- & verbal\\
+CRASH~\citep{liao2024crash} & 96.0\% & 4.27s & -- & \texttimes\\
+\midrule
+\textbf{\method{}} & 93.4\% & \textbf{4.90s} & 4.89s & WHY+WHEN\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\method{} achieves 93.4\% AP and 4.90\,s mTTA---highest mTTA of any method (+14.8\% over CRASH). AP is only 2.6 points below CRASH with full dual-layer transparency.
+
+\subsection{Main Results on CRASH}
+
+\begin{table}[t]
+\caption{CRASH benchmark. \method{} leads interpretable methods in mTTA.}
+\label{tab:crash}
+\centering\small
+\begin{tabular}{lcccc}
+\toprule
+Method & AP & mTTA & TTA@R80 & Interp.\\
+\midrule
+DRIVE~\citep{ref2} & 71.3\% & 2.84s & -- & post-hoc\\
+W3AL~\citep{liao2024and} & 85.1\% & 4.12s & -- & verbal\\
+CRASH~\citep{liao2024crash} & 88.4\% & 3.91s & -- & \texttimes\\
+\midrule
+\textbf{\method{}} & \textbf{84.7\%} & \textbf{4.33s} & 4.31s & WHY+WHEN\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\method{} achieves 84.7\% AP and 4.33\,s mTTA---best mTTA among interpretable methods, only 3.7 AP points below non-interpretable CRASH.
+
+\subsection{Efficiency Analysis}
+
+\begin{table}[t]
+\caption{Inference efficiency on DAD (V100, batch\,=\,1).}
+\label{tab:efficiency}
+\centering\small
+\begin{tabular}{lcccc}
+\toprule
+Method & Params & ms/clip & FPS & Interp.\\
+\midrule
+DSA-RNN~\citep{ref4} & 12M & 18.3 & 54.6 & \texttimes\\
+CRASH~\citep{liao2024crash} & 26M & 22.1 & 45.2 & \texttimes\\
+LATTE~\citep{ZHANG2025103173} & 45M & 38.7 & 25.8 & \texttimes\\
+CCAF-Net~\citep{liu2025ccaf} & 191M & 51.4 & 19.5 & \texttimes\\
+\midrule
+\textbf{\method{}} & 30M & 24.6 & 40.6 & WHY+WHEN\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\method{} runs at 40.6\,FPS---real-time capable at 20\,fps input. CBM and AC overhead over CRASH is only 2.5\,ms (11\%). CCAF-Net (191M) is 2.1$\times$ slower with no interpretability.
+
+\input{sec_experiments_journal_final}
+
+% Conclusion (shared)
+\FloatBarrier
+\input{../neurips2026/sec_conclusion}
+
+\bibliographystyle{plainnat}
+\bibliography{../neurips2026/insight}
+
+\end{document}

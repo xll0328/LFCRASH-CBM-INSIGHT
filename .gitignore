@@ -1,0 +1,61 @@
+.omx/
+.codex/*
+!.codex/agents/
+!.codex/agents/**
+!.codex/skills/
+!.codex/skills/**
+.codex/skills/.system/**
+!.codex/prompts/
+!.codex/prompts/**
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Local runtime artifacts
+logs/
+tmp/
+archive/
+.DS_Store
+*.log
+${LOG}
+
+# Large experiment outputs / checkpoints
+output/
+output_gru/
+experiments_gru_gpu6/
+experiments_gru_gpu7/
+optuna_studies/
+${OUTDIR}/
+*.pth
+*.pt
+*.ckpt
+*.npz
+*.npy
+
+# Local data
+data/
+
+# Paper build artifacts
+paper/**/*.aux
+paper/**/*.bbl
+paper/**/*.blg
+paper/**/*.fdb_latexmk
+paper/**/*.fls
+paper/**/*.log
+paper/**/*.out
+paper/**/*.synctex.gz
+paper/**/*.toc
+paper/**/*.pdf
+paper/**/outputs/
+paper/emnlp2026/frozen/
+paper/extracted/
+paper/mm24_*.gz
+paper/*25.gz
+paper/**/layout_audit*/
+
+# Local/packaged archives
+*.zip
+*.tar
+*.tar.gz

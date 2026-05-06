@@ -1,0 +1,88 @@
+EMNLP/ARR submission package notes for INSIGHT
+
+Files:
+- insight_emnlp.tex: ACL-style anonymous review entrypoint
+- insight_emnlp_arr8.tex: strict ARR/EMNLP long-paper candidate with the main
+  body, limitations, and references before the appendix
+- insight_emnlp_polished.tex: visually compressed EMNLP/ARR candidate with
+  rebuilt compact paper figures and consolidated result tables; rejected as an
+  upload candidate because its appendix starts on page 6
+- insight_emnlp_oral8.tex: current strongest non-frozen read-through candidate
+  with appendix starting on page 9 and rebuilt framework/layout figures
+- sec_intro_emnlp.tex: EMNLP-specific introduction
+- sec_related_emnlp.tex: EMNLP-specific related work
+- sec_method_emnlp.tex: EMNLP-specific method section
+- sec_experiments_emnlp.tex: EMNLP-specific experiments section
+- sec_conclusion_emnlp.tex: EMNLP-specific conclusion/limitations
+- insight.bib: bibliography
+- acl.sty, acl_natbib.bst: official ACL style files
+- insight_emnlp.pdf: latest full compiled PDF
+- insight_emnlp_first25.pdf: latest first-25-pages PDF
+- insight_emnlp_arr8.pdf: latest strict ARR/EMNLP page-limit candidate
+- insight_emnlp_polished.pdf: rejected visual/layout compression experiment
+- insight_emnlp_oral8.pdf: current strongest non-frozen EMNLP read-through
+  candidate
+- ORAL8_LAYOUT_AUDIT.md: render-based audit for the oral8 candidate
+- POLISHED_LAYOUT_AUDIT.md: render-based audit for the polished candidate
+- ARR_LAST_MINUTE_CHECKLIST.md: last 10-minute manual upload checklist
+- freeze_arr_submission.sh: frozen package builder with `ARR<UTC timestamp>` naming
+
+Current positioning:
+- multimodal semantics / language-grounded semantic interface
+- ontology construction as a modeling choice
+- beyond-accuracy evaluation via auditability and intervention
+
+Current package shape:
+- anonymous ACL review mode
+- main paper + references + appendix compiled together
+- latest build refreshed after each manuscript edit
+- a separate strict ARR/EMNLP candidate now exists for page-limit-sensitive
+  upload review; see `ARR8_LAYOUT_AUDIT.md`
+- a separate polished visual candidate now exists for figure/table/layout
+  review, but it is rejected/superseded because it starts the appendix on page
+  6; see `POLISHED_LAYOUT_AUDIT.md`
+- the current strongest non-frozen read-through candidate is
+  `insight_emnlp_oral8.pdf`; see `ORAL8_LAYOUT_AUDIT.md`
+
+ARR / EMNLP 2026 submission-readiness checklist:
+
+1. Authorship and anonymity
+- Confirm the final ARR author list before submission; EMNLP commitment will not allow adding or removing authors later.
+- Check the PDF title page, metadata, acknowledgments, appendix, and notes for any institution, personal email, homepage, repo, or cloud-link leakage.
+- If code or assets are shared during review, ensure they are anonymized and do not reveal lab identity.
+
+2. Venue and formatting
+- Confirm that the submission uses official ACL style in anonymous review mode.
+- Re-check main-paper length against ARR long-paper expectations (8 pages of main content, with references excluded under ARR rules as applicable).
+- Decide whether the current appendix should stay appended in the review PDF or be moved into supplementary material, depending on the exact ARR submission interface and page-policy interpretation used at submission time.
+- Decide explicitly whether the upload should use `insight_emnlp.pdf`, the
+  strict candidate `insight_emnlp_arr8.pdf`, or the current oral-readthrough
+  candidate `insight_emnlp_oral8.pdf`; do not use
+  `insight_emnlp_polished.pdf` for upload.
+
+3. Scientific scope and claims
+- Keep the paper framed as a language-grounded semantic interface / ontology-as-modeling paper, not as a pure leaderboard paper.
+- Keep the strongest claims on semantic-interface evidence, ontology construction, and beyond-accuracy evaluation.
+- Keep the current caution that actor-based timing evidence is partial and dataset-dependent.
+
+4. References and related work
+- Manually inspect the bibliography for missing entries, malformed fields, duplicated items, or venue strings that look inconsistent.
+- Do one final human pass on very recent related work most relevant to EMNLP positioning: multimodal semantics, concept bottlenecks, ontology construction, language-mediated supervision, and interpretable decision making.
+
+5. Required policy-facing sections
+- Confirm that limitations remain explicit and visible.
+- Confirm that no citation or factual claim is hallucinated or unsupported.
+- Confirm that any LLM-assisted ontology construction is described as part of the method, not hidden or overstated.
+- Confirm that writing-assistance usage is compliant with ACL/ARR policy.
+
+6. ARR workflow logistics
+- Submit to ARR by the target cycle deadline.
+- Ensure every author completes the required ARR reviewer registration workflow by the stated deadline.
+- Record the intended preferred venue as EMNLP 2026 during ARR submission.
+- Prepare for author response and discussion window after reviews are released.
+
+7. Final package sanity checks before upload
+- Open the compiled PDF and visually inspect the first page, table rendering, figure captions, line breaks, and appendix start.
+- Check that all key tables and figures referenced in the main text actually appear and are legible.
+- Confirm that the latest insight_emnlp.pdf and insight_emnlp_first25.pdf match the latest source edits.
+- Keep a frozen copy of the exact submitted PDF and source package for later rebuttal / revision tracking.
