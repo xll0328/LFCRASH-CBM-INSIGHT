@@ -56,10 +56,10 @@ The paper is in an **ARR-ready pre-submission stage**.
   under the same completion-safe accounting rule.
 - Both status files now expose running-preview metrics (not counted as completed):
   current previews are `historical_full AP≈65.81%, mTTA≈1.99s`,
-  `perfect_v1 AP≈64.15%, mTTA≈1.93s`, and
-  `DAD historical-stratified (30) AP≈61.62%, mTTA≈1.92s`.
+  `perfect_v1 AP≈65.35%, mTTA≈1.96s`, and
+  `DAD historical-stratified (30) AP≈65.46%, mTTA≈1.98s`.
 - Latest post-update sanity rerun reports `OK fatal_count=0` at
-  `2026-05-06T10:11:32Z`.
+  `2026-05-06T13:17:05Z`.
 
 ## Upload Candidate Checklist (Human-Gated)
 

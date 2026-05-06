@@ -1,6 +1,6 @@
 # EMNLP Top-Conference Quality Audit
 
-- Generated at: `2026-05-06T10:11:33Z`
+- Generated at: `2026-05-06T13:17:06Z`
 - Scope: current LFCRASH-CBM EMNLP/ARR paper package and support artifacts.
 - Standard used: top-conference acceptance, oral, and best-paper competitiveness; not just submission sanity.
 

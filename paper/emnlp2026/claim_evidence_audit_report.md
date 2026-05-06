@@ -1,6 +1,6 @@
 # EMNLP Claim/Evidence Audit
 
-- Generated at: `2026-05-06T10:11:33Z`
+- Generated at: `2026-05-06T13:17:05Z`
 - Scope: live EMNLP source files plus the shared appendix source.
 - Nature: mechanical pre-submission scan, not human validation.
 
