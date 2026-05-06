@@ -38,5 +38,6 @@ This index links the paper's appendix claims to concrete repository assets.
 
 ## Writing / positioning assets
 - `paper/neurips2026/PROJECT_STATUS_20260501.md`
+- `paper/neurips2026/ORAL_BEST_PAPER_SPRINT_LEDGER_20260506.md`
 - `paper/neurips2026/thesis_claims_evidence_matrix.md`
 - `paper/neurips2026/rebuttal_map.md`

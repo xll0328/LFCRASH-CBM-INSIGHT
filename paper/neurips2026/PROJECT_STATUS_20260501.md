@@ -97,6 +97,9 @@ remain bounded.
 - Added a dedicated hard-case-symmetry reviewer QA entry in
   `paper/neurips2026/rebuttal_map.md`, aligning rebuttal language with the same
   audit-gated scope boundary used in the main text and manifest.
+- Added `paper/neurips2026/ORAL_BEST_PAPER_SPRINT_LEDGER_20260506.md` to
+  track Oral/Best-Paper strengthening status, remaining blockers, and
+  no-GPU next actions under current evidence constraints.
 - Rebuilt `paper/neurips2026/insight_main.pdf` and reran the NeurIPS sanity
   gate. Latest status at 06:03 UTC is `OK fatal_count=0 warn_count=1`
   (only expected legacy-draft warning remains).
