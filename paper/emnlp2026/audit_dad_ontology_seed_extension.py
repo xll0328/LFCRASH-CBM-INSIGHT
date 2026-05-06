@@ -54,6 +54,7 @@ def main():
     rows = []
     for concept_set, concept_count in CONCEPT_META.items():
         results = []
+        running_results = []
         running = []
         pending = []
         for seed in SEEDS:
@@ -63,6 +64,23 @@ def main():
 
             if is_running:
                 running.append(seed)
+                if path.exists():
+                    try:
+                        data = load_json(path)
+                        running_results.append(
+                            {
+                                "seed": seed,
+                                "tag": tag,
+                                "path": str(path),
+                                "AP": data["AP"],
+                                "mTTA": data["mTTA"],
+                                "TTA_R80": data.get("TTA_R80"),
+                                "P_R80": data.get("P_R80"),
+                                "epoch": data.get("epoch"),
+                            }
+                        )
+                    except Exception:
+                        pass
                 continue
 
             if not path.exists():
@@ -91,6 +109,7 @@ def main():
             "num_running": len(running),
             "num_expected": len(SEEDS),
             "running_seeds": running,
+            "running_preview_results": running_results,
             "pending_seeds": pending,
             "results": results,
         }
@@ -100,6 +119,11 @@ def main():
                 "mTTA": stats([r["mTTA"] for r in results]),
                 "TTA_R80": stats([r["TTA_R80"] for r in results]),
                 "P_R80": stats([r["P_R80"] for r in results]),
+            }
+        if running_results:
+            row["running_preview_aggregate"] = {
+                "AP": stats([r["AP"] for r in running_results]),
+                "mTTA": stats([r["mTTA"] for r in running_results]),
             }
         rows.append(row)
 
@@ -113,8 +137,8 @@ def main():
         "",
         f"- Seeds tracked: `{', '.join(str(s) for s in SEEDS)}`",
         "",
-        "| Concept set | #Concepts | Completed | Running | AP mean+-std (completed) | mTTA mean+-std (completed) | Pending |",
-        "|---|---:|---:|---:|---:|---:|---|",
+        "| Concept set | #Concepts | Completed | Running | AP mean+-std (completed) | mTTA mean+-std (completed) | AP preview (running) | mTTA preview (running) | Pending |",
+        "|---|---:|---:|---:|---:|---:|---:|---:|---|",
     ]
     for row in rows:
         agg = row.get("aggregate")
@@ -124,11 +148,14 @@ def main():
         else:
             ap = f"{100.0 * agg['AP']['mean']:.2f}% +- {100.0 * agg['AP']['std']:.2f}"
             mtta = f"{agg['mTTA']['mean']:.2f}s +- {agg['mTTA']['std']:.2f}s"
+        run_agg = row.get("running_preview_aggregate")
+        run_ap = "--" if run_agg is None else f"{100.0 * run_agg['AP']['mean']:.2f}%"
+        run_mtta = "--" if run_agg is None else f"{run_agg['mTTA']['mean']:.2f}s"
         pending = ", ".join(str(s) for s in row["pending_seeds"]) or "--"
         md_lines.append(
             f"| {row['concept_set']} | {row['concept_count']} | "
             f"{row['num_completed']}/{row['num_expected']} | "
-            f"{row['num_running']} | {ap} | {mtta} | {pending} |"
+            f"{row['num_running']} | {ap} | {mtta} | {run_ap} | {run_mtta} | {pending} |"
         )
 
     md_path.write_text("\n".join(md_lines) + "\n")

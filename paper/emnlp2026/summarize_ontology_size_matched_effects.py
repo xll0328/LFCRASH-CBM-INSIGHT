@@ -79,10 +79,14 @@ def collect():
     for ds in DATASETS:
         for cond, k, label in CONDS:
             rows = []
+            running_preview_rows = []
             for seed in SEEDS:
                 tag = f"{ds}_sizectrl_{cond}_s{seed}"
                 p = ROOT / "output" / f"{ds}_ac" / tag / "results.json"
                 if tag in running_tags:
+                    rr = load_result(p)
+                    if rr is not None:
+                        running_preview_rows.append({"seed": seed, **rr})
                     continue
                 r = load_result(p)
                 if r is not None:
@@ -95,6 +99,7 @@ def collect():
                 "label": label,
                 "concept_count": k,
                 "n": len(rows),
+                "n_running_preview": len(running_preview_rows),
                 "total": len(SEEDS),
                 "missing_seeds": [s for s in SEEDS if s not in {r["seed"] for r in rows}],
                 "AP": {
@@ -106,6 +111,7 @@ def collect():
                     "std": std(mtta),
                 },
                 "rows": rows,
+                "running_preview_rows": running_preview_rows,
             }
 
     return aggregates
@@ -181,8 +187,8 @@ def main():
         "",
         "## Aggregate Status",
         "",
-        "| Dataset | Condition | #Concepts | n/3 | AP mean±std | mTTA mean±std | Missing |",
-        "|---|---|---:|---:|---:|---:|---|",
+        "| Dataset | Condition | #Concepts | n/3 completed | running | AP mean±std (completed) | mTTA mean±std (completed) | Missing |",
+        "|---|---|---:|---:|---:|---:|---:|---|",
     ]
 
     for ds in DATASETS:
@@ -196,7 +202,7 @@ def main():
             t_txt = "--" if t_m is None else f"{t_m:.2f}s ± {t_s:.2f}s"
             missing = "--" if not row["missing_seeds"] else ", ".join(str(x) for x in row["missing_seeds"])
             lines.append(
-                f"| {DATASET_LABEL[ds]} | {label} | {k} | {row['n']}/3 | {ap_txt} | {t_txt} | {missing} |"
+                f"| {DATASET_LABEL[ds]} | {label} | {k} | {row['n']}/3 | {row['n_running_preview']} | {ap_txt} | {t_txt} | {missing} |"
             )
 
     lines += [

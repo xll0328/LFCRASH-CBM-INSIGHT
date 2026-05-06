@@ -67,6 +67,7 @@ def main():
         status[ds] = {}
         for cond, k in CONDS:
             completed = []
+            running_preview = []
             running = []
             pending = []
 
@@ -77,6 +78,19 @@ def main():
 
                 if is_running:
                     running.append(s)
+                    if path.exists():
+                        data = read_json(path)
+                        if data is not None:
+                            running_preview.append(
+                                {
+                                    "seed": s,
+                                    "tag": tag,
+                                    "AP": float(data["AP"]) if isinstance(data.get("AP"), (int, float)) else None,
+                                    "mTTA": float(data["mTTA"]) if isinstance(data.get("mTTA"), (int, float)) else None,
+                                    "epoch": data.get("epoch"),
+                                    "path": str(path),
+                                }
+                            )
                     continue
 
                 if not path.exists():
@@ -101,11 +115,15 @@ def main():
 
             ap_vals = [x["AP"] for x in completed if x["AP"] is not None]
             tta_vals = [x["mTTA"] for x in completed if x["mTTA"] is not None]
+            run_ap_vals = [x["AP"] for x in running_preview if x["AP"] is not None]
+            run_tta_vals = [x["mTTA"] for x in running_preview if x["mTTA"] is not None]
 
             ap_mean = mean(ap_vals)
             ap_std = std(ap_vals)
             tta_mean = mean(tta_vals)
             tta_std = std(tta_vals)
+            run_ap_mean = mean(run_ap_vals)
+            run_tta_mean = mean(run_tta_vals)
 
             status[ds][cond] = {
                 "concept_count": k,
@@ -116,12 +134,31 @@ def main():
                 "ap_std_percent": None if ap_std is None else ap_std * 100.0,
                 "mtta_mean_sec": tta_mean,
                 "mtta_std_sec": tta_std,
+                "running_ap_preview_percent": None if run_ap_mean is None else run_ap_mean * 100.0,
+                "running_mtta_preview_sec": run_tta_mean,
                 "running_seeds": running,
                 "pending_seeds": pending,
                 "completed_rows": completed,
+                "running_preview_rows": running_preview,
             }
 
-            rows.append((ds, cond, k, len(completed), len(running), len(SEEDS), ap_mean, ap_std, tta_mean, tta_std, pending))
+            rows.append(
+                (
+                    ds,
+                    cond,
+                    k,
+                    len(completed),
+                    len(running),
+                    len(SEEDS),
+                    ap_mean,
+                    ap_std,
+                    tta_mean,
+                    tta_std,
+                    run_ap_mean,
+                    run_tta_mean,
+                    pending,
+                )
+            )
 
     json_path = OUT / "ontology_size_matched_status.json"
     md_path = OUT / "ontology_size_matched_status.md"
@@ -132,16 +169,18 @@ def main():
         "",
         "- Seeds tracked: `42, 123, 3407`",
         "",
-        "| Dataset | Condition | #Concepts | Completed | Running | AP mean±std (completed) | mTTA mean±std (completed) | Pending |",
-        "|---|---|---:|---:|---:|---:|---:|---|",
+        "| Dataset | Condition | #Concepts | Completed | Running | AP mean±std (completed) | mTTA mean±std (completed) | AP preview (running) | mTTA preview (running) | Pending |",
+        "|---|---|---:|---:|---:|---:|---:|---:|---:|---|",
     ]
 
-    for ds, cond, k, done, running, total, ap_m, ap_s, tta_m, tta_s, pending in rows:
+    for ds, cond, k, done, running, total, ap_m, ap_s, tta_m, tta_s, run_ap_m, run_tta_m, pending in rows:
         ap_s_txt = "--" if ap_m is None else f"{ap_m*100.0:.2f}% ± {ap_s*100.0:.2f}%"
         tta_s_txt = "--" if tta_m is None else f"{tta_m:.2f}s ± {tta_s:.2f}s"
+        run_ap_txt = "--" if run_ap_m is None else f"{run_ap_m*100.0:.2f}%"
+        run_tta_txt = "--" if run_tta_m is None else f"{run_tta_m:.2f}s"
         pending_txt = "--" if not pending else ", ".join(str(x) for x in pending)
         lines.append(
-            f"| {ds} | {cond} | {k} | {done}/{total} | {running} | {ap_s_txt} | {tta_s_txt} | {pending_txt} |"
+            f"| {ds} | {cond} | {k} | {done}/{total} | {running} | {ap_s_txt} | {tta_s_txt} | {run_ap_txt} | {run_tta_txt} | {pending_txt} |"
         )
 
     md_path.write_text("\n".join(lines) + "\n", encoding="utf-8")

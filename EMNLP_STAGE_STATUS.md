@@ -54,6 +54,10 @@ The paper is in an **ARR-ready pre-submission stage**.
   `perfect_v1: 3/8 completed + 5 running`.
 - Size-matched queue is live with `DAD historical-stratified (30): 0/3 completed + 2 running`
   under the same completion-safe accounting rule.
+- Both status files now expose running-preview metrics (not counted as completed):
+  current previews are `historical_full AP≈65.81%, mTTA≈1.99s`,
+  `perfect_v1 AP≈64.15%, mTTA≈1.93s`, and
+  `DAD historical-stratified (30) AP≈61.62%, mTTA≈1.92s`.
 - Latest post-update sanity rerun reports `OK fatal_count=0` at
   `2026-05-06T10:11:32Z`.
 

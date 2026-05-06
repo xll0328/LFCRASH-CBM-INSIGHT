@@ -104,6 +104,8 @@ Completion criterion:
 - [x] Corrected progress accounting to completion-safe semantics
   (running jobs excluded from completed aggregates) for both DAD extension and
   size-matched controls.
+- [x] Added running-preview telemetry in status reports (real-time trend readout
+  without upgrading evidence tier).
 - [ ] Human approval of freeze candidate for upload logistics.
 
 ## Stop Conditions
