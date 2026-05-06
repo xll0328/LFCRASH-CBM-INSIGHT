@@ -65,12 +65,16 @@ annotation cost while preserving the semantic support needed for downstream
 concept discovery.
 
 \paragraph{Stage 2: multimodal risk concept proposal.}
-Given the sampled frames, a multimodal model proposes candidate concepts,
-risk factors, and coarse semantic families. Our prompts ask explicitly for
-\emph{risk-first} concepts, such as cut-in behavior, closing distance,
-visibility degradation, or vulnerable-road-user interaction, instead of generic
-scene captions. The output of this stage is a noisy but high-recall pool of
-candidate accident precursors.
+Given the sampled frames, a multimodal model proposes candidate concepts in a
+structured JSON format with separate \texttt{risk\_factors} and
+\texttt{raw\_concepts} fields. Prompts explicitly request \emph{risk-first}
+concepts (e.g., cut-in behavior, closing distance, visibility degradation, and
+vulnerable-road-user interactions) rather than generic scene captions. We then
+apply deterministic normalization (case-folding, punctuation cleanup, phrase
+canonicalization) and keyword-based risk scoring. A phrase is retained only if
+its quality score passes a fixed threshold and appears across frames with
+minimum frequency, which turns this stage into a high-recall but rule-filtered
+candidate precursor pool.
 
 \paragraph{Stage 3: risk-first refinement and canonical merge.}
 The raw candidate pool is then refined into reusable risk primitives. We
@@ -100,14 +104,23 @@ with downstream learning.
 The current release follows explicit rules recorded in the ontology audit
 artifacts. Starting from a 611-concept source pool, we apply:
 \begin{itemize}[leftmargin=1.4em,topsep=2pt,itemsep=1pt]
+  \item \textbf{deterministic parsing and thresholds}: phrase normalization, risk/noise keyword scoring, and fixed keep thresholds (\texttt{min\_score}=2, \texttt{min\_count}=2) for the mined pool;
   \item \textbf{risk-first keep/drop filtering}: remove generic scene-status phrases and weakly informative captions;
-  \item \textbf{duplicate-cluster consolidation}: prioritize high-overlap clusters (visibility, pedestrian-crossing, and merge-related phrases) and keep canonical representatives;
+  \item \textbf{duplicate-cluster consolidation}: signature-based grouping with canonical representatives, emphasizing high-overlap visibility, pedestrian-crossing, and merge clusters;
   \item \textbf{family-balance constraints}: redistribute concepts to preserve coverage across nine semantic families instead of frequency-dominated pools;
   \item \textbf{canonical naming policy}: short reusable risk phrases favored over awkward ``potential/presence'' variants;
   \item \textbf{light human review acceptance}: wording-level refinements only, with ontology structure preserved.
 \end{itemize}
 This yields an 81-concept post-polish pool and an 80-concept reviewed release,
 with merge provenance and family metadata tracked in versioned assets.
+
+\paragraph{Deterministic vs.\ judgment-based steps.}
+To make the pipeline reproducible as a method variable, we separate deterministic
+and human-judgment operations. Deterministic steps include parsing, threshold
+filters, canonicalization maps, signature-based merging, family assignment, and
+family-quota balancing. The only judgment-based step is the final light human
+review, which is constrained to wording-level decisions and does not alter the
+family schema or introduce new concept families.
 
 \paragraph{What makes the interface language-grounded and governed.}
 The paper's claim does not rest on any single multimodal model being perfectly
@@ -118,6 +131,13 @@ review metadata. This matters because the scientific question is not only
 whether concepts can be proposed, but whether the resulting ontology is stable
 enough to function as a named interface between visual evidence and downstream
 anticipation behavior.
+
+\paragraph{Count disambiguation used in this paper.}
+The compact governed release ontology has 80 concepts (from a post-polish pool
+of 81), while the ``historical full'' ontology used in matched benchmark
+comparisons is a separate legacy large vocabulary with 837 concepts. We report
+both because they answer different questions: governance quality of the compact
+release versus operating-point behavior under broad-vocabulary baselines.
 
 \begin{figure*}[t]
   \centering
@@ -268,20 +288,20 @@ We parameterize an actor and critic over the concept-conditioned state:
 Each video is a finite-horizon episode. The reward favors early correct alerts
 and penalizes false alarms and misses:
 \begin{equation}
-  \mathfrak{r}_t = \begin{cases}
-    \begin{aligned}[t]
-      \lambda_r \cdot \dfrac{\tau - t}{\tau}\\
-      \cdot (1 + \beta\, b_t)
-    \end{aligned}
-      & \text{first positive alert, } t < \tau \\[4pt]
-    -\lambda_p & \text{false alert or miss} \\[4pt]
-    +\varepsilon & \text{wait before end}
-  \end{cases}
+  \begin{aligned}
+    \mathfrak{r}_t
+    &= \mathbb{I}^{\text{first}}_t \lambda_r \dfrac{\tau - t}{\tau}(1+\beta b_t)
+    - \mathbb{I}^{\text{err}}_t \lambda_p \\
+    &\quad + \bigl(1-\mathbb{I}^{\text{first}}_t-\mathbb{I}^{\text{err}}_t\bigr)\varepsilon,
+  \end{aligned}
   \label{eq:reward}
 \end{equation}
+where $\mathbb{I}^{\text{first}}_t{=}1$ only at the first pre-crash alert and
+$\mathbb{I}^{\text{err}}_t{=}1$ for false-alert or miss outcomes.
 where $b_t = \sigma(\mathbf{w}_b^\top \mathbf{c}_t)$ is a learnable concept
-bonus. This term encourages the policy to favor early alerts that are backed by
-strong concept evidence.
+bonus; $\lambda_r$, $\lambda_p$, and $\beta$ control early-alert reward,
+false-alert penalty, and concept bonus strength. This term encourages the
+policy to favor early alerts backed by strong concept evidence.
 
 \paragraph{Actor-Critic objective and evaluation scope.}
 With advantage $A_t = R_t - V(\mathbf{s}_t)$ and discounted return $R_t$, the

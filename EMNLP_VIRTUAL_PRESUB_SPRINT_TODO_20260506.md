@@ -71,7 +71,7 @@ Deliverable:
 
 - [x] Launch phase-1 DAD ontology seed-extension block (`perfect_v1`, +5 seeds).
 - [x] Launch phase-2 extension for `historical_full` and `risk_core_v1` (+5 seeds each, queued workers on GPU2/3).
-- [ ] Add at least 5 additional seeds per ontology cell.
+- [x] Add at least 5 additional seeds per ontology cell.
 - [ ] Refresh multiseed audit and integrate into paper after completion.
 
 Suggested seeds:
@@ -83,13 +83,53 @@ Launch command template:
 Stop rule:
 - Do not change headline claim tier before all new seeds are aggregated.
 
+### P6 (must): Size-vs-ontology confound isolation
+
+- [x] Add a size-matched control protocol (30/80 concept budgets) so ontology source and concept count are not fully coupled.
+- [x] Build deterministic subset rules for historical vocabulary (seeded sampling with family-stratified quotas).
+- [x] Launch DAD + A3D pilot runs for size-matched controls (minimum 3 seeds each condition).
+- [ ] Add one compact table/paragraph separating “source effect” vs “count effect”.
+
+Deliverable:
+- `paper/emnlp2026/run_ontology_size_matched_controls.sh` (`DONE`)
+- `paper/emnlp2026/build_historical_size_matched_subsets.py` (`DONE`)
+- `paper/emnlp2026/audit_ontology_size_matched_controls.py` (`DONE`)
+- updated `sec_experiments_emnlp.tex` section near Table 6.
+
+### P7 (must): Reproducibility hardening in main paper
+
+- [x] Replace high-level ontology prose with executable criteria language (inputs, deterministic parts, review-only parts).
+- [x] Add deterministic-vs-judgment boundary sentence block in Method.
+- [x] Add concrete artifact pointers for each ontology stage in main text.
+
+Deliverable:
+- updated `sec_method_emnlp.tex` with explicit protocol bullets and governance trace links.
+
+### P8 (should): Presentation precision cleanup
+
+- [x] Reformat reward equation block for readability and compactness.
+- [x] Resolve naming ambiguity around ontology counts (`611/81/80` vs `837` historical full vocabulary) with one explicit disambiguation sentence.
+- [x] Re-check terminology consistency (`training protocol` vs `launcher`, `semantic interface` vs legacy wording).
+
+Deliverable:
+- updated `sec_method_emnlp.tex`, `sec_experiments_emnlp.tex`, and sanity-clean compile.
+
+### P9 (should): Comparison set and fairness wording
+
+- [ ] Expand the A3D comparability caveat (backbone/data pipeline mismatch) in result discussion.
+- [ ] Add one sentence in conclusion on what would be needed for stronger cross-stack fairness claims.
+
+Deliverable:
+- updated `sec_experiments_emnlp.tex`, `sec_conclusion_emnlp.tex`.
+
 ## Immediate Execution Order (start now)
 
 1. P0 + P3 manuscript surgery (high impact, low compute risk). `DONE`  
 2. P1 + P2 evidence table/prose upgrade from existing support artifacts. `DONE`  
 3. P4 related-work updates with verified references only. `DONE`  
-4. Start P5 extended DAD seed jobs in background and track status. `STARTED (phase-1 + phase-2 launched)`  
-5. Recompile + sanity gate + claim audit + tracker sync. `DONE`  
+4. Start P5 extended DAD seed jobs in background and track status. `STARTED (phase-1 + phase-2 launched, perfect_v1 completed)`  
+5. Run P6 size-matched control setup + launch pilot runs. `DONE (queue running)`  
+6. Recompile + sanity gate + claim audit + tracker sync. `DONE (latest sanity: 2026-05-06T10:11:32Z)`  
 
 ## Gate Criteria Before Next Freeze
 
@@ -99,4 +139,4 @@ Stop rule:
 - Revised paper clearly states:
   - what is headline evidence,
   - what is support evidence,
-  - what remains unresolved (DAD stability + actor transfer fragility).
+  - what remains unresolved (DAD stability + actor transfer fragility + size/source disentanglement status).

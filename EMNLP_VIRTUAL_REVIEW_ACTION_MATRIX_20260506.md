@@ -14,6 +14,9 @@ Scope: map virtual pre-review weaknesses to concrete fixes and evidence
 | Ontology protocol under-specified | Added operational curation rules (filter/merge/balance/review) in method | `paper/emnlp2026/sec_method_emnlp.tex` | Done |
 | Fairness of baseline comparison unclear | Added comparability note for backbone/protocol mismatch | `paper/emnlp2026/sec_experiments_emnlp.tex` | Done |
 | Missing recent related work | Added verified 2025 references currently checkable | `paper/emnlp2026/insight.bib`, `paper/emnlp2026/sec_related_emnlp.tex` | Done |
+| Ontology-source effect confounded with concept count | Added dedicated size-matched control track (30/80 budgets), deterministic historical subset builder, live queued runs, and explicit source-vs-count caveat text in main experiments | `paper/emnlp2026/run_ontology_size_matched_controls.sh`, `paper/emnlp2026/build_historical_size_matched_subsets.py`, `paper/emnlp2026/audit_ontology_size_matched_controls.py`, `paper/emnlp2026/sec_experiments_emnlp.tex` | Running |
+| Eq. (reward) readability and notation precision | Replaced long case labels with compact indicator-form equation and added symbol legend sentence | `paper/emnlp2026/sec_method_emnlp.tex` | Done |
+| 611/81/80 vs 837 ontology-count ambiguity | Added explicit count disambiguation text (governed release ontology vs historical full benchmark vocabulary) in Method + Experiments | `paper/emnlp2026/sec_method_emnlp.tex`, `paper/emnlp2026/sec_experiments_emnlp.tex` | Done |
 
 ## Stability Escalation Track (Compute)
 
@@ -31,9 +34,10 @@ Status monitor:
 
 1. Refresh `dad_ontology_seed_extension_status.*`.
 2. Recompute ontology effect-size summary.
-3. Update only stability paragraphs/tables; do not reopen story framing.
-4. Re-run submission sanity gate.
-5. Sync stage/dashboard/todo docs.
+3. Refresh size-matched control summaries and update the count/source confound paragraph.
+4. Update only stability/ontology-control paragraphs/tables; do not reopen story framing.
+5. Re-run submission sanity gate.
+6. Sync stage/dashboard/todo docs.
 
 ## Stop Conditions
 

@@ -43,6 +43,10 @@ Actor--Critic warmup followed by a delayed ramp-in of concept-related losses.
 For DAD, the canonical headline result comes from a curriculum-stabilized line
 that delays concept supervision in the earliest stage. For ontology comparison
 experiments, we keep the training protocol fixed and vary only the ontology.
+To avoid count ambiguity, we distinguish two assets throughout:
+the governed compact release ontology (80 concepts from an 81-concept
+post-polish pool) and the legacy historical-full benchmark vocabulary
+(837 concepts).
 
 \paragraph{Comparability note for cross-paper benchmarks.}
 Several published baselines use different backbones, input preprocessing, or
@@ -505,6 +509,15 @@ most direct evidence that language-side design decisions survive contact with
 model training: changing canonical names, merge policy, and family structure at
 the ontology level changes the downstream operating point under one matched
 training-protocol family.
+
+\paragraph{Source vs.\ count caveat.}
+Table~\ref{tab:concept_sets} changes both ontology source and concept count, so
+its interpretation is a \emph{joint source+cardinality effect}, not a pure
+source-only estimate. To isolate this, we launched a size-matched control track
+with fixed 30/80 concept budgets (risk-core vs.\ historical-30, and perfect-v1
+vs.\ historical-80) using deterministic, family-stratified subsets from the
+historical vocabulary. Those controls are treated as support evidence and are
+reported separately from headline tables once the seeded block completes.
 
 This claim is now backed by a complete three-seed extension over all six
 dataset--ontology cells. Across the matched ontology block, all $18/18$

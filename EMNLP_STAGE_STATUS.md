@@ -38,6 +38,18 @@ The paper is in an **ARR-ready pre-submission stage**.
   `{7,11,2718,314,2026}` on GPU `{2,3}`.
 - Virtual pre-review issue closure is tracked in:
   `EMNLP_VIRTUAL_REVIEW_ACTION_MATRIX_20260506.md`.
+- A new size-matched ontology control track is now running to decouple source
+  effects from concept-count effects:
+  `paper/emnlp2026/run_ontology_size_matched_controls.sh`
+  (DAD+A3D, 30/80 budgets, seeds `{42,123,3407}` on GPU `{5,7}`).
+- Live monitor for this new block:
+  `output/emnlp2026_support/ontology_size_matched_status.md`.
+- Current extension progress snapshot:
+  `output/emnlp2026_support/dad_ontology_seed_extension_status.md`
+  shows `historical_full: 5/8`, `risk_core_v1: 3/8`, `perfect_v1: 8/8`;
+  size-matched queue has started with first jobs running.
+- Latest post-update sanity rerun reports `OK fatal_count=0` at
+  `2026-05-06T10:11:32Z`.
 
 ## Upload Candidate Checklist (Human-Gated)
 

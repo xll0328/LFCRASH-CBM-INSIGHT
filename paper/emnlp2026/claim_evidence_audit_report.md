@@ -1,6 +1,6 @@
 # EMNLP Claim/Evidence Audit
 
-- Generated at: `2026-05-06T09:04:25Z`
+- Generated at: `2026-05-06T10:11:33Z`
 - Scope: live EMNLP source files plus the shared appendix source.
 - Nature: mechanical pre-submission scan, not human validation.
 
@@ -36,11 +36,11 @@ These terms are high-risk unless directly quoted; use concrete evidence instead.
 Allowed when scoped or negated, but each instance should remain tied to evidence.
 
 - `paper/emnlp2026/sec_intro_emnlp.tex:148`: \item We keep the central claim intentionally constrained: \method{} advances semantic-interface methodology and auditing, with the strongest current contribution in interpretab...
-- `paper/emnlp2026/sec_method_emnlp.tex:332`: This does not prove that every trained model will respond monotonically to
-- `paper/emnlp2026/sec_experiments_emnlp.tex:234`: and partial semantic stability, but do not establish full causal faithfulness.}
-- `paper/emnlp2026/sec_experiments_emnlp.tex:289`: these diagnostics as proof of full concept faithfulness; they are support
-- `paper/emnlp2026/sec_experiments_emnlp.tex:654`: Top-risk edit & 25 edited cases & mean shift = 0.00 frames & naive top-risk edits alone do not guarantee movement \\
-- `paper/emnlp2026/sec_experiments_emnlp.tex:669`: timing proof. That asymmetry is intentional in our presentation: the paper is
+- `paper/emnlp2026/sec_method_emnlp.tex:352`: This does not prove that every trained model will respond monotonically to
+- `paper/emnlp2026/sec_experiments_emnlp.tex:238`: and partial semantic stability, but do not establish full causal faithfulness.}
+- `paper/emnlp2026/sec_experiments_emnlp.tex:293`: these diagnostics as proof of full concept faithfulness; they are support
+- `paper/emnlp2026/sec_experiments_emnlp.tex:667`: Top-risk edit & 25 edited cases & mean shift = 0.00 frames & naive top-risk edits alone do not guarantee movement \\
+- `paper/emnlp2026/sec_experiments_emnlp.tex:682`: timing proof. That asymmetry is intentional in our presentation: the paper is
 - `paper/neurips2026/sec_appendix.tex:21`: policy-level causal benchmark.
 - `paper/neurips2026/sec_appendix.tex:484`: We do not claim a formal global theorem guaranteeing monotone policy shifts for
 - `paper/neurips2026/sec_appendix.tex:486`: for such a guarantee to be informative without unrealistic assumptions. The

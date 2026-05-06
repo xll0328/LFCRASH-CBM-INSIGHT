@@ -93,6 +93,12 @@ Completion criterion:
 - [x] Re-ran post-revision sanity gate (`OK fatal_count=0`, `2026-05-06T09:04:24Z`).
 - [x] Launched phase-1 DAD ontology seed-extension block for `perfect_v1` (+5 seeds).
 - [x] Launched phase-2 DAD seed-extension queue for `historical_full` and `risk_core_v1` (+5 seeds each, queued on GPU2/3).
+- [x] Added virtual-review round-2 execution tracks: size/source confound isolation, reproducibility hardening, and equation/terminology cleanup.
+- [x] Launched size-matched ontology controls (`30/80` concept budgets; DAD+A3D; seeds `42,123,3407`) on GPU5/7 queue.
+- [x] Re-ran sanity gate after method/experiment updates (`OK fatal_count=0`, `2026-05-06T10:11:32Z`).
+- [x] Refreshed live status artifacts:
+  `output/emnlp2026_support/dad_ontology_seed_extension_status.md` and
+  `output/emnlp2026_support/ontology_size_matched_status.md`.
 - [ ] Human approval of freeze candidate for upload logistics.
 
 ## Stop Conditions

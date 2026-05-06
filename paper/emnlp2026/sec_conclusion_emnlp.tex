@@ -38,6 +38,9 @@ main remaining empirical weakness is no longer missing ontology coverage but
 DAD-side instability, limited cross-dataset ontology transfer evidence, and the
 gap between classifier-derived anticipation scores and mature policy-level
 timing behavior.
+In addition, while the current matched-ontology table clearly shows operating-point
+movement, fully isolating ontology \emph{source} from ontology \emph{size}
+requires completed size-matched seeded controls.
 
 \paragraph{Evidence scope.}
 To keep methodological integrity, the paper explicitly treats DAD as a
@@ -45,6 +48,8 @@ stress setting, not a universal performance frontier, and treats actor-policy
 timing as a partial, support-only account. This choice keeps the central claim
 on the part of the evidence that is strongest: concept-interface construction,
 matched protocol contrast, and clean A3D flagship stability.
+Cross-paper leaderboard comparisons are also kept conservative because backbone
+and preprocessing stacks differ across published systems.
 
 \paragraph{Broader impact.}
 For safety-critical prediction, the practical value of \method{} is not merely
