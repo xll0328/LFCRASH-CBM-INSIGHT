@@ -62,8 +62,11 @@ The paper is in an **ARR-ready pre-submission stage**.
   unified soft-macaron table styling (header tint + consistent table typography),
   refreshed framework/ontology/safety-utility figure palettes, and appendix path
   text was hardened for underscore-safe LaTeX rendering.
+- Follow-up typography cleanup normalized appendix hard-case family labels from
+  underscore-heavy identifiers to reader-facing names to reduce visual noise in
+  table reading.
 - Latest post-update sanity rerun reports `OK fatal_count=0` at
-  `2026-05-06T13:55:26Z`.
+  `2026-05-06T14:16:20Z`.
 
 ## Upload Candidate Checklist (Human-Gated)
 
