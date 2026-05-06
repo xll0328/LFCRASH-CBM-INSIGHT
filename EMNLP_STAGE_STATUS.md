@@ -33,6 +33,9 @@ The paper is in an **ARR-ready pre-submission stage**.
   `2026-05-06T09:04:24Z`.
 - Phase-1 DAD stability extension has been launched:
   `dad_shared_perfect_v1` additional seeds `{7,11,2718,314,2026}` (running).
+- Phase-2 DAD stability extension has been launched with queued workers:
+  `dad_shared_historical_full` and `dad_shared_risk_core_v1` additional seeds
+  `{7,11,2718,314,2026}` on GPU `{2,3}`.
 
 ## Upload Candidate Checklist (Human-Gated)
 

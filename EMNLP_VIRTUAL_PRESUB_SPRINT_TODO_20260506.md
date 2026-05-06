@@ -69,7 +69,7 @@ Deliverable:
 ### P5 (should): New compute block for DAD ontology stability
 
 - [x] Launch phase-1 DAD ontology seed-extension block (`perfect_v1`, +5 seeds).
-- [ ] Launch phase-2 extension for `historical_full` and `risk_core_v1` (+5 seeds each).
+- [x] Launch phase-2 extension for `historical_full` and `risk_core_v1` (+5 seeds each, queued workers on GPU2/3).
 - [ ] Add at least 5 additional seeds per ontology cell.
 - [ ] Refresh multiseed audit and integrate into paper after completion.
 
@@ -87,7 +87,7 @@ Stop rule:
 1. P0 + P3 manuscript surgery (high impact, low compute risk). `DONE`  
 2. P1 + P2 evidence table/prose upgrade from existing support artifacts. `DONE`  
 3. P4 related-work updates with verified references only. `DONE`  
-4. Start P5 extended DAD seed jobs in background and track status. `STARTED`  
+4. Start P5 extended DAD seed jobs in background and track status. `STARTED (phase-1 + phase-2 launched)`  
 5. Recompile + sanity gate + claim audit + tracker sync. `DONE`  
 
 ## Gate Criteria Before Next Freeze

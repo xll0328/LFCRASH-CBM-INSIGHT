@@ -92,6 +92,7 @@ Completion criterion:
 - [x] Applied virtual pre-review revision sweep (claim calibration, related-work refresh, semantic-validity table, ontology effect-size wording).
 - [x] Re-ran post-revision sanity gate (`OK fatal_count=0`, `2026-05-06T09:04:24Z`).
 - [x] Launched phase-1 DAD ontology seed-extension block for `perfect_v1` (+5 seeds).
+- [x] Launched phase-2 DAD seed-extension queue for `historical_full` and `risk_core_v1` (+5 seeds each, queued on GPU2/3).
 - [ ] Human approval of freeze candidate for upload logistics.
 
 ## Stop Conditions
