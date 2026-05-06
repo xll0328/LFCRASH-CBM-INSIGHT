@@ -164,7 +164,8 @@ def main() -> int:
                             "pending manual confirmation: "
                             f"pair_rows={s.get('pair_row_count', 0)}, "
                             f"auto_suggested={s.get('auto_suggested_pair_rows', 0)}, "
-                            f"confirmed_with_notes={s.get('confirmed_pair_rows_with_notes', 0)}"
+                            f"confirmed_with_notes={s.get('confirmed_pair_rows_with_notes', 0)}, "
+                            f"confirmation_ratio={s.get('confirmation_ratio', 0.0)}"
                         ),
                     )
 

@@ -109,9 +109,14 @@ remain bounded.
   NeurIPS sanity checker. Current gate status is pending
   (`pair_rows=8`, `auto_suggested=8`, `confirmed_with_notes=0`), so stronger
   hard-case symmetry claims remain blocked.
+- Added `paper/neurips2026/build_hard_case_pair_review_sheet.py`, which
+  generates `paper/neurips2026/dad_hard_case_pair_review_sheet.md` as a
+  reviewer-fillable pair-confirmation checklist linked to the hard-case audit.
+- Tightened the hard-case gate rule to require **all** paired rows to be
+  confirmed with non-empty reviewer notes before `gate_ready=true`.
 - Rebuilt `paper/neurips2026/insight_main.pdf` and reran the NeurIPS sanity
-  gate. Latest status at 06:19 UTC is `OK fatal_count=0 warn_count=2`
-  (legacy-draft warning + expected hard-case gate pending warning).
+  gate. Latest status at 06:32 UTC is `OK fatal_count=0 warn_count=1`
+  (expected hard-case gate pending warning only; legacy stale-risk warning is cleared).
 
 ## Immediate Safe Next Actions
 

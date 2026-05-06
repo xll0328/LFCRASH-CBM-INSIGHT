@@ -24,8 +24,10 @@ This index links the paper's appendix claims to concrete repository assets.
 
 ## Hard-case symmetry scaffold
 - `paper/neurips2026/build_dad_hard_case_symmetry_audit.py`
+- `paper/neurips2026/build_hard_case_pair_review_sheet.py`
 - `paper/neurips2026/dad_hard_case_symmetry_audit.md`
 - `paper/neurips2026/dad_hard_case_pair_review_draft_20260506.md`
+- `paper/neurips2026/dad_hard_case_pair_review_sheet.md`
 - `paper/neurips2026/validate_hard_case_symmetry_gate.py`
 - `paper/neurips2026/hard_case_symmetry_gate_summary.json`
 - `paper/neurips2026/v4_case_bank_scan.json`

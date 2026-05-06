@@ -67,7 +67,11 @@ def _status(rows: list[dict]) -> dict:
         "auto_suggested_pair_rows": len(auto),
         "unpaired_rows": len(unpaired),
         "confirmed_pair_rows_with_notes": len(confirmed),
-        "gate_ready": len(pair_rows) > 0 and len(auto) == 0 and len(confirmed) > 0,
+        "confirmation_ratio": (
+            0.0 if len(pair_rows) == 0 else round(len(confirmed) / len(pair_rows), 3)
+        ),
+        # Gate is only ready when every paired row is fully reviewer-confirmed.
+        "gate_ready": len(pair_rows) > 0 and len(auto) == 0 and len(confirmed) == len(pair_rows),
     }
 
 
