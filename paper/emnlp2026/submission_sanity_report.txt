@@ -1,5 +1,5 @@
 INSIGHT submission sanity report
-generated_at=2026-05-06T06:57:47Z
+generated_at=2026-05-06T07:04:49Z
 
 [1] Core files
 OK insight_emnlp.tex
@@ -51,11 +51,11 @@ OK insight_emnlp.pdf newer than manuscript sources
 738:Underfull \hbox (badness 10000) in paragraph at lines 164--165
 743:Underfull \hbox (badness 10000) in paragraph at lines 165--165
 748:Underfull \hbox (badness 1014) in paragraph at lines 165--165
-818:Underfull \vbox (badness 2753) has occurred while \output is active []
-821:Underfull \vbox (badness 10000) has occurred while \output is active []
-824:Underfull \hbox (badness 10000) in paragraph at lines 440--448
-829:Underfull \hbox (badness 10000) in paragraph at lines 440--448
-834:Underfull \hbox (badness 10000) in paragraph at lines 440--448
+818:Underfull \hbox (badness 10000) in paragraph at lines 440--448
+823:Underfull \hbox (badness 10000) in paragraph at lines 440--448
+828:Underfull \hbox (badness 10000) in paragraph at lines 440--448
+834:Underfull \hbox (badness 1237) in paragraph at lines 450--457
+848:Underfull \hbox (badness 10000) in paragraph at lines 459--473
 
 [3] Obvious identity / link scan
 OK no obvious identity/link matches

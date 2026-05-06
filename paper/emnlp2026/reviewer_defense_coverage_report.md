@@ -1,6 +1,6 @@
 # EMNLP Reviewer Defense Coverage Audit
 
-- Generated at: `2026-05-06T06:57:48Z`
+- Generated at: `2026-05-06T07:04:51Z`
 - Scope: oral accept case one-pager, reviewer quick map, response map, response playbook, response templates, and response tracker.
 - Nature: mechanical coverage audit, not human validation or final rebuttal text.
 
@@ -45,7 +45,7 @@
 
 ## Evidence Path Check
 
-- Evidence paths referenced: `34`
+- Evidence paths referenced: `36`
 - OK all referenced evidence paths exist.
 
 ## Advisory Items

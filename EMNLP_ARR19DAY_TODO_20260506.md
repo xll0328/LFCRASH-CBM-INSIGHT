@@ -27,7 +27,7 @@ Completion rule:
 - [ ] Do one full human read-through at 100% zoom: page 1, Fig 1, Table 1, appendix opening.
 - [ ] Mark all sentences that can be misread as causal/policy-overclaim.
 - [ ] Apply only minimal wording edits; re-run sanity immediately.
-- [ ] Run a rebuttal dry-run against 5 highest-risk reviewer attacks.
+- [x] Run a rebuttal dry-run against 5 highest-risk reviewer attacks.
 - [ ] Sync quick-map/playbook/templates with any wording edits.
 
 Completion rule:
@@ -64,7 +64,7 @@ Completion rule:
 
 ### P1 Oral Lift (Must)
 
-- [ ] Ensure every major table caption declares evidence tier: headline/support/stress.
+- [x] Ensure every major table caption declares evidence tier: headline/support/stress.
 - [ ] Keep A3D as flagship operating-point evidence.
 - [ ] Keep DAD as hard stress-test evidence with explicit limits.
 - [ ] Keep actor-policy as support-only unless new aggregate evidence appears.

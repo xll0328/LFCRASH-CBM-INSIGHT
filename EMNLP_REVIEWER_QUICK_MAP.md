@@ -1,6 +1,6 @@
 # EMNLP Reviewer Quick Map
 
-Date: 2026-04-29
+Date: 2026-05-06
 
 This is a one-page navigation map for the current INSIGHT submission package.
 It is meant for internal response preparation and final pre-upload checks.
@@ -49,12 +49,16 @@ Evidence paths:
 Answer:
 The strongest package is the combination of governed ontology construction,
 matched ontology comparisons, language-side audits, and the stable A3D
-interpretable operating point. A3D is the clean flagship dataset.
+interpretable operating point. A3D is the clean flagship dataset, and the
+results section now tags each major artifact as headline / controlled support /
+stress evidence to prevent pooled-reading ambiguity.
 
 Evidence paths:
 - `output/emnlp2026_support/a3d_headline_multiseed_status.md`
 - `EMNLP_SUPPORT_RESULTS.md`
 - `paper/emnlp2026/sec_experiments_emnlp.tex`
+- `paper/figures/insight_fig5_safety_utility.pdf`
+- `paper/figures/insight_fig9_experiment_portfolio.pdf`
 
 Key numbers:
 - A3D headline multi-seed: `94.16% +/- 0.95` AP,
@@ -77,10 +81,10 @@ Key numbers:
 - Canonical DAD: `68.19%` AP / `1.75s` mTTA.
 - Clean three-seed diagnostic: `62.31% +/- 1.90` AP,
   `2.07s +/- 0.09s` mTTA.
-- Recovery block: `63.52% +/- 0.81` AP,
-  `2.16s +/- 0.25s` mTTA over `6/6` completed runs.
-- Matched full support block: `63.19% +/- 1.21` AP,
-  `2.17s +/- 0.05s` mTTA over `3/3` completed runs.
+- Recovery block: `63.64% +/- 0.80` AP,
+  `2.33s +/- 0.27s` mTTA over `3/3` completed runs.
+- Matched full support block: `63.18% +/- 1.32` AP,
+  `2.27s +/- 0.20s` mTTA over `3/3` completed runs.
 
 ### 5. Are actor-policy or intervention claims overstated?
 
@@ -113,6 +117,11 @@ Safe formulation:
 The paper provides a governed semantic interface whose ontology choice affects
 the predictive--timing operating point, with strong A3D evidence, honest DAD
 stress diagnostics, and scoped intervention/timing support.
+
+Reading shortcut:
+Headline tables first (`tab:dad`, `tab:a3d`), then controlled support
+(`tab:concept_sets`, `tab:ablation`), then stress evidence
+(`tab:trigger_compare`, `tab:interp_quant`, DAD stress summaries).
 
 ## Final Upload Check
 
