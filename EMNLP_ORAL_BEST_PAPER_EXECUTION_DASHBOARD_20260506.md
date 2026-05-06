@@ -87,6 +87,7 @@ Completion criterion:
 - [x] Synced quick-map/playbook/templates with the latest bounded wording.
 - [x] Completed minimal risk-phrase pass in EMNLP source (`advisory_hits: 14 -> 9`, sanity still green).
 - [x] Cut and verified a new technical freeze candidate (`ARR20260506T073630Z`).
+- [x] Reran no-change sanity gate for freeze readiness (`OK fatal_count=0`, `2026-05-06T08:06:17Z`).
 - [ ] Human approval of freeze candidate for upload logistics.
 
 ## Stop Conditions

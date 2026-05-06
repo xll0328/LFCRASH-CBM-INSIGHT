@@ -21,7 +21,9 @@ The paper is in an **ARR-ready pre-submission stage**.
 - A new technical freeze candidate was created and verified:
   `ARR20260506T073630Z` with tarball
   `paper/emnlp2026/frozen/insight_emnlp_arr_freeze_ARR20260506T073630Z.tar.gz`.
-- Latest sanity rerun reports `OK fatal_count=0` at `2026-05-06T07:27:49Z`.
+- Latest sanity rerun reports `OK fatal_count=0` at `2026-05-06T08:06:17Z`.
+- No-change rehearsal gate was rerun and passed for the current freeze candidate:
+  `bash paper/emnlp2026/verify_arr_freeze.sh ARR20260506T073630Z`.
 
 ## Upload Candidate Checklist (Human-Gated)
 

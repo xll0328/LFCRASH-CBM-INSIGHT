@@ -45,7 +45,7 @@ Completion rule:
 
 ### Phase D (T-2 to T-0, 2026-05-23 to 2026-05-25): Upload Ops
 
-- [ ] Final no-change sanity gate.
+- [x] Final no-change sanity gate rehearsal completed (`OK fatal_count=0`, `2026-05-06T08:06:17Z`); rerun required on upload day.
 - [ ] Human upload + ARR metadata checks.
 - [ ] Commit/venue-lock decisions logged (human).
 - [ ] Freeze post-upload rebuttal mode; no story rewrite.
@@ -96,3 +96,4 @@ Completion rule:
 - [x] Submission sanity rerun completed (`OK fatal_count=0`, generated `2026-05-06T06:53:30Z`).
 - [x] Top-conference and oral-readiness audits rerun on latest workspace.
 - [x] New 2026-05-06 gap ledger created.
+- [x] Final no-change sanity + freeze verification rerun completed (`sanity=2026-05-06T08:06:17Z`, `freeze=ARR20260506T073630Z` verified).
