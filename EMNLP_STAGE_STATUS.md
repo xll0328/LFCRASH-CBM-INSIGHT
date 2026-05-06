@@ -24,6 +24,8 @@ The paper is in an **ARR-ready pre-submission stage**.
 - Latest sanity rerun reports `OK fatal_count=0` at `2026-05-06T08:06:17Z`.
 - No-change rehearsal gate was rerun and passed for the current freeze candidate:
   `bash paper/emnlp2026/verify_arr_freeze.sh ARR20260506T073630Z`.
+- Upload-day operations are now codified in:
+  `EMNLP_UPLOAD_DAY_RUNBOOK_20260506.md`.
 
 ## Upload Candidate Checklist (Human-Gated)
 

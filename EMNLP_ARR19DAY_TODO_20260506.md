@@ -97,3 +97,4 @@ Completion rule:
 - [x] Top-conference and oral-readiness audits rerun on latest workspace.
 - [x] New 2026-05-06 gap ledger created.
 - [x] Final no-change sanity + freeze verification rerun completed (`sanity=2026-05-06T08:06:17Z`, `freeze=ARR20260506T073630Z` verified).
+- [x] Upload-day operator runbook created (`EMNLP_UPLOAD_DAY_RUNBOOK_20260506.md`).

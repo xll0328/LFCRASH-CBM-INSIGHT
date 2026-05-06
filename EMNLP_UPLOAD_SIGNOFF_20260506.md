@@ -3,6 +3,7 @@
 Date: 2026-05-06
 Freeze candidate: `ARR20260506T073630Z`
 Tarball: `paper/emnlp2026/frozen/insight_emnlp_arr_freeze_ARR20260506T073630Z.tar.gz`
+Runbook: `EMNLP_UPLOAD_DAY_RUNBOOK_20260506.md`
 
 ## A. Technical Gate (already passed)
 
