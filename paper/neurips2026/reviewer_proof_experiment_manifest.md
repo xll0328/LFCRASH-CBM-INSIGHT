@@ -26,6 +26,7 @@ These runs are not headline replacements; they quantify robustness.
 - Add analogous 3-seed aggregate for the final A3D line
 - Add mean/std for ontology-controlled runs if compute permits
 - Add a DAD hard-case symmetry audit table (predefined scenario families, paired success/failure counts, fixed checkpoint rule)
+- Use `paper/neurips2026/build_dad_hard_case_symmetry_audit.py` to refresh `paper/neurips2026/dad_hard_case_symmetry_audit.md` before each claim-evidence freeze
 
 ## Block C — Controlled ontology block
 Use `controlled_ontology_matrix.md` and the shared launcher.

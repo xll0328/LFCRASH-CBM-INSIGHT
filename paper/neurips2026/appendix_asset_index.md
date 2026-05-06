@@ -22,6 +22,11 @@ This index links the paper's appendix claims to concrete repository assets.
 - `paper/neurips2026/timing_faithfulness_package.md`
 - `output/insight_analysis/dad_timing_v4_enhanced/timing_faithfulness_summary.json`
 
+## Hard-case symmetry scaffold
+- `paper/neurips2026/build_dad_hard_case_symmetry_audit.py`
+- `paper/neurips2026/dad_hard_case_symmetry_audit.md`
+- `paper/neurips2026/v4_case_bank_scan.json`
+
 ## Result truthfulness and protocol separation
 - `paper/neurips2026/claim_evidence_audit.json`
 - `paper/neurips2026/submission_results_ledger.json`

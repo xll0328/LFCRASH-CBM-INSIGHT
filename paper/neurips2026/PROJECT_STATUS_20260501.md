@@ -79,6 +79,11 @@ remain bounded.
   family-level hard-case symmetry audit table before any stronger symmetry claim.
 - Updated `paper/neurips2026/claim_evidence_audit.json` with an explicit
   `hard_case_symmetry_scope` reviewer-sensitive guardrail.
+- Added a refreshable hard-case symmetry scaffold:
+  `paper/neurips2026/build_dad_hard_case_symmetry_audit.py` now generates
+  `paper/neurips2026/dad_hard_case_symmetry_audit.md` from archived casebank
+  assets, explicitly marking symmetry as open unless paired family-level
+  success/failure evidence is filled.
 - Rebuilt `paper/neurips2026/insight_main.pdf` and reran the NeurIPS sanity
   gate. Latest status at 05:39 UTC is `OK fatal_count=0 warn_count=1`
   (only expected legacy-draft warning remains).
