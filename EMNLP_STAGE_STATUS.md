@@ -44,10 +44,16 @@ The paper is in an **ARR-ready pre-submission stage**.
   (DAD+A3D, 30/80 budgets, seeds `{42,123,3407}` on GPU `{5,7}`).
 - Live monitor for this new block:
   `output/emnlp2026_support/ontology_size_matched_status.md`.
+- Auto effect-size summary for this block:
+  `output/emnlp2026_support/ontology_size_matched_effects.md`.
 - Current extension progress snapshot:
   `output/emnlp2026_support/dad_ontology_seed_extension_status.md`
-  shows `historical_full: 5/8`, `risk_core_v1: 3/8`, `perfect_v1: 8/8`;
-  size-matched queue has started with first jobs running.
+  now uses a completion-safe rule (finished process + result file):
+  `historical_full: 3/8 completed + 2 running`,
+  `risk_core_v1: 3/8 completed + 0 running`,
+  `perfect_v1: 3/8 completed + 5 running`.
+- Size-matched queue is live with `DAD historical-stratified (30): 0/3 completed + 2 running`
+  under the same completion-safe accounting rule.
 - Latest post-update sanity rerun reports `OK fatal_count=0` at
   `2026-05-06T10:11:32Z`.
 

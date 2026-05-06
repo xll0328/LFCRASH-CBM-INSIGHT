@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import json
+import subprocess
 from pathlib import Path
 
 
@@ -25,20 +26,54 @@ def load_json(path: Path):
     return json.loads(path.read_text())
 
 
+def get_running_tags():
+    cmd = "ps -eo cmd"
+    try:
+        proc = subprocess.run(
+            cmd,
+            shell=True,
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+    except Exception:
+        return set()
+
+    tags = set()
+    for line in proc.stdout.splitlines():
+        if "train_multi.py" not in line or "--tag" not in line:
+            continue
+        parts = line.split("--tag", 1)[1].strip().split()
+        if parts:
+            tags.add(parts[0])
+    return tags
+
+
 def main():
+    running_tags = get_running_tags()
     rows = []
     for concept_set, concept_count in CONCEPT_META.items():
         results = []
-        missing = []
+        running = []
+        pending = []
         for seed in SEEDS:
-            path = ROOT / "output" / "dad_ac" / f"dad_shared_{concept_set}_s{seed}" / "results.json"
-            if not path.exists():
-                missing.append(seed)
+            tag = f"dad_shared_{concept_set}_s{seed}"
+            path = ROOT / "output" / "dad_ac" / tag / "results.json"
+            is_running = tag in running_tags
+
+            if is_running:
+                running.append(seed)
                 continue
+
+            if not path.exists():
+                pending.append(seed)
+                continue
+
             data = load_json(path)
             results.append(
                 {
                     "seed": seed,
+                    "tag": tag,
                     "path": str(path),
                     "AP": data["AP"],
                     "mTTA": data["mTTA"],
@@ -53,8 +88,10 @@ def main():
             "concept_set": concept_set,
             "concept_count": concept_count,
             "num_completed": len(results),
+            "num_running": len(running),
             "num_expected": len(SEEDS),
-            "missing_seeds": missing,
+            "running_seeds": running,
+            "pending_seeds": pending,
             "results": results,
         }
         if results:
@@ -76,8 +113,8 @@ def main():
         "",
         f"- Seeds tracked: `{', '.join(str(s) for s in SEEDS)}`",
         "",
-        "| Concept set | #Concepts | Seeds done | AP mean+-std | mTTA mean+-std | Missing |",
-        "|---|---:|---:|---:|---:|---|",
+        "| Concept set | #Concepts | Completed | Running | AP mean+-std (completed) | mTTA mean+-std (completed) | Pending |",
+        "|---|---:|---:|---:|---:|---:|---|",
     ]
     for row in rows:
         agg = row.get("aggregate")
@@ -87,10 +124,11 @@ def main():
         else:
             ap = f"{100.0 * agg['AP']['mean']:.2f}% +- {100.0 * agg['AP']['std']:.2f}"
             mtta = f"{agg['mTTA']['mean']:.2f}s +- {agg['mTTA']['std']:.2f}s"
-        missing = ", ".join(str(s) for s in row["missing_seeds"]) or "--"
+        pending = ", ".join(str(s) for s in row["pending_seeds"]) or "--"
         md_lines.append(
             f"| {row['concept_set']} | {row['concept_count']} | "
-            f"{row['num_completed']}/{row['num_expected']} | {ap} | {mtta} | {missing} |"
+            f"{row['num_completed']}/{row['num_expected']} | "
+            f"{row['num_running']} | {ap} | {mtta} | {pending} |"
         )
 
     md_path.write_text("\n".join(md_lines) + "\n")

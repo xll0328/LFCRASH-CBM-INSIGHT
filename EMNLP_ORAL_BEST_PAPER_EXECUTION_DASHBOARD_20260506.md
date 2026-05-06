@@ -99,6 +99,11 @@ Completion criterion:
 - [x] Refreshed live status artifacts:
   `output/emnlp2026_support/dad_ontology_seed_extension_status.md` and
   `output/emnlp2026_support/ontology_size_matched_status.md`.
+- [x] Added size-matched effect-size summarizer and emitted first partial report:
+  `output/emnlp2026_support/ontology_size_matched_effects.md`.
+- [x] Corrected progress accounting to completion-safe semantics
+  (running jobs excluded from completed aggregates) for both DAD extension and
+  size-matched controls.
 - [ ] Human approval of freeze candidate for upload logistics.
 
 ## Stop Conditions

@@ -94,6 +94,7 @@ Deliverable:
 - `paper/emnlp2026/run_ontology_size_matched_controls.sh` (`DONE`)
 - `paper/emnlp2026/build_historical_size_matched_subsets.py` (`DONE`)
 - `paper/emnlp2026/audit_ontology_size_matched_controls.py` (`DONE`)
+- `paper/emnlp2026/summarize_ontology_size_matched_effects.py` (`DONE`)
 - updated `sec_experiments_emnlp.tex` section near Table 6.
 
 ### P7 (must): Reproducibility hardening in main paper
