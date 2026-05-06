@@ -1,6 +1,6 @@
 # EMNLP Review Response Templates
 
-Date: 2026-04-29
+Date: 2026-05-06
 
 Purpose: prepare concise, evidence-grounded response drafts for likely ARR /
 EMNLP reviewer concerns. These are internal templates, not final rebuttal text.
@@ -20,6 +20,8 @@ For response-ready short and formal variants, use
 - Keep actor-policy timing and intervention evidence scoped.
 - Never merge headline, support, search, and diagnostic runs into one
   leaderboard claim.
+- Keep the response reading order explicit: headline evidence, then controlled
+  support, then stress evidence.
 
 ## Template 1: "Why is this an EMNLP paper?"
 
@@ -105,8 +107,8 @@ Key facts:
   `2.07s +/- 0.09s` mTTA.
 - Recovery block: `63.52% +/- 0.81` AP and
   `2.16s +/- 0.25s` mTTA over `6/6` completed runs.
-- Matched full support block: `63.19% +/- 1.21` AP and
-  `2.17s +/- 0.05s` mTTA over `3/3` completed runs.
+- Matched full support block (paper stress summary): `63.18% +/- 1.32` AP and
+  `2.27s +/- 0.20s` mTTA over `3/3` completed runs.
 
 Possible paper change:
 
@@ -181,6 +183,8 @@ Possible paper change:
 
 - If needed, replace "causal" with "structural" or "intervention" in any
   remaining ambiguous sentence.
+- Preserve caption-level evidence-tier tags to prevent pooled-reading
+  misinterpretation.
 
 Do not say:
 

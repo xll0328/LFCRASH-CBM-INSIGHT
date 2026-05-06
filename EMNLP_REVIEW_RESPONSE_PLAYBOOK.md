@@ -1,6 +1,6 @@
 # EMNLP Review Response Playbook
 
-Date: 2026-04-29
+Date: 2026-05-06
 
 Purpose: provide response-ready variants for the most likely ARR / EMNLP
 reviewer concerns. This playbook is internal preparation. It must be adapted to
@@ -15,6 +15,8 @@ evidence, or a promise to run uncompleted GPU work.
 - Add a paper-change commitment only if the change is already made or is a
   small wording/caption clarification that does not require new experiments.
 - Do not broaden claims beyond the current support boards.
+- Keep the evidence-tier reading rule explicit: headline first, then controlled
+  support, then stress evidence.
 
 ## Attack 1: "This is not really an EMNLP paper."
 
@@ -117,8 +119,8 @@ Evidence payload:
   `2.07s +/- 0.09s` mTTA
 - Recovery block: `63.52% +/- 0.81` AP,
   `2.16s +/- 0.25s` mTTA over `6/6` completed runs
-- Matched full support block: `63.19% +/- 1.21` AP,
-  `2.17s +/- 0.05s` mTTA over `3/3` completed runs
+- Matched full support block (paper stress summary): `63.18% +/- 1.32` AP,
+  `2.27s +/- 0.20s` mTTA over `3/3` completed runs
 - `output/emnlp2026_support/dad_hardening_status.md`
 - `output/emnlp2026_support/dad_curriculum_recovery_status.md`
 - DAD discussion in `paper/emnlp2026/sec_experiments_emnlp.tex`
@@ -200,6 +202,8 @@ Safe paper-change commitment:
 
 - Replace ambiguous "causal" phrasing with "structural" or "intervention" if
   a reviewer flags a specific sentence.
+- Keep figure/table captions explicitly tagged as headline / controlled support
+  / stress evidence where applicable.
 
 Forbidden response:
 

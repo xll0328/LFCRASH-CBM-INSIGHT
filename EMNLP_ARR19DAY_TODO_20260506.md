@@ -25,10 +25,10 @@ Completion rule:
 ### Phase B (T-15 to T-9, 2026-05-10 to 2026-05-16): Oral Defense Hardening
 
 - [ ] Do one full human read-through at 100% zoom: page 1, Fig 1, Table 1, appendix opening.
-- [ ] Mark all sentences that can be misread as causal/policy-overclaim.
-- [ ] Apply only minimal wording edits; re-run sanity immediately.
+- [x] Mark all sentences that can be misread as causal/policy-overclaim.
+- [x] Apply only minimal wording edits; re-run sanity immediately.
 - [x] Run a rebuttal dry-run against 5 highest-risk reviewer attacks.
-- [ ] Sync quick-map/playbook/templates with any wording edits.
+- [x] Sync quick-map/playbook/templates with any wording edits.
 
 Completion rule:
 - Reviewer quick responses can answer "why EMNLP" and "what DAD proves" in 2-3 sentences without adding claims.
