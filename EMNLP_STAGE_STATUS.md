@@ -36,6 +36,8 @@ The paper is in an **ARR-ready pre-submission stage**.
 - Phase-2 DAD stability extension has been launched with queued workers:
   `dad_shared_historical_full` and `dad_shared_risk_core_v1` additional seeds
   `{7,11,2718,314,2026}` on GPU `{2,3}`.
+- Virtual pre-review issue closure is tracked in:
+  `EMNLP_VIRTUAL_REVIEW_ACTION_MATRIX_20260506.md`.
 
 ## Upload Candidate Checklist (Human-Gated)
 

@@ -2,6 +2,7 @@
 
 Date: 2026-05-06  
 Target: turn virtual borderline review into acceptance-level revision package
+Action matrix: `EMNLP_VIRTUAL_REVIEW_ACTION_MATRIX_20260506.md`
 
 ## Mission
 
