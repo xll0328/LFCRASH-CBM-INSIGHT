@@ -55,9 +55,9 @@ Figure~\ref{fig:intervention_gallery}:
 the motivated example and bridge view show what the semantic interface looks like per case,
 while the later headline/support blocks and the intervention gallery test whether
 the same behavior survives quantitative, mechanistic, and cross-regime scrutiny.
-In particular, the score trace, named activations, and alert marker in
-Figure~\ref{fig:motivation} map onto the headline comparisons,
-ontology-control blocks, and timing-support diagnostics, respectively.
+The score trace and concept activations in Figure~\ref{fig:motivation} should
+therefore be read as entry points to the quantitative ontology and timing
+blocks, not as standalone evidence.
 
 
 \paragraph{The missing object in accident anticipation: a semantic interface.}
@@ -88,36 +88,18 @@ after-the-fact visualization.
 \paragraph{Scope we claim and do not claim.}
 We make a focused claim: a language-grounded ontology is a governed research
 variable, and that variable changes forecasting behavior in measurable ways under
-matched launchers.
+matched training protocols.
 We do not claim dataset-agnostic superiority, complete policy-level intervention control,
 or that the same ontology choice is optimal across all driving distributions.
 In this paper, CRASH materials are used as support-oriented stress and transfer
 signals and are not pooled into the headline DAD/A3D claims.
 This restraint is central to how we frame both our headline and support evidence.
 
-\paragraph{Claim tiers and reading order.}
-The strongest claim is the governed semantic-interface design.
-A3D is the clean flagship for that claim; DAD remains an explicit stress lens.
-This is why the paper uses a compact read rule: first read the visual protocol
-anchors, then the headline tables, then the support/stress
-evidence blocks that are explicitly marked as bounded in their role.
-
-\paragraph{What this paper asks you to read first.}
-Before any table, read the anchor map in this order:
-\begin{itemize}[leftmargin=1.4em,topsep=2pt,itemsep=1pt]
-  \item Figure~\ref{fig:motivation}: what the interface does on a real case.
-  \item Figure~\ref{fig:vis_bridge}: what the interface carries in CRS and concept geometry.
-  \item Figure~\ref{fig:ontology_evolution_main}: how the ontology is evolved and constrained.
-  \item The protocol map (Table~\ref{tab:protocol_map_main}): how evidence is separated.
-  \item Figure~\ref{fig:ontology_family_main}: ontology governance lens.
-  \item Figure~\ref{fig:intervention_gallery}: representative intervention and timing-intuition cases.
-  \item Figure~\ref{fig:data_efficiency}: breadth check across data regime variation.
-  \item The safety-utility picture (Figure~\ref{fig:safety_utility}): the final position on the AP--mTTA frontier.
-  \item The DAD stress map (Figure~\ref{fig:dad_stress_summary}): where mechanism evidence compresses to a stable frontier band.
-  \item Figure~\ref{fig:cross_dataset_bridge}: CRASH transfer artifacts for stress-mode intuition.
-\end{itemize}
-This order keeps the first read anchored on mechanism and controlled comparison
-rather than on any single mixed table line.
+\paragraph{Reading convention.}
+We keep one compact convention throughout the paper: headline tables establish
+the primary predictive position, controlled ontology comparisons test the
+central semantic-interface claim, and stress analyses (including actor-policy
+timing and CRASH transfer) are reported as bounded support evidence.
 
 \paragraph{Our central insight.}
 In accident anticipation, ontology construction should be treated as part of
@@ -152,7 +134,8 @@ This design allows us to study not only model quality, but also how ontology
 design changes the operating point of an interpretable anticipation system.
 It also lets us separate three evidence questions cleanly: whether the
 interface improves or preserves prediction quality, whether ontology choice
-changes downstream behavior under matched launchers, and whether the paper's
+changes downstream behavior under matched training protocols, and whether the
+release ontology's
 canonical names and semantic families remain reviewable on the language side.
 
 \paragraph{Contributions.}
@@ -160,7 +143,7 @@ canonical names and semantic families remain reviewable on the language side.
   \item We argue that accident anticipation needs an auditable semantic interface, and that ontology construction should be treated as part of the method rather than hidden preprocessing.
   \item We introduce a reproducible multimodal risk-concept construction pipeline that mines, refines, merges, balances, and reviews risk concepts to produce a trainable ontology with explicit provenance, family structure, and canonical naming policy.
   \item We build \method{}, an interpretable anticipation framework that uses this ontology as a concept bottleneck and exposes auditable concept-level risk signals during prediction.
-  \item We show, with matched-launcher controls, that ontology choice changes the AP--mTTA operating point on both DAD and A3D, making the semantic interface itself an empirical variable rather than a cosmetic report.
+  \item We show, under matched training-protocol controls, that ontology choice changes the AP--mTTA operating point on both DAD and A3D, making the semantic interface itself an empirical variable rather than a cosmetic report.
   \item We pair predictive claims with language-side audits (500-frame pseudo-label and paraphrase stress), concept-level governance logs, and full review coverage for the released ontology. Under this protocol, \method{} reaches 93.40\% AP / 4.90s mTTA on A3D and 68.19\% AP on the canonical DAD line, while actor-policy timing is reported as scoped supporting evidence.
   \item We keep the central claim intentionally constrained: \method{} advances semantic-interface methodology and auditing, with the strongest current contribution in interpretability and controlled ontology science rather than policy-level causal intervention.
 \end{itemize}

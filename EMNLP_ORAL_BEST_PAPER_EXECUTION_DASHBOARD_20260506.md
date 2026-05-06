@@ -89,6 +89,9 @@ Completion criterion:
 - [x] Cut and verified a new technical freeze candidate (`ARR20260506T073630Z`).
 - [x] Reran no-change sanity gate for freeze readiness (`OK fatal_count=0`, `2026-05-06T08:06:17Z`).
 - [x] Added upload-day operator sequence runbook (`EMNLP_UPLOAD_DAY_RUNBOOK_20260506.md`).
+- [x] Applied virtual pre-review revision sweep (claim calibration, related-work refresh, semantic-validity table, ontology effect-size wording).
+- [x] Re-ran post-revision sanity gate (`OK fatal_count=0`, `2026-05-06T09:04:24Z`).
+- [x] Launched phase-1 DAD ontology seed-extension block for `perfect_v1` (+5 seeds).
 - [ ] Human approval of freeze candidate for upload logistics.
 
 ## Stop Conditions

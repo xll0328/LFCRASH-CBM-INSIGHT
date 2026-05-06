@@ -23,7 +23,7 @@ The manuscript does not aim for a broad benchmark sweep. Instead, it trades
 dataset breadth for protocol depth across three families: headline comparisons
 \(DAD/A3D\), controlled ontology studies, and mechanism-stress checks.
 Within this scope, we report six ontology cells (DAD/A3D $\times$ three ontology
-variants) under matched launchers, explicit seed/checkpoint rules, trigger-source
+variants) under matched training protocols, explicit seed/checkpoint rules, trigger-source
 transfer checks, and ablation stress checks. This keeps the central claim
 mechanism-centric without inflating scope.
 
@@ -42,34 +42,31 @@ $3{\times}10^{-4}$, cosine decay, batch size 16, and a 150-epoch schedule with
 Actor--Critic warmup followed by a delayed ramp-in of concept-related losses.
 For DAD, the canonical headline result comes from a curriculum-stabilized line
 that delays concept supervision in the earliest stage. For ontology comparison
-experiments, we keep the training launcher fixed and vary only the ontology.
+experiments, we keep the training protocol fixed and vary only the ontology.
+
+\paragraph{Comparability note for cross-paper benchmarks.}
+Several published baselines use different backbones, input preprocessing, or
+training schedules. We therefore use benchmark tables as operating-point
+context, while treating matched in-paper protocol blocks (especially
+Table~\ref{tab:concept_sets}) as the primary evidence for our central claim.
 
 \paragraph{Protocol discipline.}
-This paper separates \emph{canonical headline runs} from \emph{controlled
-support analyses}. We do not pool ontology search runs, support checkpoints,
-intervention assets, and headline tables into one leaderboard narrative. This
-separation is essential because the paper's central claim is about the semantic
-interface. To evaluate that claim fairly, ontology comparison, ablation,
-robustness, and timing-support analyses must be read as distinct evidence
-blocks rather than as a single source of cherry-picked best numbers.
-In practice, we use three evidence levels:
+We separate \emph{headline} results from \emph{controlled support} and
+\emph{stress} analyses. This keeps the central ontology claim measurable and
+prevents mixing heterogeneous checkpoints into one leaderboard narrative. We
+use three evidence levels:
 \begin{itemize}
-  \item \textbf{Headline}: canonical AP/mTTA claims for direct comparison.
-  \item \textbf{Mechanism stress}: matched ontology, ablation, and timing-support runs
-    that test whether the interface behavior is consistent.
+  \item \textbf{Headline}: canonical AP/mTTA comparisons.
+  \item \textbf{Controlled support}: matched ontology and ablation blocks under one training protocol.
+  \item \textbf{Stress}: timing-transfer and robustness diagnostics that define boundaries.
   \item \textbf{Language-side audits}: pseudo-label concentration, paraphrase
     robustness, and family-level governance checks.
 \end{itemize}
-This separation prevents support evidence from being interpreted as a pooled
-leaderboard shortcut.
-\paragraph{Reading discipline.}
-Each table and figure in this section is therefore tagged as either
-headline, controlled support, or stress evidence. Reviewers should read in this
-order: headline first, then controlled support, then stress.
+The role of each major result block is summarized in
+Table~\ref{tab:protocol_map_main}.
 \begin{table}[t]
-\caption{[Reading-map evidence] Protocol and evidence map for the main paper. Headline prediction,
-controlled support, and ontology science families are separated so the table is
-not mistaken for one pooled leaderboard.}
+\caption{Protocol and evidence map for the main paper. It separates headline prediction
+from controlled support blocks so the table is not mistaken for one pooled leaderboard.}
 \label{tab:protocol_map_main}
 \centering\scriptsize
 \setlength{\tabcolsep}{2.5pt}
@@ -80,7 +77,7 @@ Paper item & Recipe family & Checkpoint rule & Seeds & Score source & Role \\
 \midrule
 Table~\ref{tab:dad} & DAD curriculum line & canonical endpoint & 1 & classifier & DAD headline \\
 Table~\ref{tab:a3d} & shared default line & canonical endpoint & 1 & classifier & A3D headline \\
-Table~\ref{tab:concept_sets} & shared ontology launcher & one run per ontology/data pair & 1 each & classifier & ontology science \\
+Table~\ref{tab:concept_sets} & shared ontology protocol & one run per ontology/data pair & 1 each & classifier & ontology science \\
 Table~\ref{tab:trigger_compare} & support checkpoints & matched checkpoint eval & 1 each & classifier / actor & timing support \\
 Table~\ref{tab:ablation} & support protocol & fixed support line & 1 & classifier & component isolation \\
 DAD robustness paragraph & clean curriculum family & fixed epochs 25/30 & 3 & classifier & sensitivity diagnostic \\
@@ -88,89 +85,12 @@ DAD robustness paragraph & clean curriculum family & fixed epochs 25/30 & 3 & cl
 \end{tabular}%
 }
 \end{table}
-\paragraph{Reader-oriented map.}
-To avoid leaderboard-style ambiguity, each protocol row now has one role and one
-checkpointing rule. Reviewers can therefore read the paper as: (i) headline
-comparisons, then (ii) controlled mechanism checks, then (iii) language-side
-governance audits.
-The motivated case in Figure~\ref{fig:motivation} follows the same map: its
-risk trace points to headline classifier evidence, its concept activations
-point to ontology and language-side support evidence, and its alert marker
-points to timing diagnostics rather than deployment-level policy validation.
-
-\paragraph{First-read visual route.}
-The fastest safe reading path is:
-\begin{enumerate}
-  \item Figure~\ref{fig:motivation}: what a semantic interface looks like in one crash case.
-  \item Figure~\ref{fig:vis_bridge}: CRS and concept-space bridge for intuition.
-  \item Figure~\ref{fig:framework} and Figure~\ref{fig:concept_pipeline}: the interface object and governance construction.
-  \item Figures~\ref{fig:ontology_evolution_main} and
-  \ref{fig:ontology_family_main}: ontology governance and family coverage before reading protocol claims.
-  \item Table~\ref{tab:protocol_map_main}: why each result block is headline vs support vs stress.
-  \item Figure~\ref{fig:experiment_portfolio}: protocol coverage, completion depth, and AP--mTTA frontier in one dashboard.
-  \item Figure~\ref{fig:data_efficiency}: data-efficiency behavior on CRASH, DAD, and A3D as an additional breadth lens.
-  \item Figure~\ref{fig:safety_utility}: where the clean flagship lives on the AP--mTTA frontier.
-  \item Figure~\ref{fig:cross_dataset_bridge}: CRASH qualitative transfer bridge for stress-mode interpretation.
-  \item Figure~\ref{fig:dad_stress_summary}: how DAD stress evidence changes across protocol families.
-  \item Figure~\ref{fig:intervention_gallery}: dual-intervention gallery for support-only intervention intuition.
-  \item Figure~\ref{fig:review_map}: visual map that maps each numeric claim into the paper's role taxonomy.
-\end{enumerate}
-This route keeps interpretability and mechanism claims from collapsing into a
-single leaderboard list.
-\paragraph{Claim-tier reading rule.}
-For a compact read, the first five items and Figure~\ref{fig:review_map} fix
-the claim tier; the remaining figures provide optional depth after that tier is
-clear.
-
-\paragraph{Execution depth check.}
-To address limited experimental breadth directly, this paper reports
-a layered protocol surface rather than a dense leaderboard crawl. We include one
-canonical DAD headline run, one canonical A3D headline run, a 3-seed A3D
-auditing block, a 6-cell ontology-control block (3 seeds \(\times\) 2 datasets
-\(\times\) 3 ontology sets), and controlled support/stress blocks on DAD and
-A3D (full support, trigger source, ablations, and mechanism hardening). The
-low-regularization follow-up block is also complete with 3/3 runs. Each result
-family therefore has a unique evidence role and cannot be repurposed as a
-single headline winner.
-\paragraph{Evidence density by protocol family.}
-To make experimental depth auditable, the evaluation makes depth and
-breadth explicit in three orthogonal axes:
-\begin{itemize}
-  \item \textbf{Horizontal axis (dataset):} DAD, A3D, and CRASH (CRASH stress-only).
-  \item \textbf{Vertical axis (ontology):} three ontology variants under matched launchers.
-  \item \textbf{Depth axis (seed/checkpoint protocol):} singleton headlines, multi-seed support,
-    and seed-synchronized stress/transfer checks.
-\end{itemize}
-Table~\ref{tab:evidence_density} summarizes the minimum experimental scale that
-supports this framing.
-\paragraph{Evidence accounting (minimum protocol scope).}
-The table reports the minimum evidence bundle for each claim tier; additional
-archival diagnostics and additional protocol variants remain supportive but are
-not mixed into headline claims.
-\begin{table}[t]
-  \centering
-  \caption{[Reading-map evidence] Core execution scale behind the evidence tiers.}
-  \label{tab:evidence_density}
-  \setlength{\tabcolsep}{2pt}
-  \small
-  \begin{tabular}{p{0.28\linewidth}p{0.21\linewidth}p{0.43\linewidth}}
-    \toprule
-    Protocol family & Dataset scope & Minimum independent evidence points \\
-    \midrule
-    Headline baselines & DAD, A3D & 1 canonical run each (1 seed), matched launcher \\
-    Headline stability (A3D) & A3D & 3-seed stability block \\
-    Controlled ontology support & DAD, A3D & 18 ontology-cell endpoints (2 datasets \(\times\) 3 ontologies \(\times\) 3 seeds) \\
-    Mechanism stress / hardening & DAD & at least 3 runs per stress block (3 checked blocks, support-only role) \\
-    Trigger-source transfer checks & DAD, A3D & 6 same-family support checkpoints \\
-    Data-efficiency stress check & DAD, A3D, CRASH & 4 data fractions each, one protocol line each \\
-    \bottomrule
-  \end{tabular}
-\end{table}
-\par
-This density does not claim dataset-agnostic universality. It claims a controlled
-research design: one flagship dataset pair for generality and timing claims
-(DAD/A3D), plus one stress dataset for transfer intuition (CRASH), with all
-other claims routed to explicit evidence tiers.
+\paragraph{Execution depth.}
+Beyond singleton headline rows, we report a completed 18-cell seeded ontology
+block (DAD/A3D $\times$ 3 ontology variants $\times$ 3 seeds), A3D headline
+stability checks, DAD stress/hardening blocks, and trigger-source transfer
+audits. This does not imply dataset-agnostic universality; it establishes a
+controlled evidence surface for the semantic-interface claim.
 \paragraph{Architecture-extension probes (support-only).}
 Beyond ontology and ablation families, we track two bounded architecture probes
 under the same ontology protocol: a DAD RWKV temporal replacement family and an
@@ -179,17 +99,6 @@ A3D hidden-width scaling family (\texttt{h\_dim=384}), each with
   support file.
 Until each family reaches completed 3-run aggregates, they remain support-only
 execution evidence and are not merged into headline tables.
-\begin{figure*}[t]
-\centering
-\includegraphics[width=0.98\textwidth]{../figures/insight_fig9_experiment_portfolio.pdf}
-\caption{[Reading-map evidence] Experiment portfolio map used for claim-tier reading. Panel A
-shows completion ratios for the controlled ontology matrix (DAD/A3D $\times$
-three ontology variants). Panel B summarizes protocol depth by evidence family.
-Panel C places headline, ontology, stress, and architecture-extension runs on
-the same AP--mTTA plane. The figure makes execution coverage explicit without
-mixing support evidence into headline claims.}
-\label{fig:experiment_portfolio}
-\end{figure*}
 \subsection{Visual evidence upgrade: intervention gallery (support-only)}
 \label{sec:intervention-gallery}
 \begin{figure*}[t]
@@ -301,7 +210,7 @@ pooled with headline DAD/A3D tables.
 \fbox{%
 \begin{minipage}[t]{0.31\textwidth}
 \textbf{Controlled support evidence}\\
-\textbf{Use:} test ontology/mechanism under matched launchers\\
+\textbf{Use:} test ontology/mechanism under matched protocols\\
 \textbf{Main artifacts:} Table~\ref{tab:concept_sets}, Table~\ref{tab:ablation}, Figure~\ref{fig:qual_case_stress}\\
 \textbf{Reading:} ontology choice is an empirical variable; support blocks are not pooled as leaderboard claims.
 \end{minipage}}
@@ -319,6 +228,36 @@ and one interpretation tier.}
 \label{fig:review_map}
 \end{figure*}
 
+\begin{table}[t]
+\caption{[Controlled support evidence] Semantic-validity diagnostics for the
+released ontology (DAD-500 audit slice). These metrics support inspectability
+and partial semantic stability, but do not establish full causal faithfulness.}
+\label{tab:semantic_validity}
+\centering\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{p{0.27\linewidth}p{0.21\linewidth}p{0.44\linewidth}}
+\toprule
+Diagnostic block & Key statistic & Reading \\
+\midrule
+Pseudo-label concentration (top-$m$) &
+top-1: 1.00 family/frame, 5.48\% mass; top-3: 2.34 families/frame, 16.02\% mass;
+top-10: 5.14 families/frame, 51.46\% mass &
+top-3 remains a practical middle point between over-concentrated and overly
+diffuse supervision. \\
+Canonical paraphrase stability &
+text cosine: 0.939; frame-score correlation: 0.887; top-10 overlap: 0.525;
+mean absolute score diff: 0.0134 &
+canonical names are reasonably stable under light wording variation, with
+weaker behavior on abstract paraphrases. \\
+Governance coverage and review traceability &
+611 $\rightarrow$ 81 post-polish candidates; 80/80 released concepts reviewed;
+9 families covered &
+the ontology is traceable and governed as a released asset rather than an
+unlogged phrase pool. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 \paragraph{Pseudo-label sensitivity.}
 We also audited the top-$m$ CLIP pseudo-label recipe on a larger 500-frame DAD
 slice from the paper ontology. The main takeaway remains pragmatic: top-3 is a
@@ -331,7 +270,7 @@ balance between coverage and noise rather than as a claim of exact semantic
 calibration.
 
 \paragraph{Verbalization robustness.}
-We also measured whether canonical paper-facing concept names remain stable
+We also measured whether canonical release-ontology concept names remain stable
 under light paraphrase changes. Across 12 canonical concepts with two variants
 each, canonical and variant prompts achieve mean text cosine 0.939, mean
 frame-score correlation 0.887, mean top-10 frame overlap 0.525, and mean
@@ -343,10 +282,12 @@ are visibly weaker.
 Taken together, the pseudo-label and paraphrase audits address two different
 language-side failure modes. The top-$m$ audit checks whether the semantic
 bootstrap is too concentrated or too diffuse, while the paraphrase audit checks
-whether the paper-facing ontology is brittle to minor wording changes. Together
+whether the release ontology is brittle to minor wording changes. Together
 with the family-balance and merge-provenance assets in the appendix, these
 analyses justify treating the ontology as a governed language interface rather
-than as a hidden prompt artifact.
+than as a hidden prompt artifact. At the same time, we do \emph{not} treat
+these diagnostics as proof of full concept faithfulness; they are support
+evidence for inspectability and semantic stability under bounded tests.
 
 \subsection{Interpretability Taxonomy of Prior Work}
 
@@ -368,6 +309,8 @@ DRIVE~\citep{ref2}           & Grad-CAM & RL-trained attention & post-hoc & 31M\
 DSTA~\citep{ref17}           & \texttimes & \texttimes & -- & 180M\\
 DAA-GNN~\citep{ref32}        & \texttimes & \texttimes & -- & 183M\\
 W3AL~\citep{liao2024and}     & verbal localisation & verbal timing & post-hoc & 7B\\
+DE$^2$B~\citep{guan2025domain} & text-conditioned dual branch & timing score stream & partial & --\\
+RARE~\citep{song2025rare}    & object-attention reuse & real-time score stream & partial & --\\
 CRASH~\citep{liao2024crash}  & \texttimes & \texttimes & -- & 26M\\
 CCAF-Net~\citep{liu2025ccaf} & \texttimes & \texttimes & -- & 191M\\
 LATTE~\citep{ZHANG2025103173}& \texttimes & \texttimes & -- & 45M\\
@@ -495,7 +438,7 @@ $\Delta$ vs.\ CRASH & $-2.60\%$ & $+14.8\%$ & -- & -- & --\\
 }
 \end{table}
 
-On A3D, \method{} achieves a stronger and cleaner paper-facing result. The
+On A3D, \method{} achieves a stronger and cleaner flagship result. The
 model improves mTTA over CRASH while maintaining competitive AP, which places
 it in a favorable interpretable region of the accuracy--timeliness plane.
 Because A3D offers more progressive hazard development than DAD, it also serves
@@ -516,7 +459,7 @@ under scrutiny.
 \includegraphics[width=0.98\textwidth]{../figures/insight_fig5_safety_utility.pdf}
 \caption{[Reading bridge: headline + controlled support] Safety--utility view under semantic-interface constraints. Literature
 baselines and headline \method{} points are shown as table values, while the
-colored ontology markers show three-seed matched-launcher aggregates with
+colored ontology markers show three-seed matched-protocol aggregates with
 horizontal AP and vertical mTTA standard-deviation intervals. The figure makes
 the evidence tiers explicit: \method{} occupies a competitive interpretable
 operating point, and ontology choice measurably moves the AP--mTTA frontier.}
@@ -531,8 +474,8 @@ auditable semantic layer.
 
 \begin{table*}[t]
 \caption{[Controlled support evidence] Matched ontology comparison under the
-shared launcher protocol. Only
-the ontology source varies; the training launcher family is held fixed.}
+shared training protocol. Only
+the ontology source varies; the training-protocol family is held fixed.}
 \label{tab:concept_sets}
 \centering\small
 \begin{tabular}{llccccc}
@@ -561,17 +504,28 @@ experimental variable that changes downstream behavior. This is the paper's
 most direct evidence that language-side design decisions survive contact with
 model training: changing canonical names, merge policy, and family structure at
 the ontology level changes the downstream operating point under one matched
-launcher family.
+training-protocol family.
 
 This claim is now backed by a complete three-seed extension over all six
 dataset--ontology cells. Across the matched ontology block, all $18/18$
-recommended seeded runs are finished. On A3D, the paper-facing discovered
+recommended seeded runs are finished. On A3D, the released discovered
 ontology remains competitive under this aggregate view
 ($93.35\%\pm0.49$ AP, $8.71\pm0.77$~s mTTA), so the ontology effect is not
 resting on one favorable seed. On DAD, however, the discovered ontology shows
 substantially larger variance ($60.11\%\pm7.40$ AP), which is exactly why we
 continue to describe DAD as the fragile side of the paper rather than trying
 to oversell a uniform robustness story.
+
+\paragraph{Effect-size view (seed-aggregated).}
+To make the ontology claim explicit, we also report pairwise aggregate
+differences with normal-approximate 95\% intervals. On DAD, risk-core manual
+vs.\ historical full is $+1.36$ AP points (CI $[-0.72, +3.43]$), while perfect
+v1 vs.\ historical full is $-4.05$ AP points (CI $[-12.48, +4.38]$) with
+$+0.42$s mTTA (CI $[-0.35, +1.18]$). On A3D, perfect v1 vs.\ historical full
+is $+1.67$ AP points (CI $[-0.03, +3.36]$), and risk-core manual vs.\ perfect
+v1 shows a timing shift of $-1.65$s mTTA (CI $[-3.04, -0.26]$). The practical
+reading is not that one ontology uniformly dominates; the effect is
+dataset-dependent, and DAD remains the high-variance regime.
 
 \subsection{Current Timing and Intervention Evidence}
 
@@ -628,7 +582,7 @@ policy-level intervention timing account lies beyond the current paper.
 
 \subsection{Ontology Quality as Evidence, Not Decoration}
 
-The ontology work is not merely qualitative preprocessing. The paper-facing
+The ontology work is not merely qualitative preprocessing. The release
 artifacts record a source pool of more than 600 candidate phrases, an
 order-of-magnitude compression to a paper-ready ontology of about 80 concepts,
 family-balance audits across nine semantic families, canonical merge examples,
@@ -641,7 +595,7 @@ is central: the contribution is not only that the model has concepts, but that
 the exposed semantic layer is named, canonicalized, reviewable, and tied to
 explicit provenance.
 
-Concretely, the paper-facing audit trail compresses 611 mined phrases into a
+Concretely, the release audit trail compresses 611 mined phrases into a
 post-polish pool of 81 canonical candidates and a finalized release of 80
 reviewed concepts. The retained vocabulary is distributed across nine explicit
 families, and the current human-review log covers all 80 retained concepts with
@@ -653,7 +607,7 @@ merge provenance can be inspected directly.
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.98\linewidth]{../figures/insight_fig_concept_family_coverage.pdf}
-\caption{[Language-side support evidence] Family coverage in the paper-facing ontology. The polished concept
+\caption{[Language-side support evidence] Family coverage in the released ontology. The polished concept
 set deliberately redistributes capacity toward accident-relevant semantic
 families, making the ontology easier to audit and more aligned with the target
 task than a broad ungoverned phrase pool.}
@@ -667,7 +621,7 @@ task than a broad ungoverned phrase pool.}
 semantic bottleneck is not fixed once and for all: we start from a compact
 human prior, consolidate noisy large-vocabulary proposals through canonical
 merge and family balancing, and then finalize a reviewed ontology that can be
-used consistently in both experiments and paper-facing audits.}
+used consistently in both experiments and release audits.}
 \label{fig:ontology_evolution_main}
 \end{figure*}
 
@@ -763,7 +717,7 @@ $96.03\%$, but it simultaneously shortens mTTA to $4.27$~s and TTA@R80 to
 $3.70$~s from the full line's $4.44$~s. We therefore read A3D as evidence that
 the semantic interface is most convincing as an operating-point design: some
 auxiliary terms can trade AP against timing, but removing the bottleneck itself
-still weakens the cleaner paper-facing support family.
+still weakens the cleaner release-ontology support family.
 
 From an efficiency perspective, \method{} remains in a small-model regime
 (about 30M parameters), far below several strong but non-interpretable
@@ -783,7 +737,7 @@ fragile support rather than a settled high-confidence mechanism statement.
 \begin{figure*}[t]
   \centering
   \includegraphics[width=0.985\textwidth]{../figures/insight_fig_concept_case_study.pdf}
-  \caption{\textbf{Canonical merge examples from the paper-facing ontology.}
+  \caption{\textbf{Canonical merge examples from the released ontology.}
   The final ontology is not just shorter than the raw proposal pool. It
   preserves risk semantics while consolidating wording noise into canonical,
   intervention-ready concepts such as \emph{visibility reduction},

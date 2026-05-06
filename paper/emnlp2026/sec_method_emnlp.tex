@@ -84,7 +84,7 @@ over maximal lexical granularity.
 \paragraph{Stage 4: family balancing and light human review.}
 The ontology is further polished through family-level coverage auditing,
 duplicate-cluster consolidation, and a light human review pass. The result is a
-\emph{paper-facing semantic interface}: compact enough to present clearly, rich
+\emph{release ontology}: compact enough to present clearly, rich
 enough to retain major accident precursor families, and explicit enough to
 support provenance tracking, case studies, and matched ontology comparisons.
 
@@ -95,6 +95,19 @@ used only for figures. It is encoded and deployed as the actual bottleneck
 vocabulary of the model, so ontology construction is evaluated not just by
 semantic plausibility but by whether the resulting interface survives contact
 with downstream learning.
+
+\paragraph{Operational curation rules used in this release.}
+The current release follows explicit rules recorded in the ontology audit
+artifacts. Starting from a 611-concept source pool, we apply:
+\begin{itemize}[leftmargin=1.4em,topsep=2pt,itemsep=1pt]
+  \item \textbf{risk-first keep/drop filtering}: remove generic scene-status phrases and weakly informative captions;
+  \item \textbf{duplicate-cluster consolidation}: prioritize high-overlap clusters (visibility, pedestrian-crossing, and merge-related phrases) and keep canonical representatives;
+  \item \textbf{family-balance constraints}: redistribute concepts to preserve coverage across nine semantic families instead of frequency-dominated pools;
+  \item \textbf{canonical naming policy}: short reusable risk phrases favored over awkward ``potential/presence'' variants;
+  \item \textbf{light human review acceptance}: wording-level refinements only, with ontology structure preserved.
+\end{itemize}
+This yields an 81-concept post-polish pool and an 80-concept reviewed release,
+with merge provenance and family metadata tracked in versioned assets.
 
 \paragraph{What makes the interface language-grounded and governed.}
 The paper's claim does not rest on any single multimodal model being perfectly

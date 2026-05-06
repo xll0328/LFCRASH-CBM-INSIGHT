@@ -26,6 +26,13 @@ The paper is in an **ARR-ready pre-submission stage**.
   `bash paper/emnlp2026/verify_arr_freeze.sh ARR20260506T073630Z`.
 - Upload-day operations are now codified in:
   `EMNLP_UPLOAD_DAY_RUNBOOK_20260506.md`.
+- Virtual pre-review sprint revision was applied on 2026-05-06 with:
+  narrative compression, matched-protocol wording cleanup, explicit
+  seed-aggregated ontology effect-size reporting, and a semantic-validity table.
+- Latest post-revision sanity rerun reports `OK fatal_count=0` at
+  `2026-05-06T09:04:24Z`.
+- Phase-1 DAD stability extension has been launched:
+  `dad_shared_perfect_v1` additional seeds `{7,11,2718,314,2026}` (running).
 
 ## Upload Candidate Checklist (Human-Gated)
 
