@@ -7,6 +7,7 @@ import json
 import re
 from datetime import datetime, timezone
 from pathlib import Path
+from subprocess import run
 
 
 PAPER = Path(__file__).resolve().parent
@@ -50,6 +51,13 @@ LEGACY_RISK_PATTERNS = [
     r"75-80%\+",
     r"Full convergence expected",
     r"SOTA among all",
+]
+
+HARD_CASE_OVERCLAIM_PATTERNS = [
+    r"hard-case symmetry is solved",
+    r"hard case symmetry is solved",
+    r"hard-case symmetry has been established",
+    r"hard case symmetry has been established",
 ]
 
 
@@ -120,6 +128,49 @@ def main() -> int:
             add_result(results, "FATAL", "scope language", f"missing required phrase: {phrase}")
         else:
             add_result(results, "OK", "scope language", phrase)
+
+    # Hard-case symmetry gate checks
+    gate_script = PAPER / "validate_hard_case_symmetry_gate.py"
+    if not gate_script.exists():
+        add_result(results, "FATAL", "hard-case gate", "missing validate_hard_case_symmetry_gate.py")
+    else:
+        cp = run(
+            ["python3", str(gate_script)],
+            cwd=str(ROOT),
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if cp.returncode != 0:
+            detail = (cp.stderr.strip() or cp.stdout.strip() or f"exit={cp.returncode}")[:300]
+            add_result(results, "FATAL", "hard-case gate", f"gate script failed: {detail}")
+        else:
+            summary_path = PAPER / "hard_case_symmetry_gate_summary.json"
+            if not summary_path.exists():
+                add_result(results, "FATAL", "hard-case gate", "missing hard_case_symmetry_gate_summary.json")
+            else:
+                summary = json.loads(read_text(summary_path))
+                s = summary.get("status", {})
+                if s.get("pair_row_count", 0) == 0:
+                    add_result(results, "WARN", "hard-case gate", "no paired rows found in symmetry audit table")
+                elif s.get("gate_ready", False):
+                    add_result(results, "OK", "hard-case gate", "manual pair gate marked ready")
+                else:
+                    add_result(
+                        results,
+                        "WARN",
+                        "hard-case gate",
+                        (
+                            "pending manual confirmation: "
+                            f"pair_rows={s.get('pair_row_count', 0)}, "
+                            f"auto_suggested={s.get('auto_suggested_pair_rows', 0)}, "
+                            f"confirmed_with_notes={s.get('confirmed_pair_rows_with_notes', 0)}"
+                        ),
+                    )
+
+    for pattern in HARD_CASE_OVERCLAIM_PATTERNS:
+        if re.search(pattern, active_space, re.IGNORECASE):
+            add_result(results, "FATAL", "hard-case overclaim", f"forbidden phrase found: {pattern}")
 
     legacy_path = ROOT / "paper" / "NEURIPS2026_full_draft.md"
     if legacy_path.exists():

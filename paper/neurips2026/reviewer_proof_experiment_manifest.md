@@ -28,6 +28,7 @@ These runs are not headline replacements; they quantify robustness.
 - Add a DAD hard-case symmetry audit table (predefined scenario families, paired success/failure counts, fixed checkpoint rule)
 - Use `paper/neurips2026/build_dad_hard_case_symmetry_audit.py` to refresh `paper/neurips2026/dad_hard_case_symmetry_audit.md` before each claim-evidence freeze
 - Manually validate auto-suggested mixed pairs in `paper/neurips2026/dad_hard_case_symmetry_audit.md` and replace heuristic pair IDs/outcomes with reviewer-confirmed labels before promoting any symmetry claim
+- Run `paper/neurips2026/validate_hard_case_symmetry_gate.py`; treat `gate_ready=false` as a block on any strong hard-case symmetry claim
 
 ## Block C — Controlled ontology block
 Use `controlled_ontology_matrix.md` and the shared launcher.

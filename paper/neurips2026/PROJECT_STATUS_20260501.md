@@ -103,9 +103,15 @@ remain bounded.
 - Added `paper/neurips2026/dad_hard_case_pair_review_draft_20260506.md` as a
   provisional reviewer-facing readout for the four auto-suggested mixed pairs,
   explicitly marked as requiring human confirmation before claim promotion.
+- Added a machine-check hard-case claim gate:
+  `paper/neurips2026/validate_hard_case_symmetry_gate.py` now emits
+  `paper/neurips2026/hard_case_symmetry_gate_summary.json` and is wired into the
+  NeurIPS sanity checker. Current gate status is pending
+  (`pair_rows=8`, `auto_suggested=8`, `confirmed_with_notes=0`), so stronger
+  hard-case symmetry claims remain blocked.
 - Rebuilt `paper/neurips2026/insight_main.pdf` and reran the NeurIPS sanity
-  gate. Latest status at 06:03 UTC is `OK fatal_count=0 warn_count=1`
-  (only expected legacy-draft warning remains).
+  gate. Latest status at 06:19 UTC is `OK fatal_count=0 warn_count=2`
+  (legacy-draft warning + expected hard-case gate pending warning).
 
 ## Immediate Safe Next Actions
 

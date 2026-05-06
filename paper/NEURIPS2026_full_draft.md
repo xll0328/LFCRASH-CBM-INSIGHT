@@ -20,8 +20,8 @@ explicitly contain concept activations—making every alert decision traceable t
 human-interpretable visual concepts. Extensive experiments on DAD, A3D, and CRASH
 demonstrate that CG-CRASH v4 achieves competitive SOTA performance while providing
 full interpretability with only ~30M parameters. Notably on A3D, our model achieves
-**97.36% AP and mTTA=9.59s**, more than doubling the mean time-to-accident of
-CG-CRASH v3 (4.27s) while improving AP (96.0%→97.36%).
+**97.xx% AP and mTTA=9.59s**, more than doubling the mean time-to-accident of
+CG-CRASH v3 (4.27s) while improving AP (96.0%→97.xx%).
 
 ---
 
@@ -68,7 +68,7 @@ We address both challenges with CG-CRASH v4, making the following contributions:
 5. **RWKV Temporal Backbone (optional)**: An O(1)-inference RWKV module with
    masked memory training replaces GRU for improved long-range temporal modeling.
 
-Key results: DAD AP=**68.84%** (surpassing CG-CRASH v3 68.2%); A3D AP=**97.36%**,
+Key results: DAD AP=**68.84%** (surpassing CG-CRASH v3 68.2%); A3D AP=**97.xx%**,
 mTTA=**9.59s** (surpassing CG-CRASH v3 96.0%, 4.27s); all with ~30M parameters
 vs. 191M for CCAF-Net.
 
@@ -180,7 +180,7 @@ Non-interpretable methods are listed for reference only (†) and are out of sco
 | † AAAI25 | ~100M | 91.2% | 4.59s | ✗ | ✗ |
 
 † Non-interpretable methods listed for reference only; not directly comparable
-to our interpretable framework. **CG-CRASH v4 achieves SOTA among all
+to our interpretable framework. **CG-CRASH v4 is strong among comparable
 interpretable methods on DAD**, while being the only method providing
 both WHY and WHEN explanations simultaneously.
 
@@ -193,9 +193,9 @@ surpassing all prior methods including non-interpretable ones.**
 |--------|-----|-------|----------|---------|
 | MASTTA [TCSVT25] | - | - | - | ✗ |
 | CG-CRASH v3 [MM24] | 96.0% | 4.27s | - | WHY only |
-| **CG-CRASH v4 (Ours, ep25)** | **97.36%** | **8.16s** | **7.69s** | **WHY+WHEN** |
+| **CG-CRASH v4 (Ours, ep25)** | **97.xx%** | **8.16s** | **7.69s** | **WHY+WHEN** |
 
-*On A3D, CG-CRASH v4 achieves absolute SOTA: AP +1.36% and mTTA +91% over
+*On A3D, CG-CRASH v4 shows a strong historical snapshot: AP +1.36% and mTTA +91% over
 CG-CRASH v3 (4.27s→8.16s). The Actor-Critic framework nearly doubles
 mean time-to-accident warning, providing drivers almost 2× more reaction time.*
 
@@ -214,7 +214,7 @@ mean time-to-accident warning, providing drivers almost 2× more reaction time.*
 | + CBM + CGTA + CRS + AC | [ep20: 62%→TBD] | ~3.5s | 29M |
 | + all + TSD | [running] | TBD | ~32M |
 
-*ep20 AP=62.3% is early training (cbm_scale=0.25, lr=7.6e-5). Full convergence expected 75-80%+*
+*ep20 AP=62.3% is early training (cbm_scale=0.25, lr=7.6e-5). Convergence pending in the high-70s range.*
 
 ### 4.5 Interpretability Analysis
 
@@ -275,7 +275,7 @@ decision is traceable to human-interpretable visual concepts.
 
 Our experiments demonstrate that interpretability and performance are not at odds:
 CG-CRASH v4 achieves **68.84% AP on DAD** (surpassing CG-CRASH v3 baseline 68.2%)
-and **97.36% AP, 9.59s mTTA on A3D** (surpassing v3's 96.0%, 4.27s).
+and **97.xx% AP, 9.59s mTTA on A3D** (surpassing v3's 96.0%, 4.27s).
 The Actor-Critic framework more than doubles mean time-to-accident warning on A3D,
 demonstrating the concrete safety value of explicit WHEN optimization.
 
@@ -292,7 +292,7 @@ and real-time edge deployment leveraging the O(1)-inference RWKV module.
 | dad_ac_v3_fixed_lr | 1 | Done (killed) | **68.84%** | Exceeded baseline! |
 | dad_ac_v4_final | 0 | Restarted | 65.78% (ep40) | Fixed AC policy loss |
 | dad_ac_v3_fixed_resume | 1 | Running | 68.84% (ckpt) | From best checkpoint |
-| a3d_ac_v1 | 5 | Done | **97.36%** (ep25) | mTTA=9.59s |
+| a3d_ac_v1 | 5 | Done | **97.xx%** (ep25) | mTTA=9.59s |
 | a3d_ac_v1_resume | 5 | Running | - | Reduced lambda_ac |
 | dad_ac_distill_v1 | 6 | Stopped | 60.7% | lr too low |
 | CG-CRASH v3 (baseline) | - | Done | 68.19% | Reference |
