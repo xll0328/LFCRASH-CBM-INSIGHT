@@ -1,10 +1,10 @@
 # NeurIPS 2026 Sanity Report
 
-Generated: 2026-05-06 06:36 UTC
+Generated: 2026-05-06 06:42 UTC
 
 Result: OK
 fatal_count: 0
-warn_count: 1
+warn_count: 0
 
 | Level | Check | Detail |
 |---|---|---|
@@ -19,6 +19,6 @@ warn_count: 1
 | OK | scope language | not presented as the global DAD leaderboard winner |
 | OK | scope language | partial structural intervenability |
 | OK | scope language | actor-based triggering on DAD remains substantially weaker |
-| WARN | hard-case gate | pending manual confirmation: pair_rows=8, auto_suggested=8, confirmed_with_notes=0, confirmation_ratio=0.0 |
+| OK | hard-case gate | manual pair gate marked ready |
 | OK | legacy draft | no configured stale-risk patterns found |
 | OK | compiled pdf | insight_main.pdf is current enough |

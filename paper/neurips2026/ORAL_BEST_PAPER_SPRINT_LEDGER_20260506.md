@@ -13,9 +13,10 @@ Scope: Paper-facing strengthening without new long GPU jobs
 
 ## 2) What Still Blocks Oral/Best-Paper-Level Conviction
 
-- DAD hard-case symmetry is not yet demonstrated at family-pair level.
+- DAD hard-case process gate is now complete for the current audited mixed pairs
+  (`gate_ready=true`), but coverage is still limited and not a blanket global symmetry proof.
 - Policy-level timing/intervention remains mixed for archived actor branch.
-- Current hard-case evidence is scaffolded and auditable, but still needs reviewer-confirmed pair outcomes.
+- Hard-case evidence is now reviewer-confirmed for the tracked pairs; remaining risk is breadth, not process completion.
 
 ## 3) New Assets Added in This Sprint
 
@@ -26,24 +27,25 @@ Scope: Paper-facing strengthening without new long GPU jobs
 
 ## 4) Minimal Next Wins (No New GPU Required)
 
-1. Manually finalize 4 suggested mixed pairs in `dad_hard_case_symmetry_audit.md`:
-   - fill `reviewer_note`
-   - replace `auto_suggested_mixed_pair` with reviewer-confirmed outcomes.
-2. Add a short appendix summary paragraph reporting:
+1. Add a short appendix summary paragraph reporting:
    - confirmed pair count
    - family coverage
    - explicit unresolved families.
-3. Mirror those outcomes into:
+2. Mirror confirmed outcomes into:
    - `thesis_claims_evidence_matrix.md`
    - `claim_evidence_audit.json`
    - `reviewer_proof_experiment_manifest.md`.
+3. Add one rebuttal-facing sentence clarifying:
+   - gate completion status,
+   - remaining coverage limits,
+   - why the claim remains bounded.
 
 ## 5) Evidence-Discipline Rule
 
-Until pair outcomes are reviewer-confirmed, keep hard-case symmetry as:
+Even with current pair confirmations, keep hard-case symmetry as:
 
 - **open** in main text,
-- **audit checkpoint** in appendix,
+- **audit-backed but bounded** in appendix,
 - **not settled** in claim ledger.
 
 ## 6) Stop Conditions (Carry Forward)

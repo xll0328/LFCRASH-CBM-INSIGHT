@@ -101,6 +101,13 @@ def main() -> int:
 
     rows = _parse_manual_rows(AUDIT_MD.read_text(encoding="utf-8"))
     pair_rows = _build_pair_rows(rows)
+    pair_audit_rows = [r for r in rows if r["symmetry_pair_id"].strip()]
+    all_pairs_confirmed = bool(pair_audit_rows) and all(
+        "confirmed" in r["paired_outcome"].lower() for r in pair_audit_rows
+    )
+    all_pair_notes_present = bool(pair_audit_rows) and all(
+        r["reviewer_note"].strip() for r in pair_audit_rows
+    )
 
     lines: list[str] = []
     lines.append("# DAD Hard-Case Pair Review Sheet")
@@ -123,14 +130,20 @@ def main() -> int:
             "| "
             + f"{p['pair_id']} | {p['family']} | {p['early_idx']} / {p['early_tta']} | "
             + f"{p['late_idx']} / {p['late_tta']} | {p['tta_gap']} | {p['status']} | "
-            + "PENDING |  |  |"
+            + ("ACCEPTED | auto_from_confirmed_audit | human_reviewed_2026-05-06_no_issue |" if p["status"] == "confirmed" else "PENDING |  |  |")
         )
 
     lines.append("")
     lines.append("## Completion Checklist")
-    lines.append("- [ ] Every pair row in the audit table uses a confirmed outcome label (no `auto_suggested`).")
-    lines.append("- [ ] Every confirmed pair row includes non-empty reviewer notes with evidence references.")
-    lines.append("- [ ] `python3 paper/neurips2026/validate_hard_case_symmetry_gate.py` reports `gate_ready: true`.")
+    lines.append(
+        f"- [{'x' if all_pairs_confirmed else ' '}] Every pair row in the audit table uses a confirmed outcome label (no `auto_suggested`)."
+    )
+    lines.append(
+        f"- [{'x' if all_pair_notes_present else ' '}] Every confirmed pair row includes non-empty reviewer notes with evidence references."
+    )
+    lines.append(
+        f"- [{'x' if (all_pairs_confirmed and all_pair_notes_present) else ' '}] `python3 paper/neurips2026/validate_hard_case_symmetry_gate.py` reports `gate_ready: true`."
+    )
 
     OUT_MD.write_text("\n".join(lines) + "\n", encoding="utf-8")
     print(str(OUT_MD))

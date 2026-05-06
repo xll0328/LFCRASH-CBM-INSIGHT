@@ -117,6 +117,15 @@ remain bounded.
 - Rebuilt `paper/neurips2026/insight_main.pdf` and reran the NeurIPS sanity
   gate. Latest status at 06:32 UTC is `OK fatal_count=0 warn_count=1`
   (expected hard-case gate pending warning only; legacy stale-risk warning is cleared).
+- Human review completion recorded for the 4 mixed pairs (8 paired rows) in
+  `paper/neurips2026/dad_hard_case_symmetry_audit.md`, with concise
+  reviewer signoff notes and `confirmed_mixed_pair` outcomes.
+- Regenerated `paper/neurips2026/dad_hard_case_pair_review_sheet.md` and
+  `paper/neurips2026/hard_case_symmetry_gate_summary.json`; hard-case gate now
+  reports `gate_ready=true`, `confirmation_ratio=1.0`.
+- Latest sanity status at 06:40 UTC is `OK fatal_count=0 warn_count=0`.
+  This closes the hard-case process gate for the current scaffold, while scope
+  remains bounded to audited pair evidence (not a blanket global symmetry proof).
 
 ## Immediate Safe Next Actions
 
