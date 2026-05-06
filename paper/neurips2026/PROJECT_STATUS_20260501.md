@@ -100,6 +100,9 @@ remain bounded.
 - Added `paper/neurips2026/ORAL_BEST_PAPER_SPRINT_LEDGER_20260506.md` to
   track Oral/Best-Paper strengthening status, remaining blockers, and
   no-GPU next actions under current evidence constraints.
+- Added `paper/neurips2026/dad_hard_case_pair_review_draft_20260506.md` as a
+  provisional reviewer-facing readout for the four auto-suggested mixed pairs,
+  explicitly marked as requiring human confirmation before claim promotion.
 - Rebuilt `paper/neurips2026/insight_main.pdf` and reran the NeurIPS sanity
   gate. Latest status at 06:03 UTC is `OK fatal_count=0 warn_count=1`
   (only expected legacy-draft warning remains).
