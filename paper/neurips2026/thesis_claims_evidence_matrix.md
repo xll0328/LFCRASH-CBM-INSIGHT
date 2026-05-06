@@ -46,12 +46,12 @@ Alert timing should be handled as a sequential control problem over a semantic s
 ### What this supports now
 - The architectural and conceptual argument
 - A preliminary timing-faithfulness section based on prediction timing
-- An explicit hard-case symmetry audit path (`paper/neurips2026/dad_hard_case_symmetry_audit.md`) that keeps stronger symmetry claims gated on manual paired evidence
+- An explicit hard-case symmetry audit path (`paper/neurips2026/dad_hard_case_symmetry_audit.md`) with reviewer-confirmed mixed pairs and a passing process gate
 
 ### What it does **not** yet prove
 - A strong actor-policy crossing story in archived outputs, because current stored actor signals are effectively flat
 - A definitive claim that policy timing is measurably earlier than threshold timing under a fully validated actor head
-- DAD hard-case symmetry across scenario families under a matched, fixed protocol
+- DAD hard-case symmetry across scenario families under broad, matched, fixed-protocol coverage
 
 ### Paper language implication
 Use this as a **framing claim** plus partial empirical support, not as a definitive fully verified policy-level theorem.

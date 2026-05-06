@@ -28,7 +28,7 @@ These runs are not headline replacements; they quantify robustness.
 - Add a DAD hard-case symmetry audit table (predefined scenario families, paired success/failure counts, fixed checkpoint rule)
 - Use `paper/neurips2026/build_dad_hard_case_symmetry_audit.py` to refresh `paper/neurips2026/dad_hard_case_symmetry_audit.md` before each claim-evidence freeze
 - Use `paper/neurips2026/build_hard_case_pair_review_sheet.py` to refresh `paper/neurips2026/dad_hard_case_pair_review_sheet.md` and drive manual pair confirmation
-- Manually validate auto-suggested mixed pairs in `paper/neurips2026/dad_hard_case_symmetry_audit.md` and replace heuristic pair IDs/outcomes with reviewer-confirmed labels before promoting any symmetry claim
+- Maintain reviewer-confirmed mixed pairs in `paper/neurips2026/dad_hard_case_symmetry_audit.md`; any new/changed pair rows must be reconfirmed before claim promotion
 - Run `paper/neurips2026/validate_hard_case_symmetry_gate.py`; treat `gate_ready=false` as a block on any strong hard-case symmetry claim (gate now requires all pair rows to be confirmed with notes)
 
 ## Block C — Controlled ontology block
@@ -74,7 +74,7 @@ Before paper freeze, answer each item explicitly:
 5. Are intervention limits stated honestly?
 6. Are actor-branch limitations stated honestly where relevant?
 7. Are external baselines clearly labeled as interpretable vs non-interpretable?
-8. Is DAD hard-case symmetry treated as open unless supported by an explicit family-level audit table?
+8. Is DAD hard-case symmetry still treated as bounded unless supported by broad family-level audit coverage beyond the current confirmed pairs?
 
 ## Paper usage rule
 A result may appear in the main narrative only if it is one of:
