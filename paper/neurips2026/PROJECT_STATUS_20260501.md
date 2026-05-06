@@ -84,6 +84,10 @@ remain bounded.
   `paper/neurips2026/dad_hard_case_symmetry_audit.md` from archived casebank
   assets, explicitly marking symmetry as open unless paired family-level
   success/failure evidence is filled.
+- Upgraded the hard-case scaffold to use a primary-family counting rule and
+  auto-suggest mixed early-vs-late pairs (currently 4 heuristic pair suggestions
+  from `strong_top` assets), while keeping all pair labels explicitly marked as
+  needing manual reviewer confirmation before any symmetry promotion.
 - Rebuilt `paper/neurips2026/insight_main.pdf` and reran the NeurIPS sanity
   gate. Latest status at 05:39 UTC is `OK fatal_count=0 warn_count=1`
   (only expected legacy-draft warning remains).
