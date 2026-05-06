@@ -20,6 +20,8 @@ archive/
 .DS_Store
 *.log
 ${LOG}
+.git_sync_loop.pid
+.git_sync_loop.log
 
 # Large experiment outputs / checkpoints
 output/
