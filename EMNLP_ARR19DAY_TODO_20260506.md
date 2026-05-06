@@ -49,6 +49,7 @@ Completion rule:
 - [ ] Human upload + ARR metadata checks.
 - [ ] Commit/venue-lock decisions logged (human).
 - [ ] Freeze post-upload rebuttal mode; no story rewrite.
+- [x] Upload signoff sheet prepared (`EMNLP_UPLOAD_SIGNOFF_20260506.md`).
 
 Completion rule:
 - ARR upload finished by 2026-05-25 AoE with clean evidence trail.
