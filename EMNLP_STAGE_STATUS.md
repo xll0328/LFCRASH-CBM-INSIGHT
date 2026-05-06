@@ -1,10 +1,33 @@
 # EMNLP / ARR Stage Status
 
-Date: 2026-04-27
+Date: 2026-05-06
 
 ## Current stage
 
 The paper is in an **ARR-ready pre-submission stage**.
+
+## 2026-05-06 refresh
+
+- EMNLP compile and sanity were rerun after the latest appendix updates:
+  `paper/emnlp2026/submission_sanity_report.txt` now reports
+  `OK fatal_count=0` at `2026-05-06T06:53:30Z`.
+- Top-conference and oral-readiness audits were refreshed:
+  `output/emnlp2026_support/top_conference_quality_audit.json` and
+  `output/emnlp2026_support/oral_readiness_audit.md`.
+- Oral/best-paper distance was rebaselined in
+  `EMNLP_ORAL_BEST_PAPER_GAP_LEDGER_20260506.md`.
+- A deadline-aware execution checklist for the ARR window was created in
+  `EMNLP_ARR19DAY_TODO_20260506.md` (T-19 to T-0 plan toward 2026-05-25 AoE).
+
+## Upload Candidate Checklist (Human-Gated)
+
+1. Sanity gate green:
+   `bash paper/emnlp2026/run_submission_sanity_checks.sh` -> `OK fatal_count=0`.
+2. Candidate freeze tarball path is explicit in this file.
+3. Freeze package verifier passes:
+   `bash paper/emnlp2026/verify_arr_freeze.sh <tarball>`.
+4. Human read-through completed for page 1, Figure 1, Table 1, and appendix opening.
+5. Human confirms author/reviewer-registration/venue-commit logistics before upload.
 
 This is no longer an idea-stage draft or an experiment-exploration draft. The
 main scientific story, evidence hierarchy, appendix framing, and submission

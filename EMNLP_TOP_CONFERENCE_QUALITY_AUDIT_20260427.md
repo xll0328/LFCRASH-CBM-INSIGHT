@@ -1,6 +1,6 @@
 # EMNLP Top-Conference Quality Audit
 
-- Generated at: `2026-05-02T15:51:43Z`
+- Generated at: `2026-05-06T06:57:49Z`
 - Scope: current LFCRASH-CBM EMNLP/ARR paper package and support artifacts.
 - Standard used: top-conference acceptance, oral, and best-paper competitiveness; not just submission sanity.
 
@@ -26,7 +26,7 @@
 - Citation commands across main+appendix: `53`
 - Main-body figures: `15`
 - Main-body tables: `9`
-- Appendix figures/tables: `8` / `3`
+- Appendix figures/tables: `8` / `4`
 - Missing BibTeX keys: `0`
 - Unused BibTeX keys: `0`
 

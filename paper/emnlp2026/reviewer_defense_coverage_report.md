@@ -1,6 +1,6 @@
 # EMNLP Reviewer Defense Coverage Audit
 
-- Generated at: `2026-05-02T15:51:43Z`
+- Generated at: `2026-05-06T06:57:48Z`
 - Scope: oral accept case one-pager, reviewer quick map, response map, response playbook, response templates, and response tracker.
 - Nature: mechanical coverage audit, not human validation or final rebuttal text.
 
