@@ -122,6 +122,7 @@
     "protocol_separation": "Keep canonical submission line, ontology comparison runs, and search runs separated.",
     "seed_scope": "Multi-seed DAD evidence exists for one curriculum line only and should be presented as stability diagnostics, not universal robustness.",
     "intervention_scope": "Use intervention evidence as partial support for intervenability, not as definitive causal proof.",
-    "hard_case_symmetry_scope": "Current synchronized DAD diagnostics quantify variance but do not establish hard-case symmetry across scenario families; treat symmetry as open unless family-level audits are added."
+    "hard_case_symmetry_scope": "Current synchronized DAD diagnostics quantify variance but do not establish hard-case symmetry across scenario families; treat symmetry as open unless family-level audits are added.",
+    "hard_case_symmetry_artifact": "paper/neurips2026/dad_hard_case_symmetry_audit.md (heuristic pairs require manual reviewer confirmation before promotion)"
   }
 }
