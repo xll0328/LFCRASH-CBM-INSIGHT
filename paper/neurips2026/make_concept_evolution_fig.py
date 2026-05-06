@@ -8,6 +8,7 @@ from matplotlib.patches import FancyBboxPatch
 
 ROOT = Path('/data/sony/LFCRASH/LFCRASH-CBM')
 FIG = ROOT / 'paper/figures/insight_fig_concept_evolution.png'
+FIG_PDF = FIG.with_suffix('.pdf')
 FIG.parent.mkdir(parents=True, exist_ok=True)
 
 risk_core = json.loads((ROOT / 'output/concept_sets/risk_core_concept_set_v1.meta.json').read_text())
@@ -36,36 +37,38 @@ merge_examples = [
     'red signal compliance → red-light compliance risk',
 ]
 
-plt.rcParams.update({'font.family': 'DejaVu Sans', 'font.size': 11})
+plt.rcParams.update({'font.family': 'DejaVu Sans', 'font.size': 10.5})
 fig, ax = plt.subplots(figsize=(15.8, 7.4), dpi=220)
 ax.set_xlim(0, 15.8)
 ax.set_ylim(0, 7.4)
 ax.axis('off')
 fig.patch.set_facecolor('white')
 
-colors = {'manual':'#7c3aed','merge':'#c2410c','final':'#0f766e','text':'#111827','muted':'#475569'}
+colors = {'manual':'#A995D0','merge':'#E4AA78','final':'#78BFA3','text':'#2F4158','muted':'#5F7286'}
 
 def panel(x, y, w, h, title, subtitle, items, color):
     rect = FancyBboxPatch((x, y), w, h, boxstyle='round,pad=0.04,rounding_size=0.18', linewidth=2.1, edgecolor=color, facecolor='white')
     ax.add_patch(rect)
-    ax.text(x + 0.2, y + h - 0.3, title, fontsize=15, fontweight='bold', color=color, va='top')
-    ax.text(x + 0.2, y + h - 0.7, subtitle, fontsize=10.7, color=colors['muted'], va='top')
+    ax.text(x + 0.2, y + h - 0.3, title, fontsize=14, fontweight='bold', color=color, va='top')
+    ax.text(x + 0.2, y + h - 0.7, subtitle, fontsize=10.2, color=colors['muted'], va='top')
     yy = y + h - 1.08
     for item in items:
-        ax.text(x + 0.24, yy, u'• ' + item, fontsize=10.4, color=colors['text'], va='top')
+        ax.text(x + 0.24, yy, u'• ' + item, fontsize=9.9, color=colors['text'], va='top')
         yy -= 0.46
 
-ax.text(0.35, 6.9, 'Ontology evolution toward a paper-ready semantic interface', fontsize=19, fontweight='bold', color=colors['text'])
-ax.text(0.35, 6.45, 'The key transition is not only from manual to discovered concepts, but from noisy phrase pools to canonical, balanced, and review-validated risk primitives.', fontsize=11.5, color=colors['muted'])
+ax.text(0.35, 6.9, 'Ontology evolution toward a paper-ready semantic interface', fontsize=18, fontweight='bold', color=colors['text'])
+ax.text(0.35, 6.45, 'The key transition is not only from manual to discovered concepts, but from noisy phrase pools to canonical, balanced, and review-validated risk primitives.', fontsize=10.8, color=colors['muted'])
 
 panel(0.45, 1.0, 4.55, 5.2, 'Manual risk-core prior (30)', 'High-precision human risk primitives', risk_examples, colors['manual'])
 panel(5.65, 1.0, 4.55, 5.2, 'Canonical merge and polishing', 'Representative wording consolidations from the polishing pipeline', merge_examples, colors['merge'])
 panel(10.85, 1.0, 4.45, 5.2, 'Perfect concept set v1 (80)', 'Final paper-ready ontology after balancing + human review', perfect_examples, colors['final'])
 
-ax.annotate('', xy=(5.45, 3.6), xytext=(5.05, 3.6), arrowprops=dict(arrowstyle='-|>', lw=2.2, color='#64748b'))
-ax.annotate('', xy=(10.65, 3.6), xytext=(10.25, 3.6), arrowprops=dict(arrowstyle='-|>', lw=2.2, color='#64748b'))
+ax.annotate('', xy=(5.45, 3.6), xytext=(5.05, 3.6), arrowprops=dict(arrowstyle='-|>', lw=2.2, color='#8FA0B4'))
+ax.annotate('', xy=(10.65, 3.6), xytext=(10.25, 3.6), arrowprops=dict(arrowstyle='-|>', lw=2.2, color='#8FA0B4'))
 
-ax.text(7.9, 0.44, 'Progression: human prior → merge provenance and family balancing → review-validated paper ontology', ha='center', fontsize=12, color=colors['muted'], fontweight='bold')
+ax.text(7.9, 0.44, 'Progression: human prior → merge provenance and family balancing → review-validated paper ontology', ha='center', fontsize=11.3, color=colors['muted'], fontweight='bold')
 plt.tight_layout()
 fig.savefig(FIG, bbox_inches='tight')
+fig.savefig(FIG_PDF, bbox_inches='tight')
 print(f'Saved {FIG}')
+print(f'Saved {FIG_PDF}')

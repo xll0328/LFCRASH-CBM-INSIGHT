@@ -21,17 +21,17 @@ ROOT = Path("/data/sony/LFCRASH/LFCRASH-CBM")
 OUT = ROOT / "paper" / "figures"
 OUT.mkdir(parents=True, exist_ok=True)
 
-INK = "#202124"
-MUTED = "#5f6368"
-LINE = "#4b5563"
-BLUE = "#2F6B9A"
-RED = "#B94135"
-GREEN = "#2E7D52"
-ORANGE = "#C46A1A"
-PURPLE = "#6B4FA3"
-TEAL = "#167C80"
+INK = "#2F4158"
+MUTED = "#62758A"
+LINE = "#7B8DA4"
+BLUE = "#7FA8D6"
+RED = "#D78590"
+GREEN = "#78BFA3"
+ORANGE = "#E4AA78"
+PURPLE = "#A995D0"
+TEAL = "#7EBFD1"
 BG = "#FFFFFF"
-BAND = "#F7F8FA"
+BAND = "#FDFBF8"
 
 
 def rounded_box(ax, x, y, w, h, title, body, fc, ec, title_color=None, lw=1.5):
@@ -114,9 +114,9 @@ def main() -> int:
 
     # Background lanes.
     lanes = [
-        (0.25, 4.35, 14.7, 1.45, "#F5F8FC", "Language-side ontology construction"),
-        (0.25, 2.35, 14.7, 1.55, "#FFF7F2", "Trainable semantic interface"),
-        (0.25, 0.45, 14.7, 1.35, "#F5FAF7", "Anticipation decision and audit trail"),
+        (0.25, 4.35, 14.7, 1.45, "#F4F8FD", "Language-side ontology construction"),
+        (0.25, 2.35, 14.7, 1.55, "#FDF6EF", "Trainable semantic interface"),
+        (0.25, 0.45, 14.7, 1.35, "#F2FAF6", "Anticipation decision and audit trail"),
     ]
     for x, y, w, h, fc, title in lanes:
         ax.add_patch(
@@ -126,7 +126,7 @@ def main() -> int:
                 h,
                 boxstyle="round,pad=0.04,rounding_size=0.08",
                 facecolor=fc,
-                edgecolor="#E4E7EB",
+                edgecolor="#D6DFEB",
                 linewidth=0.9,
                 zorder=0,
             )
@@ -160,7 +160,7 @@ def main() -> int:
     mid_y = 2.78
     rounded_box(ax, 0.65, mid_y, 1.65, 0.76, "Video state", "object features\nx_t", "#FFFFFF", BLUE)
     rounded_box(ax, 2.75, mid_y, 1.75, 0.76, "OFA", "object-focused\naggregation", "#FFFFFF", BLUE)
-    rounded_box(ax, 5.0, 2.56, 2.5, 1.16, "Semantic interface", "CBM concept state c_t\ntrainable, named, inspectable", "#FFF0ED", RED, lw=2.4)
+    rounded_box(ax, 5.0, 2.56, 2.5, 1.16, "Semantic interface", "CBM concept state c_t\ntrainable, named, inspectable", "#FDEEF2", RED, lw=2.4)
     rounded_box(ax, 8.1, mid_y, 1.55, 0.76, "CRS", "global concept\nrisk ranking", "#FFFFFF", ORANGE)
     rounded_box(ax, 10.05, mid_y, 1.65, 0.76, "CGTA", "concept-delta\ntemporal attention", "#FFFFFF", GREEN)
     rounded_box(ax, 12.1, mid_y, 1.7, 0.76, "TSD", "future CLIP\nbootstrap", "#FFFFFF", PURPLE)

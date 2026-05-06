@@ -73,10 +73,12 @@ Table~\ref{tab:protocol_map_main}.
 from controlled support blocks so the table is not mistaken for one pooled leaderboard.}
 \label{tab:protocol_map_main}
 \centering\scriptsize
+\TableStyleOn
 \setlength{\tabcolsep}{2.5pt}
 \resizebox{\linewidth}{!}{%
 \begin{tabular}{p{0.19\linewidth}p{0.17\linewidth}p{0.17\linewidth}ccc}
 \toprule
+\TableHead
 Paper item & Recipe family & Checkpoint rule & Seeds & Score source & Role \\
 \midrule
 Table~\ref{tab:dad} & DAD curriculum line & canonical endpoint & 1 & classifier & DAD headline \\
@@ -88,6 +90,7 @@ DAD robustness paragraph & clean curriculum family & fixed epochs 25/30 & 3 & cl
 \bottomrule
 \end{tabular}%
 }
+\TableStyleOff
 \end{table}
 \paragraph{Execution depth.}
 Beyond singleton headline rows, we report a completed 18-cell seeded ontology
@@ -237,10 +240,12 @@ and one interpretation tier.}
 released ontology (DAD-500 audit slice). These metrics support inspectability
 and partial semantic stability, but do not establish full causal faithfulness.}
 \label{tab:semantic_validity}
-\centering\scriptsize
+\centering\footnotesize
+\TableStyleOn
 \setlength{\tabcolsep}{3pt}
 \begin{tabular}{p{0.27\linewidth}p{0.21\linewidth}p{0.44\linewidth}}
 \toprule
+\TableHead
 Diagnostic block & Key statistic & Reading \\
 \midrule
 Pseudo-label concentration (top-$m$) &
@@ -260,6 +265,7 @@ the ontology is traceable and governed as a released asset rather than an
 unlogged phrase pool. \\
 \bottomrule
 \end{tabular}
+\TableStyleOff
 \end{table}
 
 \paragraph{Pseudo-label sensitivity.}
@@ -301,11 +307,13 @@ table is not that every method should expose the same type of explanation, but
 that most prior systems still lack an explicit semantic interface that can be
 trained, audited, and compared across runs.}
 \label{tab:interp_comparison}
-\centering\small
+\centering\footnotesize
+\TableStyleOn
 \setlength{\tabcolsep}{4pt}
 \resizebox{\linewidth}{!}{%
 \begin{tabular}{lcccc}
 \toprule
+\TableHead
 Method & Semantic state & Timing account & Intrinsic? & Params\\
 \midrule
 DSA-RNN~\citep{ref4}         & \texttimes & \texttimes & -- & 12M\\
@@ -324,6 +332,7 @@ LATTE~\citep{ZHANG2025103173}& \texttimes & \texttimes & -- & 45M\\
 \bottomrule
 \end{tabular}%
 }
+\TableStyleOff
 \end{table}
 
 Table~\ref{tab:interp_comparison} highlights the representational gap that
@@ -342,11 +351,13 @@ explanation-oriented methods
 from strong non-interpretable references to position \method{} as a competitive
 interpretable system with an explicit semantic interface.}
 \label{tab:dad}
-\centering\small
+\centering\footnotesize
+\TableStyleOn
 \setlength{\tabcolsep}{4pt}
 \resizebox{\linewidth}{!}{%
 \begin{tabular}{lcccc}
 \toprule
+\TableHead
 Method & Venue & AP$\uparrow$ & mTTA$\uparrow$ & Interface\\
 \midrule
 DSA-RNN~\citep{ref4}        & ACCV'16 & 38.1\% & 2.05s & none\\
@@ -364,6 +375,7 @@ $\dagger$ LATTE & -- & 89.7\% & 4.49s & none\\
 \bottomrule
 \end{tabular}%
 }
+\TableStyleOff
 \end{table}
 
 \method{} reaches 68.19\% AP and 1.75s mTTA on the canonical DAD curriculum
@@ -425,11 +437,13 @@ read as a frontier band rather than a single favorable point.}
 interpretable operating point
 with better warning lead time than CRASH while maintaining competitive AP.}
 \label{tab:a3d}
-\centering\small
+\centering\footnotesize
+\TableStyleOn
 \setlength{\tabcolsep}{3pt}
 \resizebox{\linewidth}{!}{%
 \begin{tabular}{lccccc}
 \toprule
+\TableHead
 Method & AP$\uparrow$ & mTTA$\uparrow$ & TTA@R80$\uparrow$ & P@R80$\uparrow$ & Interface\\
 \midrule
 CRASH~\citep{liao2024crash} & 96.0\% & 4.27s & -- & -- & none\\
@@ -440,6 +454,7 @@ $\Delta$ vs.\ CRASH & $-2.60\%$ & $+14.8\%$ & -- & -- & --\\
 \bottomrule
 \end{tabular}%
 }
+\TableStyleOff
 \end{table}
 
 On A3D, \method{} achieves a stronger and cleaner flagship result. The
@@ -481,9 +496,11 @@ auditable semantic layer.
 shared training protocol. Only
 the ontology source varies; the training-protocol family is held fixed.}
 \label{tab:concept_sets}
-\centering\small
+\centering\footnotesize
+\TableStyleOn
 \begin{tabular}{llccccc}
 \toprule
+\TableHead
 Dataset & Concept set & \#Concepts & AP$\uparrow$ & mTTA$\uparrow$ & TTA@R80$\uparrow$ & P@R80$\uparrow$\\
 \midrule
 DAD & Historical full & 837 & 64.91\% & 1.88s & 2.51s & 0.492 \\
@@ -495,6 +512,7 @@ A3D & Risk-core manual & 30 & 94.36\% & \textbf{9.57s} & \textbf{8.60s} & \textb
 A3D & Perfect concept set v1 & 80 & \textbf{96.54\%} & 8.69s & 7.11s & 0.934 \\
 \bottomrule
 \end{tabular}
+\TableStyleOff
 \end{table*}
 
 Table~\ref{tab:concept_sets} is one of the most important result blocks in the
@@ -549,11 +567,13 @@ same trained checkpoint is evaluated twice: once with the classifier score
 trajectory and once with the actor policy score trajectory. These are support
 analyses, not canonical headline results.}
 \label{tab:trigger_compare}
-\centering\small
+\centering\footnotesize
+\TableStyleOn
 \setlength{\tabcolsep}{3pt}
 \resizebox{\linewidth}{!}{%
 \begin{tabular}{llcccc}
 \toprule
+\TableHead
 Dataset & Score source & AP$\uparrow$ & mTTA$\uparrow$ & TTA@R80$\uparrow$ & P@R80$\uparrow$\\
 \midrule
 DAD & classifier & 61.94\% & 2.16s & 2.87s & 0.486 \\
@@ -564,6 +584,7 @@ A3D & actor & 91.14\% & 4.97s & 4.94s & 0.911 \\
 \bottomrule
 \end{tabular}%
 }
+\TableStyleOff
 \end{table}
 
 Table~\ref{tab:trigger_compare} clarifies the scope of the timing claim. On
@@ -653,11 +674,13 @@ diagnostics from archived DAD
 analyses. These diagnostics complement the case studies by quantifying timing
 alignment, edit sensitivity, and actor behavior in the archived DAD assets.}
 \label{tab:interp_quant}
-\centering\scriptsize
+\centering\footnotesize
+\TableStyleOn
 \setlength{\tabcolsep}{2.5pt}
 \resizebox{\linewidth}{!}{%
 \begin{tabular}{p{0.23\linewidth}p{0.14\linewidth}p{0.25\linewidth}p{0.30\linewidth}}
 \toprule
+\TableHead
 Diagnostic & Samples & Main statistic & Reading \\
 \midrule
 Prediction timing & 39 valid positives & mean lead = 39.41 frames ($\approx$1.97s) & event-aligned timing is measurable before impact \\
@@ -669,6 +692,7 @@ Actor diagnostic & 48 cases & mean actor peak = 0.498 & archived actor outputs a
 \bottomrule
 \end{tabular}%
 }
+\TableStyleOff
 \end{table}
 
 Table~\ref{tab:interp_quant} records what the archived analyses support
@@ -692,11 +716,13 @@ line; their purpose is to
 isolate how much the concept interface and its support modules matter under a
 shared recipe.}
 \label{tab:ablation}
-\centering\small
+\centering\footnotesize
+\TableStyleOn
 \setlength{\tabcolsep}{4pt}
 \resizebox{\linewidth}{!}{%
 \begin{tabular}{lccc}
 \toprule
+\TableHead
 Variant & AP$\uparrow$ & mTTA$\uparrow$ & TTA@R80$\uparrow$\\
 \midrule
 Full \method                  & \textbf{68.84\%} & \textbf{2.42s} & \textbf{3.15s}\\
@@ -708,6 +734,7 @@ Full \method                  & \textbf{68.84\%} & \textbf{2.42s} & \textbf{3.15
 \bottomrule
 \end{tabular}%
 }
+\TableStyleOff
 \end{table}
 
 The ablation shows that the semantic interface participates in predictive

@@ -16,7 +16,8 @@
 \usepackage{subcaption}
 \usepackage{makecell}
 \usepackage{enumitem}
-\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage[table]{xcolor}
 
 \setlength\titlebox{6.5cm}
 
@@ -29,6 +30,24 @@
 \newcommand{\tsd}{\textsc{TSD}}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\etal}{et~al.}
+
+% Soft macaron palette for reviewer-friendly table readability.
+\definecolor{MacaronBlue}{HTML}{AFCBEA}
+\definecolor{MacaronMint}{HTML}{BFE6D8}
+\definecolor{MacaronPeach}{HTML}{F7CBB9}
+\definecolor{MacaronLavender}{HTML}{DCCEF3}
+\definecolor{MacaronHeader}{HTML}{EAF3FC}
+\definecolor{MacaronStripe}{HTML}{FAF6EF}
+\definecolor{MacaronRule}{HTML}{C8D6E5}
+\definecolor{MacaronText}{HTML}{2F4158}
+
+\newcommand{\TableStyleOn}{%
+  \renewcommand{\arraystretch}{1.13}%
+}
+\newcommand{\TableStyleOff}{%
+  \renewcommand{\arraystretch}{1.0}%
+}
+\newcommand{\TableHead}{\rowcolor{MacaronHeader}}
 
 \title{\method: A Language-Grounded Risk Concept Interface for Interpretable Accident Anticipation}
 

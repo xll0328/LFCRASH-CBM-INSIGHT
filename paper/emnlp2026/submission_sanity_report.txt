@@ -1,5 +1,5 @@
 INSIGHT submission sanity report
-generated_at=2026-05-06T13:17:05Z
+generated_at=2026-05-06T13:55:26Z
 
 [1] Core files
 OK insight_emnlp.tex
@@ -16,46 +16,46 @@ OK insight_emnlp_first25.pdf freshness
 OK insight_emnlp.pdf newer than manuscript sources
 
 [2] Compilation warnings
-530:Underfull \hbox (badness 1142) in paragraph at lines 59--76
-559:Underfull \vbox (badness 2213) has occurred while \output is active []
-562:Underfull \vbox (badness 2213) has occurred while \output is active []
-565:Underfull \hbox (badness 2582) in paragraph at lines 120--140
-571:Underfull \vbox (badness 1852) has occurred while \output is active []
-580:Underfull \hbox (badness 4886) in paragraph at lines 148--149
-585:Underfull \hbox (badness 3884) in paragraph at lines 59--67
-590:Underfull \hbox (badness 4353) in paragraph at lines 87--95
-603:Underfull \vbox (badness 1968) has occurred while \output is active []
-606:Underfull \hbox (badness 1888) in paragraph at lines 51--58
-620:Underfull \hbox (badness 2990) in paragraph at lines 68--78
-625:Underfull \hbox (badness 1910) in paragraph at lines 107--108
-630:Underfull \hbox (badness 1365) in paragraph at lines 111--112
-636:Underfull \hbox (badness 1577) in paragraph at lines 118--124
-648:Underfull \hbox (badness 1742) in paragraph at lines 271--275
-653:Underfull \hbox (badness 1975) in paragraph at lines 277--280
-667:Underfull \hbox (badness 1742) in paragraph at lines 315--322
-672:Underfull \hbox (badness 1237) in paragraph at lines 22--29
-677:Underfull \hbox (badness 1874) in paragraph at lines 52--56
-682:Underfull \hbox (badness 3439) in paragraph at lines 90--90
-687:Underfull \hbox (badness 10000) in paragraph at lines 90--90
-692:Underfull \hbox (badness 10000) in paragraph at lines 90--90
-697:Underfull \hbox (badness 10000) in paragraph at lines 90--90
-702:Underfull \hbox (badness 10000) in paragraph at lines 90--90
-707:Underfull \hbox (badness 10000) in paragraph at lines 90--90
-712:Underfull \hbox (badness 10000) in paragraph at lines 90--90
-717:Underfull \hbox (badness 10000) in paragraph at lines 90--90
-722:Underfull \hbox (badness 10000) in paragraph at lines 90--90
-727:Underfull \hbox (badness 10000) in paragraph at lines 90--90
-732:Underfull \hbox (badness 3219) in paragraph at lines 90--90
-737:Underfull \hbox (badness 10000) in paragraph at lines 90--90
-791:Underfull \hbox (badness 10000) in paragraph at lines 247--248
-796:Underfull \hbox (badness 10000) in paragraph at lines 247--248
-801:Underfull \hbox (badness 10000) in paragraph at lines 247--248
-806:Underfull \hbox (badness 10000) in paragraph at lines 247--248
-811:Underfull \hbox (badness 10000) in paragraph at lines 247--248
-816:Underfull \hbox (badness 10000) in paragraph at lines 247--248
-821:Underfull \hbox (badness 10000) in paragraph at lines 247--248
-826:Underfull \hbox (badness 10000) in paragraph at lines 247--248
-831:Underfull \hbox (badness 10000) in paragraph at lines 252--253
+553:Underfull \hbox (badness 1142) in paragraph at lines 78--95
+582:Underfull \vbox (badness 2213) has occurred while \output is active []
+585:Underfull \vbox (badness 2213) has occurred while \output is active []
+588:Underfull \hbox (badness 2582) in paragraph at lines 120--140
+594:Underfull \vbox (badness 1852) has occurred while \output is active []
+603:Underfull \hbox (badness 4886) in paragraph at lines 148--149
+608:Underfull \hbox (badness 3884) in paragraph at lines 59--67
+613:Underfull \hbox (badness 4353) in paragraph at lines 87--95
+626:Underfull \vbox (badness 1968) has occurred while \output is active []
+629:Underfull \hbox (badness 1888) in paragraph at lines 51--58
+643:Underfull \hbox (badness 2990) in paragraph at lines 68--78
+648:Underfull \hbox (badness 1910) in paragraph at lines 107--108
+653:Underfull \hbox (badness 1365) in paragraph at lines 111--112
+659:Underfull \hbox (badness 1577) in paragraph at lines 118--124
+671:Underfull \hbox (badness 1742) in paragraph at lines 271--275
+676:Underfull \hbox (badness 1975) in paragraph at lines 277--280
+690:Underfull \hbox (badness 1742) in paragraph at lines 315--322
+695:Underfull \hbox (badness 1237) in paragraph at lines 22--29
+700:Underfull \hbox (badness 1874) in paragraph at lines 52--56
+705:Underfull \hbox (badness 3439) in paragraph at lines 92--92
+710:Underfull \hbox (badness 10000) in paragraph at lines 92--92
+715:Underfull \hbox (badness 10000) in paragraph at lines 92--92
+720:Underfull \hbox (badness 10000) in paragraph at lines 92--92
+725:Underfull \hbox (badness 10000) in paragraph at lines 92--92
+730:Underfull \hbox (badness 10000) in paragraph at lines 92--92
+735:Underfull \hbox (badness 10000) in paragraph at lines 92--92
+740:Underfull \hbox (badness 10000) in paragraph at lines 92--92
+745:Underfull \hbox (badness 10000) in paragraph at lines 92--92
+750:Underfull \hbox (badness 10000) in paragraph at lines 92--92
+755:Underfull \hbox (badness 3219) in paragraph at lines 92--92
+760:Underfull \hbox (badness 10000) in paragraph at lines 92--92
+814:Underfull \hbox (badness 10000) in paragraph at lines 249--249
+819:Underfull \hbox (badness 10000) in paragraph at lines 251--251
+824:Underfull \hbox (badness 10000) in paragraph at lines 251--251
+829:Underfull \hbox (badness 10000) in paragraph at lines 252--253
+834:Underfull \hbox (badness 10000) in paragraph at lines 252--253
+839:Underfull \hbox (badness 10000) in paragraph at lines 252--253
+844:Underfull \hbox (badness 10000) in paragraph at lines 252--253
+849:Underfull \hbox (badness 10000) in paragraph at lines 252--253
+854:Underfull \hbox (badness 10000) in paragraph at lines 252--253
 
 [3] Obvious identity / link scan
 OK no obvious identity/link matches

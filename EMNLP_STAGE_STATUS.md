@@ -58,8 +58,12 @@ The paper is in an **ARR-ready pre-submission stage**.
   current previews are `historical_full AP≈65.81%, mTTA≈1.99s`,
   `perfect_v1 AP≈65.35%, mTTA≈1.96s`, and
   `DAD historical-stratified (30) AP≈65.46%, mTTA≈1.98s`.
+- A full layout-polish pass was applied for submission aesthetics:
+  unified soft-macaron table styling (header tint + consistent table typography),
+  refreshed framework/ontology/safety-utility figure palettes, and appendix path
+  text was hardened for underscore-safe LaTeX rendering.
 - Latest post-update sanity rerun reports `OK fatal_count=0` at
-  `2026-05-06T13:17:05Z`.
+  `2026-05-06T13:55:26Z`.
 
 ## Upload Candidate Checklist (Human-Gated)
 

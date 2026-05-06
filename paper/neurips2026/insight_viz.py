@@ -23,13 +23,13 @@ OUT.mkdir(parents=True, exist_ok=True)
 plt.rcParams.update({
     'font.family'       : 'DejaVu Serif',
     'font.size'         : 10,
-    'axes.facecolor'    : '#FAFAFA',
+    'axes.facecolor'    : '#FCFDFE',
     'figure.facecolor'  : '#FFFFFF',
-    'axes.edgecolor'    : '#AAAAAA',
+    'axes.edgecolor'    : '#C5D2E2',
     'axes.linewidth'    : 0.9,
     'axes.spines.top'   : False,
     'axes.spines.right' : False,
-    'grid.color'        : '#E0E0E0',
+    'grid.color'        : '#D9E5F2',
     'grid.linewidth'    : 0.6,
     'xtick.major.size'  : 3,
     'ytick.major.size'  : 3,
@@ -38,20 +38,20 @@ plt.rcParams.update({
 })
 
 # Color palette (colorblind-friendly, Nature style)
-RED    = '#C0392B'
-BLUE   = '#2471A3'
-GREEN  = '#1E8449'
-ORANGE = '#D35400'
-GRAY   = '#7F8C8D'
-GOLD   = '#F39C12'
+RED    = '#D78590'
+BLUE   = '#7FA8D6'
+GREEN  = '#78BFA3'
+ORANGE = '#E4AA78'
+GRAY   = '#8A9CB1'
+GOLD   = '#EBCB8B'
 BG     = '#FFFFFF'
-TEXT   = '#1A1A1A'
-C_WHY  = '#C0392B'
-C_WHEN = '#1E8449'
+TEXT   = '#2F4158'
+C_WHY  = '#D78590'
+C_WHEN = '#78BFA3'
 
 # Heatmap: white->yellow->orange->red (professional, high contrast)
 CMAP_ACT = LinearSegmentedColormap.from_list(
-    'act', ['#FFFFFF', '#FEF9E7', '#F39C12', '#C0392B'])
+    'act', ['#FFFFFF', '#FFF8EE', '#EBCB8B', '#D78590'])
 
 FONT_TITLE = dict(fontsize=12, fontweight='bold', color=TEXT)
 FONT_LABEL = dict(fontsize=10, color=TEXT)
@@ -434,16 +434,16 @@ def fig5_safety_utility():
     ontology = load_json(ROOT / 'output' / 'emnlp2026_support' / 'multiseed_ontology_status.json')
     ontology_rows = ontology.get('rows', [])
     concept_style = {
-        'historical_full': dict(label='Historical full', color='#4C78A8', marker='o'),
-        'risk_core_v1': dict(label='Risk-core manual', color='#F58518', marker='s'),
-        'perfect_v1': dict(label='Perfect v1', color='#54A24B', marker='D'),
+        'historical_full': dict(label='Historical full', color='#7FA8D6', marker='o'),
+        'risk_core_v1': dict(label='Risk-core manual', color='#E4AA78', marker='s'),
+        'perfect_v1': dict(label='Perfect v1', color='#78BFA3', marker='D'),
     }
 
     style = {
-        'intrinsic': dict(marker='*', color='#C0392B', s=270, edge='black', label='INSIGHT headline'),
-        'post-hoc': dict(marker='o', color='#2471A3', s=95, edge='black', label='Post-hoc baseline'),
-        'verbal': dict(marker='D', color='#8E44AD', s=95, edge='black', label='Verbal baseline'),
-        'none': dict(marker='s', color='#7F8C8D', s=85, edge='black', label='Non-interpretable baseline'),
+        'intrinsic': dict(marker='*', color='#D78590', s=270, edge='black', label='INSIGHT headline'),
+        'post-hoc': dict(marker='o', color='#7FA8D6', s=95, edge='black', label='Post-hoc baseline'),
+        'verbal': dict(marker='D', color='#A995D0', s=95, edge='black', label='Verbal baseline'),
+        'none': dict(marker='s', color='#A3B2C2', s=85, edge='black', label='Non-interpretable baseline'),
     }
 
     fig, axes = plt.subplots(1, 2, figsize=(15.6, 5.8), facecolor=BG)
@@ -505,13 +505,13 @@ def fig5_safety_utility():
             'better',
             xy=(0.92, 0.90), xycoords='axes fraction',
             xytext=(0.76, 0.73), textcoords='axes fraction',
-            arrowprops=dict(arrowstyle='->', lw=1.2, color='#444444'),
-            fontsize=8.5, color='#444444', ha='center',
+            arrowprops=dict(arrowstyle='->', lw=1.2, color='#5F7286'),
+            fontsize=8.5, color='#5F7286', ha='center',
         )
         ax.set_title(f'{title}: AP vs warning lead time', fontsize=11, fontweight='bold')
         ax.set_xlabel('AP (%)', fontsize=10)
         ax.set_ylabel('mTTA (s)', fontsize=10)
-        ax.grid(True, alpha=0.35)
+        ax.grid(True, alpha=0.4, color='#D9E5F2')
 
     axes[0].set_xlim(52, 77)
     axes[0].set_ylim(1.45, 3.35)
