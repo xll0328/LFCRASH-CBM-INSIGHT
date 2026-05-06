@@ -595,6 +595,40 @@ shows that stronger concept edits do not automatically translate into large
 timing shifts in every case. The appendix therefore supports both breadth of
 semantic evidence and a realistic boundary on controllability.
 
+\paragraph{Hard-case symmetry audit snapshot.}
+To avoid overclaiming from qualitative examples, we maintain a separate
+family-level hard-case symmetry scaffold
+(`paper/neurips2026/dad_hard_case_symmetry_audit.md`) generated from archived
+casebank assets. Table~\ref{tab:appendix_hard_case_symmetry} reports the
+current snapshot using a primary-family heuristic and prediction-branch timing
+buckets. The table is intentionally conservative: it is an audit checkpoint,
+not a claim that symmetry is solved.
+
+\begin{table}[t]
+\caption{DAD hard-case symmetry audit snapshot from archived v4 casebank assets.
+Counts are from the current `strong_top` pool under primary-family assignment.
+`auto\_pair` denotes heuristic early-vs-late mixed pair suggestions that still
+require manual reviewer confirmation.}
+\label{tab:appendix_hard_case_symmetry}
+\centering\small
+\begin{tabular}{lrrrr}
+\toprule
+Primary family & Early strong & Early marginal & Late/missed & Auto pair \\
+\midrule
+intersection\_merge & 1 & 3 & 10 & 4 \\
+visibility\_night & 0 & 0 & 6 & 0 \\
+pedestrian\_conflict & 0 & 0 & 7 & 0 \\
+road\_surface\_weather & 0 & 0 & 2 & 0 \\
+heavy\_vehicle\_conflict & 0 & 0 & 1 & 0 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+This snapshot reinforces the same scope boundary used in the main paper:
+current synchronized diagnostics and archived casebank evidence reveal uneven
+hard-case behavior, so stronger symmetry claims remain blocked until manual
+pair-level outcomes are completed in the audit file.
+
 \begin{figure*}[t]
   \centering
   \includegraphics[width=0.98\textwidth]{../figures/insight_fig_appendix_v4_casebank_selected.pdf}

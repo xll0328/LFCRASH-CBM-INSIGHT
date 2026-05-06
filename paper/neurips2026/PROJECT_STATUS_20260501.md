@@ -90,8 +90,12 @@ remain bounded.
   needing manual reviewer confirmation before any symmetry promotion.
 - Added an explicit sentence in `paper/neurips2026/sec_experiments.tex` tying
   hard-case symmetry claims to that scaffold as a blocking audit gate.
+- Added an appendix-facing hard-case symmetry snapshot table
+  (`tab:appendix_hard_case_symmetry`) in
+  `paper/neurips2026/sec_appendix.tex`, explicitly framed as an audit checkpoint
+  rather than solved symmetry evidence.
 - Rebuilt `paper/neurips2026/insight_main.pdf` and reran the NeurIPS sanity
-  gate. Latest status at 05:56 UTC is `OK fatal_count=0 warn_count=1`
+  gate. Latest status at 06:03 UTC is `OK fatal_count=0 warn_count=1`
   (only expected legacy-draft warning remains).
 
 ## Immediate Safe Next Actions
