@@ -25,6 +25,7 @@ These runs are not headline replacements; they quantify robustness.
 ### Desired next
 - Add analogous 3-seed aggregate for the final A3D line
 - Add mean/std for ontology-controlled runs if compute permits
+- Add a DAD hard-case symmetry audit table (predefined scenario families, paired success/failure counts, fixed checkpoint rule)
 
 ## Block C — Controlled ontology block
 Use `controlled_ontology_matrix.md` and the shared launcher.
@@ -69,6 +70,7 @@ Before paper freeze, answer each item explicitly:
 5. Are intervention limits stated honestly?
 6. Are actor-branch limitations stated honestly where relevant?
 7. Are external baselines clearly labeled as interpretable vs non-interpretable?
+8. Is DAD hard-case symmetry treated as open unless supported by an explicit family-level audit table?
 
 ## Paper usage rule
 A result may appear in the main narrative only if it is one of:

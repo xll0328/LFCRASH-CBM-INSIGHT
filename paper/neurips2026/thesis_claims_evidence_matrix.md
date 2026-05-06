@@ -50,6 +50,7 @@ Alert timing should be handled as a sequential control problem over a semantic s
 ### What it does **not** yet prove
 - A strong actor-policy crossing story in archived outputs, because current stored actor signals are effectively flat
 - A definitive claim that policy timing is measurably earlier than threshold timing under a fully validated actor head
+- DAD hard-case symmetry across scenario families under a matched, fixed protocol
 
 ### Paper language implication
 Use this as a **framing claim** plus partial empirical support, not as a definitive fully verified policy-level theorem.
@@ -98,6 +99,7 @@ Present this as **partial structural intervenability evidence** with honest limi
 1. Fully verified policy-level semantic control is solved.
 2. INSIGHT is the global AP leader across all accident anticipation methods.
 3. The current repository already proves strong causal timing intervention at scale.
+4. DAD hard-case symmetry is already solved by the present evidence package.
 
 ---
 

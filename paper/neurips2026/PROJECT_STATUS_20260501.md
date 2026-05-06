@@ -65,6 +65,24 @@ remain bounded.
   `OK fatal_count=0 warn_count=1`, and confirmed no API key was stored in the
   project artifacts.
 
+## What Was Advanced On 2026-05-06
+
+- Tightened main-paper scope language around the two live weaknesses:
+  `paper/neurips2026/sec_experiments.tex` now states explicitly that current
+  synchronized diagnostics do **not** establish DAD hard-case symmetry, and
+  `paper/neurips2026/sec_conclusion.tex` adds DAD hard-case symmetry as an open
+  limitation.
+- Synchronized evidence-governance files with the same boundary:
+  `paper/neurips2026/thesis_claims_evidence_matrix.md` now lists DAD hard-case
+  symmetry as not-yet-proven / not-settled; and
+  `paper/neurips2026/reviewer_proof_experiment_manifest.md` now requires a
+  family-level hard-case symmetry audit table before any stronger symmetry claim.
+- Updated `paper/neurips2026/claim_evidence_audit.json` with an explicit
+  `hard_case_symmetry_scope` reviewer-sensitive guardrail.
+- Rebuilt `paper/neurips2026/insight_main.pdf` and reran the NeurIPS sanity
+  gate. Latest status at 05:39 UTC is `OK fatal_count=0 warn_count=1`
+  (only expected legacy-draft warning remains).
+
 ## Immediate Safe Next Actions
 
 1. After any NeurIPS paper edit, run:
