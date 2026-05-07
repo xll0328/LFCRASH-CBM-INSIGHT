@@ -65,8 +65,11 @@ The paper is in an **ARR-ready pre-submission stage**.
 - Follow-up typography cleanup normalized appendix hard-case family labels from
   underscore-heavy identifiers to reader-facing names to reduce visual noise in
   table reading.
+- A second layout micro-pass refined reviewer evidence-map cards (pastel tier
+  blocks), softened table rule styling, and refreshed safety-utility panel/legend
+  visuals with a consistent macaron palette.
 - Latest post-update sanity rerun reports `OK fatal_count=0` at
-  `2026-05-06T14:16:20Z`.
+  `2026-05-07T02:34:19Z`.
 
 ## Upload Candidate Checklist (Human-Gated)
 

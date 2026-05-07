@@ -48,6 +48,9 @@ BG     = '#FFFFFF'
 TEXT   = '#2F4158'
 C_WHY  = '#D78590'
 C_WHEN = '#78BFA3'
+PANEL_DAD = '#FDF7F1'
+PANEL_A3D = '#F2FAF6'
+LEGEND_BG = '#F6FAFD'
 
 # Heatmap: white->yellow->orange->red (professional, high contrast)
 CMAP_ACT = LinearSegmentedColormap.from_list(
@@ -434,16 +437,16 @@ def fig5_safety_utility():
     ontology = load_json(ROOT / 'output' / 'emnlp2026_support' / 'multiseed_ontology_status.json')
     ontology_rows = ontology.get('rows', [])
     concept_style = {
-        'historical_full': dict(label='Historical full', color='#7FA8D6', marker='o'),
-        'risk_core_v1': dict(label='Risk-core manual', color='#E4AA78', marker='s'),
-        'perfect_v1': dict(label='Perfect v1', color='#78BFA3', marker='D'),
+        'historical_full': dict(label='Historical full', color='#92B3DB', marker='o'),
+        'risk_core_v1': dict(label='Risk-core manual', color='#E6BB95', marker='s'),
+        'perfect_v1': dict(label='Perfect v1', color='#8CCAB4', marker='D'),
     }
 
     style = {
-        'intrinsic': dict(marker='*', color='#D78590', s=270, edge='black', label='INSIGHT headline'),
-        'post-hoc': dict(marker='o', color='#7FA8D6', s=95, edge='black', label='Post-hoc baseline'),
-        'verbal': dict(marker='D', color='#A995D0', s=95, edge='black', label='Verbal baseline'),
-        'none': dict(marker='s', color='#A3B2C2', s=85, edge='black', label='Non-interpretable baseline'),
+        'intrinsic': dict(marker='*', color='#D78590', s=270, edge='#2F4158', label='INSIGHT headline'),
+        'post-hoc': dict(marker='o', color='#9CBADF', s=95, edge='#2F4158', label='Post-hoc baseline'),
+        'verbal': dict(marker='D', color='#B5A2D9', s=95, edge='#2F4158', label='Verbal baseline'),
+        'none': dict(marker='s', color='#A9B7C7', s=85, edge='#2F4158', label='Non-interpretable baseline'),
     }
 
     fig, axes = plt.subplots(1, 2, figsize=(15.6, 5.8), facecolor=BG)
@@ -451,6 +454,7 @@ def fig5_safety_utility():
                  fontsize=12.8, fontweight='bold', color=TEXT, y=1.02)
 
     for ax, data, title in [(axes[0], dad, 'DAD'), (axes[1], a3d, 'A3D')]:
+        ax.set_facecolor(PANEL_DAD if title == 'DAD' else PANEL_A3D)
         seen = set()
         for name, ap, mtta, tier in data:
             if np.isnan(mtta):
@@ -498,20 +502,20 @@ def fig5_safety_utility():
                 ap_mean + ox, mtta_mean + oy,
                 cstyle['label'], fontsize=8.0, color=cstyle['color'],
                 fontweight='bold', zorder=6,
-                bbox=dict(facecolor='white', edgecolor='none', alpha=0.75, pad=0.5),
+                bbox=dict(facecolor='#FFFFFF', edgecolor='none', alpha=0.82, pad=0.5),
             )
 
         ax.annotate(
             'better',
             xy=(0.92, 0.90), xycoords='axes fraction',
             xytext=(0.76, 0.73), textcoords='axes fraction',
-            arrowprops=dict(arrowstyle='->', lw=1.2, color='#5F7286'),
-            fontsize=8.5, color='#5F7286', ha='center',
+            arrowprops=dict(arrowstyle='->', lw=1.2, color='#667B90'),
+            fontsize=8.5, color='#667B90', ha='center',
         )
         ax.set_title(f'{title}: AP vs warning lead time', fontsize=11, fontweight='bold')
         ax.set_xlabel('AP (%)', fontsize=10)
         ax.set_ylabel('mTTA (s)', fontsize=10)
-        ax.grid(True, alpha=0.4, color='#D9E5F2')
+        ax.grid(True, alpha=0.42, color='#D4E3F1')
 
     axes[0].set_xlim(52, 77)
     axes[0].set_ylim(1.45, 3.35)
@@ -524,8 +528,18 @@ def fig5_safety_utility():
     for handle, label in list(zip(handles0, labels0)) + list(zip(handles1, labels1)):
         if label and label not in merged:
             merged[label] = handle
-    fig.legend(list(merged.values()), list(merged.keys()), loc='lower center', ncol=7, fontsize=8.4,
-               frameon=True, bbox_to_anchor=(0.5, -0.02))
+    legend = fig.legend(
+        list(merged.values()),
+        list(merged.keys()),
+        loc='lower center',
+        ncol=7,
+        fontsize=8.4,
+        frameon=True,
+        bbox_to_anchor=(0.5, -0.02),
+    )
+    legend.get_frame().set_facecolor(LEGEND_BG)
+    legend.get_frame().set_edgecolor('#C8D6E5')
+    legend.get_frame().set_alpha(0.95)
 
     plt.tight_layout(rect=[0, 0.05, 1, 1])
     out_path = OUT / 'insight_fig5_safety_utility.png'

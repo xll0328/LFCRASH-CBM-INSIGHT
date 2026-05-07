@@ -1,6 +1,6 @@
 # EMNLP PDF First-Read Audit
 
-- Generated at: `2026-05-06T14:16:20Z`
+- Generated at: `2026-05-07T02:34:20Z`
 - Scope: page 1 PDF text, Figure 1 caption source, protocol-map caption source, and appendix opening source.
 - Nature: AI-assisted mechanical first-read audit, not human upload approval.
 

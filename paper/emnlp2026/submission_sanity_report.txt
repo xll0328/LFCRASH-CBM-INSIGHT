@@ -1,5 +1,5 @@
 INSIGHT submission sanity report
-generated_at=2026-05-06T14:16:20Z
+generated_at=2026-05-07T02:34:19Z
 
 [1] Core files
 OK insight_emnlp.tex
@@ -16,7 +16,7 @@ OK insight_emnlp_first25.pdf freshness
 OK insight_emnlp.pdf newer than manuscript sources
 
 [2] Compilation warnings
-553:Underfull \hbox (badness 1142) in paragraph at lines 78--95
+553:Underfull \hbox (badness 1142) in paragraph at lines 83--100
 582:Underfull \vbox (badness 2213) has occurred while \output is active []
 585:Underfull \vbox (badness 2213) has occurred while \output is active []
 588:Underfull \hbox (badness 2582) in paragraph at lines 120--140
@@ -47,15 +47,15 @@ OK insight_emnlp.pdf newer than manuscript sources
 750:Underfull \hbox (badness 10000) in paragraph at lines 92--92
 755:Underfull \hbox (badness 3219) in paragraph at lines 92--92
 760:Underfull \hbox (badness 10000) in paragraph at lines 92--92
-814:Underfull \hbox (badness 10000) in paragraph at lines 249--249
-819:Underfull \hbox (badness 10000) in paragraph at lines 251--251
-824:Underfull \hbox (badness 10000) in paragraph at lines 251--251
-829:Underfull \hbox (badness 10000) in paragraph at lines 252--253
-834:Underfull \hbox (badness 10000) in paragraph at lines 252--253
-839:Underfull \hbox (badness 10000) in paragraph at lines 252--253
-844:Underfull \hbox (badness 10000) in paragraph at lines 252--253
-849:Underfull \hbox (badness 10000) in paragraph at lines 252--253
-854:Underfull \hbox (badness 10000) in paragraph at lines 252--253
+814:Underfull \hbox (badness 10000) in paragraph at lines 250--250
+819:Underfull \hbox (badness 10000) in paragraph at lines 252--252
+824:Underfull \hbox (badness 10000) in paragraph at lines 252--252
+829:Underfull \hbox (badness 10000) in paragraph at lines 253--254
+834:Underfull \hbox (badness 10000) in paragraph at lines 253--254
+839:Underfull \hbox (badness 10000) in paragraph at lines 253--254
+844:Underfull \hbox (badness 10000) in paragraph at lines 253--254
+849:Underfull \hbox (badness 10000) in paragraph at lines 253--254
+854:Underfull \hbox (badness 10000) in paragraph at lines 253--254
 
 [3] Obvious identity / link scan
 OK no obvious identity/link matches

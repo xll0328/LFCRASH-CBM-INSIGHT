@@ -40,11 +40,16 @@
 \definecolor{MacaronStripe}{HTML}{FAF6EF}
 \definecolor{MacaronRule}{HTML}{C8D6E5}
 \definecolor{MacaronText}{HTML}{2F4158}
+\definecolor{MacaronCardBlue}{HTML}{EEF5FD}
+\definecolor{MacaronCardMint}{HTML}{ECF8F3}
+\definecolor{MacaronCardPeach}{HTML}{FDF1EA}
 
 \newcommand{\TableStyleOn}{%
-  \renewcommand{\arraystretch}{1.13}%
+  \arrayrulecolor{MacaronRule}%
+  \renewcommand{\arraystretch}{1.15}%
 }
 \newcommand{\TableStyleOff}{%
+  \arrayrulecolor{black}%
   \renewcommand{\arraystretch}{1.0}%
 }
 \newcommand{\TableHead}{\rowcolor{MacaronHeader}}

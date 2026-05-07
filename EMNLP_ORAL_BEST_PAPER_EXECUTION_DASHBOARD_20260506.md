@@ -110,6 +110,9 @@ Completion criterion:
   main figure palettes for framework/ontology/safety-utility readability.
 - [x] Cleaned appendix hard-case table labels to reviewer-facing names (less
   identifier-style noise, same evidence content).
+- [x] Added evidence-tier pastel cards in reviewer map + safety-utility panel/legend
+  macaron micro-polish; reran submission sanity (`OK fatal_count=0`,
+  `2026-05-07T02:34:19Z`).
 - [ ] Human approval of freeze candidate for upload logistics.
 
 ## Stop Conditions
