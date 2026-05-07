@@ -1,5 +1,5 @@
 INSIGHT submission sanity report
-generated_at=2026-05-07T02:34:19Z
+generated_at=2026-05-07T04:34:15Z
 
 [1] Core files
 OK insight_emnlp.tex
@@ -62,7 +62,7 @@ OK no obvious identity/link matches
 
 [4] PDF checks
 pdfinfo not available
-OK PDF page counts full=36 first25=25
+OK PDF page counts full=37 first25=25
 OK PDF metadata /Author empty
 OK PDF metadata /Title empty
 OK PDF metadata /Subject empty

@@ -113,6 +113,11 @@ Completion criterion:
 - [x] Added evidence-tier pastel cards in reviewer map + safety-utility panel/legend
   macaron micro-polish; reran submission sanity (`OK fatal_count=0`,
   `2026-05-07T02:34:19Z`).
+- [x] Completed intervention-gallery readability polish (larger typography,
+  `2+1` panel layout, regenerated `dual_interp_case{1,2,3}` assets) and
+  reran submission sanity (`OK fatal_count=0`, `2026-05-07T04:34:15Z`).
+- [x] Re-verified final PDF frame rendering: Figure 1 still shows real DAD
+  video frames with correct box overlays.
 - [ ] Human approval of freeze candidate for upload logistics.
 
 ## Stop Conditions

@@ -68,8 +68,16 @@ The paper is in an **ARR-ready pre-submission stage**.
 - A second layout micro-pass refined reviewer evidence-map cards (pastel tier
   blocks), softened table rule styling, and refreshed safety-utility panel/legend
   visuals with a consistent macaron palette.
+- A focused case-study readability pass enlarged intervention-gallery typography
+  and switched the gallery layout to a larger `2+1` panel arrangement:
+  `paper/emnlp2026/sec_experiments_emnlp.tex`,
+  `paper/neurips2026/viz_insight.py`,
+  `paper/figures/dual_interp_case{1,2,3}.png`.
+- Final PDF visual audit reconfirmed that Figure~1 uses real DAD video frames
+  with valid detection overlays (not placeholder renders), while the ontology
+  case-study panel remains intentionally diagrammatic.
 - Latest post-update sanity rerun reports `OK fatal_count=0` at
-  `2026-05-07T02:34:19Z`.
+  `2026-05-07T04:34:15Z`.
 
 ## Upload Candidate Checklist (Human-Gated)
 
